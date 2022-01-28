@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cxxabi.h>
@@ -15,13 +16,19 @@ constexpr static int indent = 1;
 
 __attribute__((no_instrument_function)) void print_fn_name(void *addr) {
   Dl_info dlinfo{};
-  dladdr(addr, &dlinfo);
-  if (!dlinfo.dli_sname) {
+  auto rc = dladdr(addr, &dlinfo);
+  if (rc == 0) {
     fprintf(stderr, "%p\n", addr);
     return;
   }
+  if (dlinfo.dli_sname == nullptr) {
+    auto rel_diff = reinterpret_cast<uintptr_t>(addr) -
+                    reinterpret_cast<uintptr_t>(dlinfo.dli_fbase);
+    fprintf(stderr, "%#lx in %s\n", rel_diff, dlinfo.dli_fname);
+    return;
+  }
   auto name = abi::__cxa_demangle(dlinfo.dli_sname, nullptr, nullptr, nullptr);
-  if (!name) {
+  if (name == nullptr) {
     fprintf(stderr, "%s\n", dlinfo.dli_sname);
     return;
   }
