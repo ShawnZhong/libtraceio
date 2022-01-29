@@ -3,7 +3,8 @@ project(sample)
 
 add_subdirectory(.. ${CMAKE_CURRENT_BINARY_DIR}/trace)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -finstrument-functions -Wl,--export-dynamic")
+add_compile_options(-finstrument-functions)
+add_link_options(-Wl,-export-dynamic)
 
 # basic_trace
 add_executable(basic_trace basic.cpp)
