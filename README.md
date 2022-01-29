@@ -15,7 +15,7 @@ Sample program: [sample/basic.cpp](sample/basic.cpp)
 Compile and run:
 
 ```shell
-g++ test/basic.cpp -O2 -finstrument-functions -Wl,--export-dynamic
+g++ sample/basic.cpp -O2 -finstrument-functions -Wl,--export-dynamic
 make # compile libtrace.so
 LD_PRELOAD=./build/libtrace.so ./a.out
 ```
@@ -56,7 +56,7 @@ Output:
 
 ## Sample Traces
 
-- [leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
+- [sample/leveldb.cpp](sample/leveldb.cpp): [traces/leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
 
   ```make leveldb_trace && (./build-sample/leveldb_trace 2> traces/leveldb.txt)```
 
