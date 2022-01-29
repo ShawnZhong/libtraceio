@@ -1,14 +1,15 @@
 #pragma once
 
-#include <cassert>
-#include <cstdint>
-#include <cstdio>
-#include <cstdlib>
 #include <cxxabi.h>
 #include <dlfcn.h>
 #include <execinfo.h>
 #include <fcntl.h>
 #include <unistd.h>
+
+#include <cassert>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
 
 namespace func_trace {
 int nspace = 1;
@@ -69,18 +70,18 @@ ssize_t write(int fd, const void *buf, size_t count) {
   return res;
 }
 
-__attribute__((no_instrument_function)) void
-__cyg_profile_func_enter(void *this_fn, void *call_site) {
+__attribute__((no_instrument_function)) void __cyg_profile_func_enter(
+    void *this_fn, void *call_site) {
   fprintf(stderr, "%*s ", nspace, ">");
   print_fn_name(this_fn);
   nspace += indent;
 }
 
-__attribute__((no_instrument_function)) void
-__cyg_profile_func_exit(void *this_fn, void *call_site) {
+__attribute__((no_instrument_function)) void __cyg_profile_func_exit(
+    void *this_fn, void *call_site) {
   nspace -= indent;
   fprintf(stderr, "%*s ", nspace, "<");
   print_fn_name(this_fn);
 }
 }
-} // namespace func_trace
+}  // namespace func_trace

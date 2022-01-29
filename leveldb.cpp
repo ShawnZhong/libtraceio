@@ -3,7 +3,7 @@
 #include "leveldb/db.h"
 #include "trace.h"
 
-int main(int argc, char **argv) {
+int main() {
   system("rm -rf testdb");
 
   leveldb::DB *db;
