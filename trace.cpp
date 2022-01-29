@@ -4,12 +4,15 @@
 #include "trace.h"
 
 #include <cxxabi.h>
+#include <dirent.h>
 #include <dlfcn.h>
 #include <execinfo.h>
 #include <fcntl.h>
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/ranges.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include <cstdarg>
@@ -23,7 +26,7 @@ constexpr static int indent = 1;
 
 int nspace = 1;
 
-NO_INSTRUMENT void print_fn_name(void *addr) {
+NO_INSTR void print_fn_name(void *addr) {
   Dl_info dlinfo{};
   auto rc = dladdr(addr, &dlinfo);
   if (rc == 0) {
@@ -45,7 +48,7 @@ NO_INSTRUMENT void print_fn_name(void *addr) {
   free(name);
 }
 
-NO_INSTRUMENT void print_backtrace() {
+NO_INSTR void print_backtrace() {
   constexpr auto BACKTRACE_SIZE = 128;
   void *callstack[BACKTRACE_SIZE]{};
   int nptrs = backtrace(callstack, BACKTRACE_SIZE);
@@ -57,9 +60,10 @@ NO_INSTRUMENT void print_backtrace() {
   }
 }
 
-template <typename Fn, typename... Args>
-auto call(const char *name, void *fn, Args &&...args) {
-  auto res = reinterpret_cast<Fn>(fn)(args...);
+template <auto Tag, typename Fn, typename... Args>
+NO_INSTR inline auto call(const char *name, Args &&...args) {
+  static auto fn_ptr = dlsym(RTLD_NEXT, name);
+  auto res = reinterpret_cast<Fn>(fn_ptr)(args...);
   fmt::print(stderr, "{:>{}} {}({}) = {}\n", ">", nspace, name,
              fmt::join(std::make_tuple(args...), ", "), res);
   nspace += indent;
@@ -70,58 +74,110 @@ auto call(const char *name, void *fn, Args &&...args) {
 }
 
 extern "C" {
-#define CALL(name, ...)                                       \
-  do {                                                        \
-    static auto ptr = dlsym(RTLD_NEXT, #name);                \
-    return call<decltype(::name) *>(#name, ptr, __VA_ARGS__); \
-  } while (0)
+#define CALL(fn, ...) return call<&::fn, decltype(::fn) *>(#fn, __VA_ARGS__)
 
-NO_INSTRUMENT int open(const char *pathname, int flags, ...) {
+NO_INSTR int open(const char *pathname, int flags, ...) {
   mode_t mode = 0;
   if (__OPEN_NEEDS_MODE(flags)) {
     va_list arg;
     va_start(arg, flags);
     mode = va_arg(arg, mode_t);
     va_end(arg);
+    CALL(open, pathname, flags, mode);
   }
-  CALL(open, pathname, flags, mode);
+  CALL(open, pathname, flags);
 }
-NO_INSTRUMENT int close(int fd) { CALL(close, fd); }
-NO_INSTRUMENT ssize_t read(int fd, void *buf, size_t count) {
+NO_INSTR int close(int fd) { CALL(close, fd); }
+NO_INSTR ssize_t read(int fd, void *buf, size_t count) {
   CALL(read, fd, buf, count);
 }
-NO_INSTRUMENT ssize_t __read_chk(int fd, void *buf, size_t count,
-                                 size_t buflen) {
+NO_INSTR ssize_t __read_chk(int fd, void *buf, size_t count, size_t buflen) {
   CALL(__read_chk, fd, buf, count, buflen);
 }
-NO_INSTRUMENT ssize_t pread(int fd, void *buf, size_t count, off_t offset) {
+NO_INSTR ssize_t pread(int fd, void *buf, size_t count, off_t offset) {
   CALL(pread, fd, buf, count, offset);
 }
-NO_INSTRUMENT ssize_t __pread_chk(int fd, void *buf, size_t nbytes,
-                                  off_t offset, size_t bufsize) {
+NO_INSTR ssize_t pread64(int fd, void *buf, size_t count, off64_t offset) {
+  CALL(pread64, fd, buf, count, offset);
+}
+NO_INSTR ssize_t __pread_chk(int fd, void *buf, size_t nbytes, off_t offset,
+                             size_t bufsize) {
   CALL(__pread_chk, fd, buf, nbytes, offset, bufsize);
 }
-NO_INSTRUMENT ssize_t write(int fd, const void *buf, size_t count) {
+NO_INSTR ssize_t __pread64_chk(int fd, void *buf, size_t nbytes, off64_t offset,
+                               size_t bufsize) {
+  CALL(__pread64_chk, fd, buf, nbytes, offset, bufsize);
+}
+NO_INSTR ssize_t write(int fd, const void *buf, size_t count) {
   CALL(write, fd, buf, count);
 }
-NO_INSTRUMENT ssize_t pwrite(int fd, const void *buf, size_t count,
-                             off_t offset) {
+NO_INSTR ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset) {
   CALL(pwrite, fd, buf, count, offset);
 }
+NO_INSTR ssize_t pwrite64(int fd, const void *buf, size_t count,
+                          off64_t offset) {
+  CALL(pwrite64, fd, buf, count, offset);
+}
+NO_INSTR off_t lseek(int fd, off_t offset, int whence) {
+  CALL(lseek, fd, offset, whence);
+}
+NO_INSTR off64_t lseek64(int fd, off64_t offset, int whence) {
+  CALL(lseek64, fd, offset, whence);
+}
+NO_INSTR int ftruncate(int fd, off_t length) { CALL(ftruncate, fd, length); }
+NO_INSTR int ftruncate64(int fd, off64_t length) {
+  CALL(ftruncate64, fd, length);
+}
 
+NO_INSTR int fsync(int fd) { CALL(fsync, fd); }
+NO_INSTR int fdatasync(int fd) { CALL(fdatasync, fd); }
+NO_INSTR int fcntl(int fd, int cmd, ...) {
+  void *ptr;
+  va_list arg;
+  va_start(arg, cmd);
+  ptr = va_arg(arg, void *);
+  va_end(arg);
+  CALL(fcntl, fd, cmd, ptr);
+}
+NO_INSTR int access(const char *pathname, int mode) {
+  CALL(access, pathname, mode);
+}
+NO_INSTR int unlink(const char *pathname) { CALL(unlink, pathname); }
+NO_INSTR int mkdir(const char *pathname, mode_t mode) {
+  CALL(mkdir, pathname, mode);
+}
+NO_INSTR int rmdir(const char *pathname) { CALL(rmdir, pathname); }
+NO_INSTR void *mmap(void *addr, size_t length, int prot, int flags, int fd,
+                    off_t offset) {
+  CALL(mmap, addr, length, prot, flags, fd, offset);
+}
+NO_INSTR void *mmap64(void *addr, size_t length, int prot, int flags, int fd,
+                      off64_t offset) {
+  CALL(mmap64, addr, length, prot, flags, fd, offset);
+}
+NO_INSTR int munmap(void *addr, size_t length) { CALL(munmap, addr, length); }
+NO_INSTR int mprotect(void *addr, size_t len, int prot) {
+  CALL(mprotect, addr, len, prot);
+}
+NO_INSTR int msync(void *addr, size_t len, int flags) {
+  CALL(msync, addr, len, flags);
+}
+NO_INSTR int madvise(void *addr, size_t len, int advice) {
+  CALL(madvise, addr, len, advice);
+}
 #undef CALL
 
-NO_INSTRUMENT void __cyg_profile_func_enter(void *this_fn, void *call_site) {
+NO_INSTR void __cyg_profile_func_enter(void *this_fn, void *call_site) {
   fprintf(stderr, "%*s ", nspace, ">");
   print_fn_name(this_fn);
   nspace += indent;
 }
 
-NO_INSTRUMENT void __cyg_profile_func_exit(void *this_fn, void *call_site) {
+NO_INSTR void __cyg_profile_func_exit(void *this_fn, void *call_site) {
   nspace -= indent;
   fprintf(stderr, "%*s ", nspace, "<");
   print_fn_name(this_fn);
 }
 }
-#undef NO_INSTRUMENT
+#undef NO_INSTR
 }  // namespace func_trace

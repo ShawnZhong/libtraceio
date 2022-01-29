@@ -20,8 +20,10 @@ void test_io() {
   int fd = open("/dev/null", O_RDONLY);
   read(fd, nullptr, 0);
   pread(fd, nullptr, 0, 0);
+  pread64(fd, nullptr, 0, 0);
   write(fd, nullptr, 0);
   pwrite(fd, nullptr, 0, 0);
+  pwrite64(fd, nullptr, 0, 0);
   close(fd);
 }
 
@@ -31,7 +33,7 @@ void test_io_fortify() {
   // https://github.com/bminor/glibc/blob/be211e0922faba196d780565875b4617cc9839aa/posix/unistd.h#L1213-L1215
   // https://github.com/bminor/glibc/blob/ae37d06c7d127817ba43850f0f898b793d42aea7/posix/bits/unistd.h#L35-L48
 
-  int fd = open("/dev/null", O_RDONLY);
+  int fd = open("/dev/null", O_CREAT, S_IRWXU);
 
   {
     char buf[1];
