@@ -60,12 +60,12 @@ NO_INSTR void print_backtrace() {
   }
 }
 
-template <auto Tag, typename Fn, typename... Args>
+template <auto Fn, typename... Args>
 NO_INSTR inline auto call(const char *name, Args &&...args) {
   static auto fn_ptr = dlsym(RTLD_NEXT, name);
-  auto res = reinterpret_cast<Fn>(fn_ptr)(args...);
+  auto res = reinterpret_cast<decltype(Fn)>(fn_ptr)(args...);
   fmt::print(stderr, "{:>{}} {}({}) = {}\n", ">", nspace, name,
-             fmt::join(std::make_tuple(args...), ", "), res);
+             fmt::join(std::forward_as_tuple(args...), ", "), res);
   nspace += indent;
   print_backtrace();
   nspace -= indent;
@@ -74,7 +74,7 @@ NO_INSTR inline auto call(const char *name, Args &&...args) {
 }
 
 extern "C" {
-#define CALL(fn, ...) return call<&::fn, decltype(::fn) *>(#fn, __VA_ARGS__)
+#define CALL(fn, ...) return call<&::fn>(#fn, __VA_ARGS__)
 
 NO_INSTR int open(const char *pathname, int flags, ...) {
   mode_t mode = 0;
