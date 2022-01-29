@@ -1,5 +1,8 @@
 #include "trace.h"
 
+#define _FORTIFY_SOURCE 2
+#define __OPTIMIZE__ 1
+
 #include <cxxabi.h>
 #include <dlfcn.h>
 #include <execinfo.h>
