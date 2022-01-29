@@ -7,15 +7,19 @@
 #include <unistd.h>
 
 #include <cassert>
+#include <cstdarg>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 
+#define NO_INSTRUMENT __attribute__((no_instrument_function))
+
 namespace func_trace {
-int nspace = 1;
 constexpr static int indent = 1;
 
-__attribute__((no_instrument_function)) void print_fn_name(void *addr) {
+int nspace = 1;
+
+NO_INSTRUMENT void print_fn_name(void *addr) {
   Dl_info dlinfo{};
   auto rc = dladdr(addr, &dlinfo);
   if (rc == 0) {
@@ -37,48 +41,75 @@ __attribute__((no_instrument_function)) void print_fn_name(void *addr) {
   free(name);
 }
 
-__attribute__((no_instrument_function)) void print_backtrace() {
+NO_INSTRUMENT void print_backtrace() {
   constexpr auto BACKTRACE_SIZE = 128;
   void *callstack[BACKTRACE_SIZE]{};
   int nptrs = backtrace(callstack, BACKTRACE_SIZE);
-
-  fprintf(stderr, "%*s backtraces: \n", nspace + indent, "=");
+  fprintf(stderr, "%*s backtraces: \n", nspace, "=");
   for (int i = 1; i < nptrs; i++) {
-    fprintf(stderr, "%*s [%d] ", nspace + indent, "=", nptrs - i);
+    fprintf(stderr, "%*s [%d] ", nspace, "=", nptrs - i);
     print_fn_name(callstack[i]);
   }
 }
 
-auto my_read = reinterpret_cast<decltype(::read) *>(dlsym(RTLD_NEXT, "read"));
-auto my_write =
-    reinterpret_cast<decltype(::write) *>(dlsym(RTLD_NEXT, "write"));
+namespace os {
+#define DEFINE_FN(name) \
+  auto name = reinterpret_cast<decltype(::name) *>(dlsym(RTLD_NEXT, #name))
+DEFINE_FN(open);
+DEFINE_FN(close);
+DEFINE_FN(read);
+DEFINE_FN(write);
+#undef DEFINE_FN
+}  // namespace os
 
 extern "C" {
+
+#define LOG_FN(msg, ...)                                          \
+  do {                                                            \
+    fprintf(stderr, "%*s " msg "\n", nspace, "=", ##__VA_ARGS__); \
+    print_backtrace();                                            \
+  } while (0)
+
+int open(const char *pathname, int flags, ...) {
+  mode_t mode = 0;
+  if (__OPEN_NEEDS_MODE(flags)) {
+    va_list arg;
+    va_start(arg, flags);
+    mode = va_arg(arg, mode_t);
+    va_end(arg);
+  }
+  auto res = os::open(pathname, flags, mode);
+  LOG_FN("open(%s, %d, %d) = %d", pathname, flags, mode, res);
+  return res;
+}
+
+int close(int fd) {
+  auto res = os::close(fd);
+  LOG_FN("close(%d) = %d", fd, res);
+  return res;
+}
+
 ssize_t read(int fd, void *buf, size_t count) {
-  auto res = my_read(fd, buf, count);
-  fprintf(stderr, "%*s ", nspace + indent, "=");
-  fprintf(stderr, "read(%d, %p, %zu) = %ld\n", fd, buf, count, res);
-  print_backtrace();
+  auto res = os::read(fd, buf, count);
+  LOG_FN("read(%d, %p, %zu) = %zd", fd, buf, count, res);
   return res;
 }
 
 ssize_t write(int fd, const void *buf, size_t count) {
-  auto res = my_write(fd, buf, count);
-  fprintf(stderr, "%*s ", nspace + indent, "=");
-  fprintf(stderr, "write(%d, %p, %zu) = %ld\n", fd, buf, count, res);
-  print_backtrace();
+  auto res = os::write(fd, buf, count);
+  LOG_FN("write(%d, %p, %zu) = %zd", fd, buf, count, res);
   return res;
 }
 
-__attribute__((no_instrument_function)) void __cyg_profile_func_enter(
-    void *this_fn, void *call_site) {
+#undef LOG_FN
+
+NO_INSTRUMENT void __cyg_profile_func_enter(void *this_fn, void *call_site) {
   fprintf(stderr, "%*s ", nspace, ">");
   print_fn_name(this_fn);
   nspace += indent;
 }
 
-__attribute__((no_instrument_function)) void __cyg_profile_func_exit(
-    void *this_fn, void *call_site) {
+NO_INSTRUMENT void __cyg_profile_func_exit(void *this_fn, void *call_site) {
   nspace -= indent;
   fprintf(stderr, "%*s ", nspace, "<");
   print_fn_name(this_fn);
