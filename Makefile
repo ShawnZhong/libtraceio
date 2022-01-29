@@ -1,4 +1,4 @@
-cmake_targets := test_trace leveldb_trace
+cmake_targets := sample_trace test_trace leveldb_trace
 
 .PHONY: release debug
 release debug:

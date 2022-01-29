@@ -1,7 +1,5 @@
 #include "trace.h"
 
-#define __USE_FORTIFY_LEVEL 1
-
 #include <cxxabi.h>
 #include <dlfcn.h>
 #include <execinfo.h>
@@ -64,14 +62,11 @@ extern "C" {
   do {                                                                 \
     static auto ptr = dlsym(RTLD_NEXT, #name);                         \
     auto res = reinterpret_cast<decltype(::name) *>(ptr)(__VA_ARGS__); \
-    fprintf(stderr, "%*s " #name "\n", nspace, ">");                   \
-    nspace += indent;                                                  \
-                                                                       \
-    fprintf(stderr, "%*s " #name "(", nspace, "=");                    \
+    fprintf(stderr, "%*s " #name "(", nspace, ">");                    \
     print(std::cerr, __VA_ARGS__);                                     \
     std::cerr << ") = " << res << "\n";                                \
+    nspace += indent;                                                  \
     print_backtrace();                                                 \
-                                                                       \
     nspace -= indent;                                                  \
     fprintf(stderr, "%*s " #name "\n", nspace, "<");                   \
     return res;                                                        \
