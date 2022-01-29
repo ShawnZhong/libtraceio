@@ -1,6 +1,6 @@
 # FuncTrace
 
-A simple function tracer for C++.
+A simple function and IO tracer for C++.
 
 ## Usage
 
@@ -11,11 +11,13 @@ A simple function tracer for C++.
 
 ## Example Traces
 
+- [test.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/test.txt)
+
+  ```make && (./build-release/test_trace 2> traces/test.txt)```
+
+
 - [leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
 
   ```make && (./build-release/leveldb_trace 2> traces/leveldb.txt)```
 
 
-- [test.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/test.txt)
-
-  ```make && (./build-release/test_trace 2> traces/test.txt)```
