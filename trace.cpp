@@ -57,18 +57,23 @@ NO_INSTRUMENT void print_backtrace() {
   }
 }
 
+template <typename Fn, typename... Args>
+auto call(const char *name, void *fn, Args &&...args) {
+  auto res = reinterpret_cast<Fn>(fn)(args...);
+  fmt::print(stderr, "{:>{}} {}({}) = {}\n", ">", nspace, name,
+             fmt::join(std::make_tuple(args...), ", "), res);
+  nspace += indent;
+  print_backtrace();
+  nspace -= indent;
+  fmt::print(stderr, "{:>{}} {}(...)\n", "<", nspace, name);
+  return res;
+}
+
 extern "C" {
-#define CALL(name, ...)                                                \
-  do {                                                                 \
-    static auto ptr = dlsym(RTLD_NEXT, #name);                         \
-    auto res = reinterpret_cast<decltype(::name) *>(ptr)(__VA_ARGS__); \
-    fmt::print(stderr, "{:>{}} " #name "({}) = {}\n", ">", nspace,     \
-               fmt::join(std::make_tuple(__VA_ARGS__), ", "), res);    \
-    nspace += indent;                                                  \
-    print_backtrace();                                                 \
-    nspace -= indent;                                                  \
-    fprintf(stderr, "%*s " #name "(...)\n", nspace, "<");              \
-    return res;                                                        \
+#define CALL(name, ...)                                       \
+  do {                                                        \
+    static auto ptr = dlsym(RTLD_NEXT, #name);                \
+    return call<decltype(::name) *>(#name, ptr, __VA_ARGS__); \
   } while (0)
 
 NO_INSTRUMENT int open(const char *pathname, int flags, ...) {
