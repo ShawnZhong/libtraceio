@@ -71,7 +71,7 @@ extern "C" {
     nspace += indent;                                                  \
     print_backtrace();                                                 \
     nspace -= indent;                                                  \
-    fprintf(stderr, "%*s " #name "\n", nspace, "<");                   \
+    fprintf(stderr, "%*s " #name "(...)\n", nspace, "<");              \
     return res;                                                        \
   } while (0)
 

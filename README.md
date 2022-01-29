@@ -1,6 +1,6 @@
-# FuncTrace
+# IOTrace
 
-A simple function and IO tracer for C++.
+A simple function and IO tracer
 
 ## Usage
 
@@ -22,7 +22,7 @@ LD_PRELOAD=./build/libtrace.so ./a.out
 
 Output:
 
-```shell
+```cpp
 > main(...)
  > test3(char const*)
   > test2(char const*, int, int)
@@ -33,21 +33,21 @@ Output:
      = [3] test2(char const*, int, int)
      = [2] test3(char const*)
      = [1] main(...)
-    < open
+    < open(...)
     > read(3, 0, 0) = 0
      = backtraces: 
      = [4] test(char const*)
      = [3] test2(char const*, int, int)
      = [2] test3(char const*)
      = [1] main(...)
-    < read
+    < read(...)
     > close(3) = 0
      = backtraces: 
      = [4] test(char const*)
      = [3] test2(char const*, int, int)
      = [2] test3(char const*)
      = [1] main(...)
-    < close
+    < close(...)
    < test(char const*)
   < test2(char const*, int, int)
  < test3(char const*)
