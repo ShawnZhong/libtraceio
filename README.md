@@ -56,11 +56,6 @@ Output:
 
 ## Sample Traces
 
-- [test.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/test.txt)
-
-  ```make test_trace && (./build-sample/test_trace 2> traces/test.txt)```
-
-
 - [leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
 
   ```make leveldb_trace && (./build-sample/leveldb_trace 2> traces/leveldb.txt)```
