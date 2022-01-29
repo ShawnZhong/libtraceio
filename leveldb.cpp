@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "leveldb/db.h"
-#include "trace.h"
 
 int main() {
   system("rm -rf testdb");

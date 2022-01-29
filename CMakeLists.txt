@@ -3,15 +3,17 @@ project(FuncTrace)
 set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -finstrument-functions -Wl,--export-dynamic")
-link_libraries(dl)
 
-include_directories(${CMAKE_SOURCE_DIR})
+add_library(trace SHARED trace.cpp trace.h)
+target_link_libraries(trace PRIVATE dl)
+target_compile_options(trace PRIVATE "-fno-instrument-functions")
 
 # test_trace
-add_executable(test_trace test/main.cpp test/common.h trace.h)
-add_library(test_shared_lib SHARED test/shared_lib.cpp test/common.h)
-add_library(test_static_lib STATIC test/static_lib.cpp test/common.h)
-target_link_libraries(test_trace test_shared_lib test_static_lib)
+add_executable(test_trace test/main.cpp test/lib_common.h trace.h)
+add_library(test_shared_lib SHARED test/lib_shared.cpp test/lib_common.h)
+add_library(test_static_lib STATIC test/lib_static.cpp test/lib_common.h)
+target_link_libraries(test_trace trace test_shared_lib test_static_lib)
+target_include_directories(test_trace PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # leveldb_trace
 add_executable(leveldb_trace leveldb.cpp trace.h)
@@ -22,4 +24,4 @@ FetchContent_Declare(
     GIT_TAG main
 )
 FetchContent_MakeAvailable(leveldb)
-target_link_libraries(leveldb_trace leveldb)
+target_link_libraries(leveldb_trace trace leveldb)

@@ -4,12 +4,90 @@ A simple function and IO tracer for C++.
 
 ## Usage
 
-1. Add `#include "trace.h"` to your source file.
-2. Add `-finstrument-functions -Wl,--export-dynamic` to the compiler flags.
-3. Add `-ldl` to the linker flags.
-4. Run the program.
+1. Add `-finstrument-functions -Wl,--export-dynamic` to the compiler flags.
 
-## Example Traces
+2. Run your program with `libtrace.so` loaded.
+
+## Example
+
+Sample program:
+
+```cpp
+// sample.cpp
+#include <fcntl.h>
+#include <unistd.h>
+
+void test_io() {
+  int fd = open("/dev/null", O_RDONLY);
+  read(fd, nullptr, 0);
+  pread(fd, nullptr, 0, 0);
+  write(fd, nullptr, 0);
+  pwrite(fd, nullptr, 0, 0);
+  close(fd);
+}
+
+int main() { test_io(); }
+```
+
+Compile and run:
+
+```shell
+# compile program
+g++ sample.cpp -finstrument-functions -Wl,--export-dynamic -o sample
+
+# compile libtrace.so
+make
+
+# run program
+LD_PRELOAD=./build-release/libtrace.so ./sample
+```
+
+Output:
+
+```shell
+> main(...)
+ > test_io()
+  > open
+   = open(/dev/null, 0, 0) = 3
+   = backtraces: 
+   = [2] test_io()
+   = [1] main(...)
+  < open
+  > read
+   = read(3, 0, 0) = 0
+   = backtraces: 
+   = [2] test_io()
+   = [1] main(...)
+  < read
+  > pread
+   = pread(3, 0, 0, 0) = 0
+   = backtraces: 
+   = [2] test_io()
+   = [1] main(...)
+  < pread
+  > write
+   = write(3, 0, 0) = -1
+   = backtraces: 
+   = [2] test_io()
+   = [1] main(...)
+  < write
+  > pwrite
+   = pwrite(3, 0, 0, 0) = -1
+   = backtraces: 
+   = [2] test_io()
+   = [1] main(...)
+  < pwrite
+  > close
+   = close(3) = 0
+   = backtraces: 
+   = [2] test_io()
+   = [1] main(...)
+  < close
+ < test_io()
+< main(...)
+```
+
+## Sample Traces
 
 - [test.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/test.txt)
 
