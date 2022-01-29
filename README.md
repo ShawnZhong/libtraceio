@@ -10,39 +10,14 @@ A simple function and IO tracer for C++.
 
 ## Example
 
-Sample program:
-
-```cpp
-// test/sample.cpp
-#include <fcntl.h>
-#include <unistd.h>
-
-void test(const char* pathname) {
-  int fd = open(pathname, O_RDONLY);
-  int rc = read(fd, nullptr, 0);
-  close(fd);
-}
-int test2(const char* pathname, int a, int b) {
-  test(pathname);
-  return a + b;
-}
-int test3(const char* pathname) { return test2(pathname, 1, -1); }
-
-int main() { return test3("/dev/null"); }
-
-```
+Sample program: [sample/basic.cpp](sample/basic.cpp)
 
 Compile and run:
 
 ```shell
-# compile program
-g++ test/sample.cpp -O2 -finstrument-functions -Wl,--export-dynamic -o sample
-
-# compile libtrace.so
-make
-
-# run program
-LD_PRELOAD=./build/libtrace.so ./sample
+g++ test/basic.cpp -O2 -finstrument-functions -Wl,--export-dynamic
+make # compile libtrace.so
+LD_PRELOAD=./build/libtrace.so ./a.out
 ```
 
 Output:
@@ -83,11 +58,11 @@ Output:
 
 - [test.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/test.txt)
 
-  ```make && (./build/test_trace 2> traces/test.txt)```
+  ```make test_trace && (./build-sample/test_trace 2> traces/test.txt)```
 
 
 - [leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
 
-  ```make && (./build/leveldb_trace 2> traces/leveldb.txt)```
+  ```make leveldb_trace && (./build-sample/leveldb_trace 2> traces/leveldb.txt)```
 
 

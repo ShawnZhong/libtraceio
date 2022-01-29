@@ -3,7 +3,7 @@
 
 #include <cstdio>
 
-#include "lib_common.h"
+#include "test_common.h"
 
 void hello_shared_lib();
 void hello_static_lib();
