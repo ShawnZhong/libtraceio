@@ -11,6 +11,11 @@ A simple function tracer for C++.
 
 ## Example Traces
 
-```make && (./build-release/leveldb_trace 2> traces/leveldb.txt)```
+- [leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
 
-```make && (./build-release/test_trace 2> traces/test.txt)```
+  ```make && (./build-release/leveldb_trace 2> traces/leveldb.txt)```
+
+
+- [test.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/test.txt)
+
+  ```make && (./build-release/test_trace 2> traces/test.txt)```
