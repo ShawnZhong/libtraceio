@@ -1,12 +1,15 @@
-#include "trace.h"
-
 #define _FORTIFY_SOURCE 2
 #define __OPTIMIZE__ 1
+
+#include "trace.h"
 
 #include <cxxabi.h>
 #include <dlfcn.h>
 #include <execinfo.h>
 #include <fcntl.h>
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/ranges.h>
 #include <unistd.h>
 
 #include <cstdarg>
@@ -54,20 +57,13 @@ NO_INSTRUMENT void print_backtrace() {
   }
 }
 
-template <typename Arg, typename... Args>
-NO_INSTRUMENT void print(std::ostream &out, Arg &&arg, Args &&...args) {
-  out << arg;
-  ((out << ", " << args), ...);
-}
-
 extern "C" {
 #define CALL(name, ...)                                                \
   do {                                                                 \
     static auto ptr = dlsym(RTLD_NEXT, #name);                         \
     auto res = reinterpret_cast<decltype(::name) *>(ptr)(__VA_ARGS__); \
-    fprintf(stderr, "%*s " #name "(", nspace, ">");                    \
-    print(std::cerr, __VA_ARGS__);                                     \
-    std::cerr << ") = " << res << "\n";                                \
+    fmt::print(stderr, "{:>{}} " #name "({}) = {}\n", ">", nspace,     \
+               fmt::join(std::make_tuple(__VA_ARGS__), ", "), res);    \
     nspace += indent;                                                  \
     print_backtrace();                                                 \
     nspace -= indent;                                                  \
