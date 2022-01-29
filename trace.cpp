@@ -76,54 +76,48 @@ inline static auto call(const char *name, Args &&...args) {
 
 extern "C" {
 #define CALL(fn, ...) return call<::fn>(#fn, __VA_ARGS__)
-
-int open(const char *pathname, int flags, ...) {
+int open(const char *path, int flags, ...) {
   mode_t mode = 0;
   if (__OPEN_NEEDS_MODE(flags)) {
     va_list arg;
     va_start(arg, flags);
     mode = va_arg(arg, mode_t);
     va_end(arg);
-    CALL(open, pathname, flags, mode);
+    CALL(open, path, flags, mode);
   }
-  CALL(open, pathname, flags);
+  CALL(open, path, flags);
 }
 int close(int fd) { CALL(close, fd); }
-ssize_t read(int fd, void *buf, size_t count) { CALL(read, fd, buf, count); }
-ssize_t __read_chk(int fd, void *buf, size_t count, size_t buflen) {
-  CALL(__read_chk, fd, buf, count, buflen);
+ssize_t read(int fd, void *buf, size_t n) { CALL(read, fd, buf, n); }
+ssize_t __read_chk(int fd, void *buf, size_t n, size_t buflen) {
+  CALL(__read_chk, fd, buf, n, buflen);
 }
-ssize_t pread(int fd, void *buf, size_t count, off_t offset) {
-  CALL(pread, fd, buf, count, offset);
+ssize_t pread(int fd, void *buf, size_t n, off_t off) {
+  CALL(pread, fd, buf, n, off);
 }
-ssize_t pread64(int fd, void *buf, size_t count, off64_t offset) {
-  CALL(pread64, fd, buf, count, offset);
+ssize_t pread64(int fd, void *buf, size_t n, off64_t off) {
+  CALL(pread64, fd, buf, n, off);
 }
-ssize_t __pread_chk(int fd, void *buf, size_t nbytes, off_t offset,
-                    size_t bufsize) {
-  CALL(__pread_chk, fd, buf, nbytes, offset, bufsize);
+ssize_t __pread_chk(int fd, void *buf, size_t n, off_t off, size_t bufsize) {
+  CALL(__pread_chk, fd, buf, n, off, bufsize);
 }
-ssize_t __pread64_chk(int fd, void *buf, size_t nbytes, off64_t offset,
+ssize_t __pread64_chk(int fd, void *buf, size_t n, off64_t off,
                       size_t bufsize) {
-  CALL(__pread64_chk, fd, buf, nbytes, offset, bufsize);
+  CALL(__pread64_chk, fd, buf, n, off, bufsize);
 }
-ssize_t write(int fd, const void *buf, size_t count) {
-  CALL(write, fd, buf, count);
+ssize_t write(int fd, const void *buf, size_t n) { CALL(write, fd, buf, n); }
+ssize_t pwrite(int fd, const void *buf, size_t n, off_t off) {
+  CALL(pwrite, fd, buf, n, off);
 }
-ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset) {
-  CALL(pwrite, fd, buf, count, offset);
+ssize_t pwrite64(int fd, const void *buf, size_t n, off64_t off) {
+  CALL(pwrite64, fd, buf, n, off);
 }
-ssize_t pwrite64(int fd, const void *buf, size_t count, off64_t offset) {
-  CALL(pwrite64, fd, buf, count, offset);
+off_t lseek(int fd, off_t off, int whence) { CALL(lseek, fd, off, whence); }
+off64_t lseek64(int fd, off64_t off, int whence) {
+  CALL(lseek64, fd, off, whence);
 }
-off_t lseek(int fd, off_t offset, int whence) {
-  CALL(lseek, fd, offset, whence);
-}
-off64_t lseek64(int fd, off64_t offset, int whence) {
-  CALL(lseek64, fd, offset, whence);
-}
-int ftruncate(int fd, off_t length) { CALL(ftruncate, fd, length); }
-int ftruncate64(int fd, off64_t length) { CALL(ftruncate64, fd, length); }
+int ftruncate(int fd, off_t len) { CALL(ftruncate, fd, len); }
+int ftruncate64(int fd, off64_t len) { CALL(ftruncate64, fd, len); }
 int fsync(int fd) { CALL(fsync, fd); }
 int fdatasync(int fd) { CALL(fdatasync, fd); }
 int fcntl(int fd, int cmd, ...) {
@@ -134,20 +128,17 @@ int fcntl(int fd, int cmd, ...) {
   va_end(arg);
   CALL(fcntl, fd, cmd, ptr);
 }
-
-int access(const char *pathname, int mode) { CALL(access, pathname, mode); }
-int unlink(const char *pathname) { CALL(unlink, pathname); }
-int mkdir(const char *pathname, mode_t mode) { CALL(mkdir, pathname, mode); }
-int rmdir(const char *pathname) { CALL(rmdir, pathname); }
-void *mmap(void *addr, size_t length, int prot, int flags, int fd,
-           off_t offset) {
-  CALL(mmap, addr, length, prot, flags, fd, offset);
+int access(const char *path, int mode) { CALL(access, path, mode); }
+int unlink(const char *path) { CALL(unlink, path); }
+int mkdir(const char *path, mode_t mode) { CALL(mkdir, path, mode); }
+int rmdir(const char *path) { CALL(rmdir, path); }
+void *mmap(void *addr, size_t len, int prot, int flags, int fd, off_t off) {
+  CALL(mmap, addr, len, prot, flags, fd, off);
 }
-void *mmap64(void *addr, size_t length, int prot, int flags, int fd,
-             off64_t offset) {
-  CALL(mmap64, addr, length, prot, flags, fd, offset);
+void *mmap64(void *addr, size_t len, int prot, int flags, int fd, off64_t off) {
+  CALL(mmap64, addr, len, prot, flags, fd, off);
 }
-int munmap(void *addr, size_t length) { CALL(munmap, addr, length); }
+int munmap(void *addr, size_t len) { CALL(munmap, addr, len); }
 int mprotect(void *addr, size_t len, int prot) {
   CALL(mprotect, addr, len, prot);
 }
