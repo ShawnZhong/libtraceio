@@ -1,6 +1,6 @@
 # IOTrace
 
-A simple function and IO tracer
+A library for tracing function calls and I/O code path.
 
 ## Usage
 
@@ -56,7 +56,8 @@ Output:
 
 ## Sample Traces
 
-- [sample/leveldb.cpp](sample/leveldb.cpp): [traces/leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
+- [sample/leveldb.cpp](sample/leveldb.cpp): [traces/leveldb-full.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb-full.txt)
+  , [traces/leveldb-io.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb-io.txt)
 
   ```
   make leveldb_trace
