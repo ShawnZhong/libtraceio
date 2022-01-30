@@ -22,16 +22,16 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <stack>
+#include <vector>
 
 namespace trace {
 namespace config {
 static int indent = 1;
-static bool backtrace = true;
-static bool delay_print = false;
+static bool print_io_backtrace = true;
+static bool print_fn_trace = false;
 }  // namespace config
 
-std::stack<void *> call_stack;
+std::vector<void *> call_stack;
 
 static int nspace = 1;
 
@@ -58,25 +58,25 @@ static void print_fn_name(void *addr) {
 }
 
 static void print_backtrace() {
-  constexpr auto BACKTRACE_SIZE = 128;
-  void *callstack[BACKTRACE_SIZE]{};
-  int nptrs = backtrace(callstack, BACKTRACE_SIZE);
-  nptrs -= 2;  // skip __libc_start_main and _start
-  fprintf(stderr, "%*s backtraces: \n", nspace, "=");
-  for (int i = 2; i < nptrs; i++) {
-    fprintf(stderr, "%*s [%d] ", nspace, "=", nptrs - i);
-    print_fn_name(callstack[i]);
+  if (!config::print_io_backtrace) return;
+  fmt::print(stderr, "{:>{}} backtraces:\n", "=", nspace);
+  for (const auto &fn : call_stack) {
+    fmt::print(stderr, "{:>{}} ", "=", nspace);
+    print_fn_name(fn);
   }
 }
 
 static void print_enter_trace(void *addr) {
+  call_stack.emplace_back(addr);
+  if (!config::print_fn_trace) return;
   fmt::print(stderr, "{:>{}} ", ">", nspace);
   print_fn_name(addr);
   nspace += config::indent;
-  call_stack.push(addr);
 }
 
 static void print_exit_trace(void *addr) {
+  call_stack.pop_back();
+  if (!config::print_fn_trace) return;
   nspace -= config::indent;
   fmt::print(stderr, "{:>{}} ", "<", nspace);
   print_fn_name(addr);
@@ -86,8 +86,11 @@ __attribute__((constructor)) void ctor() {
   if (auto env = getenv("TRACE_INDENT"); env != nullptr) {
     config::indent = std::stoi(env);
   }
-  if (auto env = getenv("TRACE_NO_BACKTRACE"); env != nullptr) {
-    config::backtrace = false;
+  if (auto env = getenv("TRACE_PRINT_IO_BACKTRACE"); env != nullptr) {
+    config::print_io_backtrace = env[0] == '1';
+  }
+  if (auto env = getenv("TRACE_PRINT_FN_TRACE"); env != nullptr) {
+    config::print_fn_trace = env[0] == '1';
   }
 }
 
@@ -101,7 +104,7 @@ inline static auto call(const char *name, Args &&...args) {
   fmt::print(stderr, "{:>{}} {}({}) = {} in {}\n", ">", nspace, name,
              fmt::join(std::forward_as_tuple(args...), ", "), res, time);
   nspace += config::indent;
-  if (config::backtrace) print_backtrace();
+  print_backtrace();
   nspace -= config::indent;
   fmt::print(stderr, "{:>{}} {}(...)\n", "<", nspace, name);
   return res;
