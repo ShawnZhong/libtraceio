@@ -2,8 +2,9 @@
 #include <unistd.h>
 
 void test(const char* pathname) {
+  char buf[1024];
   int fd = open(pathname, O_RDONLY);
-  int rc = read(fd, nullptr, 0);
+  int rc = read(fd, buf, 0);
   close(fd);
 }
 int test2(const char* pathname, int a, int b) {

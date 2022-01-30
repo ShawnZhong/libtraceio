@@ -35,7 +35,7 @@ __attribute__((constructor)) void ctor() {
 }
 
 std::vector<void *> call_stack;
-size_t get_nspace(size_t offset = 0) {
+static size_t get_nspace(size_t offset = 0) {
   if (config::print_fn_trace) offset += call_stack.size();
   return offset * config::indent;
 }
@@ -89,7 +89,7 @@ static void print_exit_trace(void *addr) {
 }
 
 template <bool Sep = true, class Head, class... Tail>
-void print(Head const &h, Tail const &...t) {
+static void print(Head const &h, Tail const &...t) {
   if constexpr (std::is_pointer_v<Head>) {
     if (h == nullptr) {
       fmt::print(stderr, "nullptr");
