@@ -8,6 +8,7 @@
 #include <dlfcn.h>
 #include <execinfo.h>
 #include <fcntl.h>
+#include <fmt/chrono.h>
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/ranges.h>
@@ -15,15 +16,32 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <chrono>
 #include <cstdarg>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <queue>
 
-namespace func_trace {
-constexpr static int indent = 1;
+namespace trace {
+namespace config {
+static int indent = 1;
+static bool backtrace = true;
+static bool delay_print = false;
+}  // namespace config
 
+struct FnLog {
+  void *addr;
+  std::chrono::high_resolution_clock::time_point ts;
+  explicit FnLog(void *addr)
+      : addr(addr), ts(std::chrono::high_resolution_clock::now()) {}
+};
+
+static_assert(sizeof(FnLog) == 16, "FnLog is not 16 bytes");
+
+std::queue<FnLog> enter_logs;
+std::queue<FnLog> exit_logs;
 static int nspace = 1;
 
 static void print_fn_name(void *addr) {
@@ -60,16 +78,59 @@ static void print_backtrace() {
   }
 }
 
+static void print_enter_trace(void *addr) {
+  fmt::print(stderr, "{:>{}} ", ">", nspace);
+  print_fn_name(addr);
+  nspace += config::indent;
+}
+
+static void print_exit_trace(void *addr) {
+  nspace -= config::indent;
+  fmt::print(stderr, "{:>{}} ", "<", nspace);
+  print_fn_name(addr);
+}
+
+static void print_traces() {
+  while (true) {
+    if (exit_logs.empty()) break;
+    if (!enter_logs.empty() && enter_logs.front().ts < exit_logs.front().ts) {
+      print_enter_trace(enter_logs.front().addr);
+      enter_logs.pop();
+    } else {
+      print_exit_trace(exit_logs.front().addr);
+      exit_logs.pop();
+    }
+  }
+}
+
+__attribute__((constructor)) void ctor() {
+  if (auto env = getenv("TRACE_INDENT"); env != nullptr) {
+    config::indent = std::stoi(env);
+  }
+  if (auto env = getenv("TRACE_NO_BACKTRACE"); env != nullptr) {
+    config::backtrace = false;
+  }
+  if (auto env = getenv("TRACE_DELAY_PRINT"); env != nullptr) {
+    config::delay_print = true;
+  }
+
+  if (config::delay_print) {
+    std::atexit(print_traces);
+  }
+}
+
 template <auto Fn, typename... Args>
 inline static auto call(const char *name, Args &&...args) {
   using R = decltype(Fn(std::forward<Args>(args)...));
   static void *fn_ptr = dlsym(RTLD_NEXT, name);
+  auto ts = std::chrono::high_resolution_clock::now();
   R res = reinterpret_cast<decltype(Fn)>(fn_ptr)(std::forward<Args>(args)...);
-  fmt::print(stderr, "{:>{}} {}({}) = {}\n", ">", nspace, name,
-             fmt::join(std::forward_as_tuple(args...), ", "), res);
-  nspace += indent;
-  print_backtrace();
-  nspace -= indent;
+  auto time = std::chrono::high_resolution_clock::now() - ts;
+  fmt::print(stderr, "{:>{}} {}({}) = {} in {}\n", ">", nspace, name,
+             fmt::join(std::forward_as_tuple(args...), ", "), res, time);
+  nspace += config::indent;
+  if (config::backtrace) print_backtrace();
+  nspace -= config::indent;
   fmt::print(stderr, "{:>{}} {}(...)\n", "<", nspace, name);
   return res;
 }
@@ -149,15 +210,19 @@ int madvise(void *addr, size_t len, int advice) {
 #undef CALL
 
 void __cyg_profile_func_enter(void *this_fn, void *call_site) {
-  fprintf(stderr, "%*s ", nspace, ">");
-  print_fn_name(this_fn);
-  nspace += indent;
+  if (config::delay_print) {
+    enter_logs.emplace(this_fn);
+  } else {
+    print_enter_trace(this_fn);
+  }
 }
 
 void __cyg_profile_func_exit(void *this_fn, void *call_site) {
-  nspace -= indent;
-  fprintf(stderr, "%*s ", nspace, "<");
-  print_fn_name(this_fn);
+  if (config::delay_print) {
+    exit_logs.emplace(this_fn);
+  } else {
+    print_exit_trace(this_fn);
+  }
 }
 }
-}  // namespace func_trace
+}  // namespace trace
