@@ -19,70 +19,74 @@
 #include <vector>
 
 namespace calltrace {
-namespace config {
-static int indent = 1;
-static bool print_io_backtrace = true;
-static bool print_fn_trace = true;
-}  // namespace config
+static struct Config {
+  int indent = 1;
+  bool log_io = true;
+  bool log_fn = true;
+  FILE *log_file = stderr;
 
-__attribute__((constructor)) void ctor() {
-  if (auto env = getenv("TRACE_INDENT"); env != nullptr)
-    config::indent = std::stoi(env);
-  if (auto env = getenv("TRACE_PRINT_IO_BACKTRACE"); env != nullptr)
-    config::print_io_backtrace = env[0] == '1';
-  if (auto env = getenv("TRACE_PRINT_FN_TRACE"); env != nullptr)
-    config::print_fn_trace = env[0] == '1';
-}
+  Config() noexcept {
+    if (auto s = getenv("TRACE_INDENT"); s) indent = std::stoi(s);
+    if (auto s = getenv("TRACE_LOG_IO"); s) log_io = s[0] == '1';
+    if (auto s = getenv("TRACE_LOG_FN"); s) log_fn = s[0] == '1';
+    if (auto s = getenv("TRACE_LOG_FILE"); s) log_file = fopen(s, "w");
+
+    if (!log_file) {
+      fmt::print(stderr, "Failed to open log file. Fallback to stderr\n");
+      log_file = stderr;
+    }
+  }
+} config;
 
 thread_local std::vector<void *> call_stack;
 static size_t get_nspace(size_t offset = 0) {
-  if (config::print_fn_trace) offset += call_stack.size();
-  return offset * config::indent;
+  if (config.log_fn) offset += call_stack.size();
+  return offset * config.indent;
 }
 
 static void print_fn_name(void *addr) {
   Dl_info dlinfo{};
   auto rc = dladdr(addr, &dlinfo);
   if (rc == 0) {
-    fmt::print(stderr, "{}\n", addr);
+    fmt::print(config.log_file, "{}\n", addr);
     return;
   }
   if (dlinfo.dli_sname == nullptr) {
     auto rel_diff = reinterpret_cast<uintptr_t>(addr) -
                     reinterpret_cast<uintptr_t>(dlinfo.dli_fbase);
-    fmt::print(stderr, "{:#x} in {}\n", rel_diff, dlinfo.dli_fname);
+    fmt::print(config.log_file, "{:#x} in {}\n", rel_diff, dlinfo.dli_fname);
     return;
   }
   auto name = abi::__cxa_demangle(dlinfo.dli_sname, nullptr, nullptr, nullptr);
   if (name == nullptr) {
-    fmt::print(stderr, "{}(...)\n", dlinfo.dli_sname);
+    fmt::print(config.log_file, "{}(...)\n", dlinfo.dli_sname);
     return;
   }
-  fmt::print(stderr, "{}\n", name);
+  fmt::print(config.log_file, "{}\n", name);
   free(name);
 }
 
 static void print_backtrace() {
-  if (!config::print_io_backtrace) return;
+  if (!config.log_io) return;
   const auto nspace = get_nspace(2);
-  fmt::print(stderr, "{:>{}} backtraces:\n", "=", nspace);
+  fmt::print(config.log_file, "{:>{}} backtraces:\n", "=", nspace);
   for (int i = call_stack.size() - 1; i >= 0; --i) {
-    fmt::print(stderr, "{:>{}} [{}] ", "=", nspace, i);
+    fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, i);
     print_fn_name(call_stack[i]);
   }
 }
 
 static void print_enter_trace(void *addr) {
   call_stack.emplace_back(addr);
-  if (config::print_fn_trace) {
-    fmt::print(stderr, "{:>{}} ", ">", get_nspace());
+  if (config.log_fn) {
+    fmt::print(config.log_file, "{:>{}} ", ">", get_nspace());
     print_fn_name(addr);
   }
 }
 
 static void print_exit_trace(void *addr) {
-  if (config::print_fn_trace) {
-    fmt::print(stderr, "{:>{}} ", "<", get_nspace());
+  if (config.log_fn) {
+    fmt::print(config.log_file, "{:>{}} ", "<", get_nspace());
     print_fn_name(addr);
   }
   call_stack.pop_back();
@@ -92,13 +96,13 @@ template <bool Sep = true, class Head, class... Tail>
 static void print(Head const &h, Tail const &...t) {
   if constexpr (std::is_pointer_v<Head>) {
     if (h == nullptr) {
-      fmt::print(stderr, "nullptr");
+      fmt::print(config.log_file, "nullptr");
       return;
     }
     if constexpr (std::is_same_v<Head, struct stat *> ||
                   std::is_same_v<Head, struct stat64 *>) {
       fmt::print(
-          stderr,
+          config.log_file,
           "{{dev={}, ino={}, mode={}, nlink={}, uid={}, gid={}, rdev={}, "
           "size={}, blksize={}, blocks={}, atim={}.{}, mtim={}.{}, "
           "ctim={}.{}}}",
@@ -108,21 +112,21 @@ static void print(Head const &h, Tail const &...t) {
           h->st_mtim.tv_nsec, h->st_ctim.tv_sec, h->st_ctim.tv_nsec);
     } else if constexpr (std::is_same_v<Head, struct dirent *> ||
                          std::is_same_v<Head, struct dirent64 *>) {
-      fmt::print(stderr,
+      fmt::print(config.log_file,
                  "{{d_ino={}, d_off={}, d_reclen={}, d_type={}, d_name={}}}",
                  h->d_ino, h->d_off, h->d_reclen, h->d_type, h->d_name);
     } else if constexpr (std::is_same_v<Head, DIR *>) {
-      fmt::print(stderr, "{}", fmt::ptr(h));
+      fmt::print(config.log_file, "{}", fmt::ptr(h));
     } else {
-      fmt::print(stderr, "{}", h);
+      fmt::print(config.log_file, "{}", h);
     }
   } else {
-    fmt::print(stderr, "{}", h);
+    fmt::print(config.log_file, "{}", h);
   }
 
   if constexpr (sizeof...(t) > 0) {
     if constexpr (Sep) {
-      fmt::print(stderr, ", ");
+      fmt::print(config.log_file, ", ");
     }
     print<Sep>(t...);
   }
@@ -136,11 +140,11 @@ inline static auto call(const char *name, Args &&...args) {
   auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
       std::chrono::high_resolution_clock::now() - ts);
   const auto nspace = get_nspace(1);
-  fmt::print(stderr, "{:>{}} {}(", ">", nspace, name);
+  fmt::print(config.log_file, "{:>{}} {}(", ">", nspace, name);
   print(std::forward<Args>(args)...);
   print</*Sep=*/false>(") = ", res, " in ", duration, "\n");
   print_backtrace();
-  fmt::print(stderr, "{:>{}} {}(...)\n", "<", nspace, name);
+  fmt::print(config.log_file, "{:>{}} {}(...)\n", "<", nspace, name);
   return res;
 }
 #define CALL(fn, ...) return call<::fn>(#fn, __VA_ARGS__)

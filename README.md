@@ -56,13 +56,19 @@ Output:
 
 ## Sample Traces
 
-- [sample/leveldb.cpp](sample/leveldb.cpp): [traces/leveldb-full.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb-full.txt)
-  , [traces/leveldb-io.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb-io.txt)
+- [sample/leveldb.cpp](sample/leveldb.cpp): [traces/leveldb-full.txt](traces/leveldb-full.txt)
+  , [traces/leveldb-io.txt](traces/leveldb-io.txt)
 
-  ```
-  make leveldb_trace
-  TRACE_PRINT_FN_TRACE=1 ./build-sample/leveldb_trace 2> traces/leveldb-full.txt
-  TRACE_PRINT_FN_TRACE=0 ./build-sample/leveldb_trace 2> traces/leveldb-io.txt
+  ```shell
+  make trace_leveldb
+  TRACE_LOG_FN=1 TRACE_LOG_FILE=traces/leveldb-full.txt ./build/sample/trace_leveldb
+  TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/leveldb-io.txt ./build/sample/trace_leveldb
   ```
 
+- [leveldb/benchmarks/db_bench.cc](https://github.com/google/leveldb/blob/main/benchmarks/db_bench.cc): [traces/leveldb_bench.txt](traces/leveldb_bench.txt)
+
+  ```shell
+  make db_bench
+  TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/leveldb_bench.txt build/_deps/leveldb-build/db_bench --num=100
+  ```
 

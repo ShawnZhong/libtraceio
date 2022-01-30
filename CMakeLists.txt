@@ -10,3 +10,8 @@ set_property(TARGET fmt PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_library(calltrace SHARED calltrace.cpp calltrace.h)
 target_link_libraries(calltrace PRIVATE dl fmt::fmt)
 target_compile_options(calltrace PRIVATE "-fno-instrument-functions")
+
+option(BUILD_SAMPLES "Build samples" OFF)
+if (BUILD_SAMPLES)
+    add_subdirectory(sample)
+endif ()
