@@ -22,7 +22,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <queue>
+#include <stack>
 
 namespace trace {
 namespace config {
@@ -31,17 +31,8 @@ static bool backtrace = true;
 static bool delay_print = false;
 }  // namespace config
 
-struct FnLog {
-  void *addr;
-  std::chrono::high_resolution_clock::time_point ts;
-  explicit FnLog(void *addr)
-      : addr(addr), ts(std::chrono::high_resolution_clock::now()) {}
-};
+std::stack<void *> call_stack;
 
-static_assert(sizeof(FnLog) == 16, "FnLog is not 16 bytes");
-
-std::queue<FnLog> enter_logs;
-std::queue<FnLog> exit_logs;
 static int nspace = 1;
 
 static void print_fn_name(void *addr) {
@@ -82,6 +73,7 @@ static void print_enter_trace(void *addr) {
   fmt::print(stderr, "{:>{}} ", ">", nspace);
   print_fn_name(addr);
   nspace += config::indent;
+  call_stack.push(addr);
 }
 
 static void print_exit_trace(void *addr) {
@@ -90,32 +82,12 @@ static void print_exit_trace(void *addr) {
   print_fn_name(addr);
 }
 
-static void print_traces() {
-  while (true) {
-    if (exit_logs.empty()) break;
-    if (!enter_logs.empty() && enter_logs.front().ts < exit_logs.front().ts) {
-      print_enter_trace(enter_logs.front().addr);
-      enter_logs.pop();
-    } else {
-      print_exit_trace(exit_logs.front().addr);
-      exit_logs.pop();
-    }
-  }
-}
-
 __attribute__((constructor)) void ctor() {
   if (auto env = getenv("TRACE_INDENT"); env != nullptr) {
     config::indent = std::stoi(env);
   }
   if (auto env = getenv("TRACE_NO_BACKTRACE"); env != nullptr) {
     config::backtrace = false;
-  }
-  if (auto env = getenv("TRACE_DELAY_PRINT"); env != nullptr) {
-    config::delay_print = true;
-  }
-
-  if (config::delay_print) {
-    std::atexit(print_traces);
   }
 }
 
@@ -210,19 +182,11 @@ int madvise(void *addr, size_t len, int advice) {
 #undef CALL
 
 void __cyg_profile_func_enter(void *this_fn, void *call_site) {
-  if (config::delay_print) {
-    enter_logs.emplace(this_fn);
-  } else {
-    print_enter_trace(this_fn);
-  }
+  print_enter_trace(this_fn);
 }
 
 void __cyg_profile_func_exit(void *this_fn, void *call_site) {
-  if (config::delay_print) {
-    exit_logs.emplace(this_fn);
-  } else {
-    print_exit_trace(this_fn);
-  }
+  print_exit_trace(this_fn);
 }
 }
 }  // namespace trace
