@@ -8,7 +8,9 @@
 #include <dlfcn.h>
 #include <execinfo.h>
 #include <fcntl.h>
+#include <fmt/chrono.h>
 #include <fmt/core.h>
+#include <fmt/format.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -18,7 +20,6 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
-#include <iostream>
 #include <vector>
 
 namespace calltrace {
@@ -87,24 +88,43 @@ static void print_exit_trace(void *addr) {
   call_stack.pop_back();
 }
 
-std::ostream &operator<<(std::ostream &os, const struct stat *s) {
-  if (s == nullptr) return os << "nullptr";
-  os << fmt::format(
-      "{{dev={}, ino={}, mode={}, nlink={}, uid={}, gid={}, rdev={}, size={}, "
-      "blksize={}, blocks={}, atim={}.{}, mtim={}.{}, ctim={}.{}}}",
-      s->st_dev, s->st_ino, s->st_mode, s->st_nlink, s->st_uid, s->st_gid,
-      s->st_rdev, s->st_size, s->st_blksize, s->st_blocks, s->st_atim.tv_sec,
-      s->st_atim.tv_nsec, s->st_mtim.tv_sec, s->st_mtim.tv_nsec,
-      s->st_ctim.tv_sec, s->st_ctim.tv_nsec);
-  return os;
-}
+template <bool Sep = true, class Head, class... Tail>
+void print(Head const &h, Tail const &...t) {
+  if constexpr (std::is_pointer_v<Head>) {
+    if (h == nullptr) {
+      fmt::print(stderr, "nullptr");
+      return;
+    }
+    if constexpr (std::is_same_v<Head, struct stat *> ||
+                  std::is_same_v<Head, struct stat64 *>) {
+      fmt::print(
+          stderr,
+          "{{dev={}, ino={}, mode={}, nlink={}, uid={}, gid={}, rdev={}, "
+          "size={}, blksize={}, blocks={}, atim={}.{}, mtim={}.{}, "
+          "ctim={}.{}}}",
+          h->st_dev, h->st_ino, h->st_mode, h->st_nlink, h->st_uid, h->st_gid,
+          h->st_rdev, h->st_size, h->st_blksize, h->st_blocks,
+          h->st_atim.tv_sec, h->st_atim.tv_nsec, h->st_mtim.tv_sec,
+          h->st_mtim.tv_nsec, h->st_ctim.tv_sec, h->st_ctim.tv_nsec);
+    } else if constexpr (std::is_same_v<Head, struct dirent *> ||
+                         std::is_same_v<Head, struct dirent64 *>) {
+      fmt::print(stderr,
+                 "{{d_ino={}, d_off={}, d_reclen={}, d_type={}, d_name={}}}",
+                 h->d_ino, h->d_off, h->d_reclen, h->d_type, h->d_name);
+    } else if constexpr (std::is_same_v<Head, DIR *>) {
+      fmt::print(stderr, "{}", fmt::ptr(h));
+    } else {
+      fmt::print(stderr, "{}", h);
+    }
+  } else {
+    fmt::print(stderr, "{}", h);
+  }
 
-template <class Head, class... Tail>
-void print(Head const &head, Tail const &...tail) {
-  std::cerr << head;
-  if constexpr (sizeof...(tail) > 0) {
-    std::cerr << ", ";
-    print(tail...);
+  if constexpr (sizeof...(t) > 0) {
+    if constexpr (Sep) {
+      fmt::print(stderr, ", ");
+    }
+    print<Sep>(t...);
   }
 }
 
@@ -118,7 +138,7 @@ inline static auto call(const char *name, Args &&...args) {
   const auto nspace = (call_stack.size() + 1) * config::indent;
   fmt::print(stderr, "{:>{}} {}(", ">", nspace, name);
   print(std::forward<Args>(args)...);
-  std::cerr << ") = " << res << " in " << duration.count() << " ns\n";
+  print</*Sep=*/false>(") = ", res, " in ", duration, "\n");
   print_backtrace();
   fmt::print(stderr, "{:>{}} {}(...)\n", "<", nspace, name);
   return res;
