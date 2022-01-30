@@ -8,10 +8,7 @@
 #include <dlfcn.h>
 #include <execinfo.h>
 #include <fcntl.h>
-#include <fmt/chrono.h>
 #include <fmt/core.h>
-#include <fmt/format.h>
-#include <fmt/ranges.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -91,17 +88,37 @@ static void print_exit_trace(void *addr) {
   print_fn_name(addr);
 }
 
+std::ostream &operator<<(std::ostream &os, const struct stat *s) {
+  if (s == nullptr) return os << "nullptr";
+  os << fmt::format(
+      "{{dev={}, ino={}, mode={}, nlink={}, uid={}, gid={}, rdev={}, size={}, "
+      "blksize={}, blocks={}, atim={}.{}, mtim={}.{}, ctim={}.{}}}",
+      s->st_dev, s->st_ino, s->st_mode, s->st_nlink, s->st_uid, s->st_gid,
+      s->st_rdev, s->st_size, s->st_blksize, s->st_blocks, s->st_atim.tv_sec,
+      s->st_atim.tv_nsec, s->st_mtim.tv_sec, s->st_mtim.tv_nsec,
+      s->st_ctim.tv_sec, s->st_ctim.tv_nsec);
+  return os;
+}
+
+template <class Head, class... Tail>
+void print(Head const &head, Tail const &...tail) {
+  std::cerr << head;
+  if constexpr (sizeof...(tail) > 0) {
+    std::cerr << ", ";
+    print(tail...);
+  }
+}
+
 template <auto Fn, typename... Args>
 inline static auto call(const char *name, Args &&...args) {
   static void *fn = dlsym(RTLD_NEXT, name);
   auto ts = std::chrono::high_resolution_clock::now();
   auto res = reinterpret_cast<decltype(Fn)>(fn)(std::forward<Args>(args)...);
-  auto time = std::chrono::high_resolution_clock::now() - ts;
-  using R = std::conditional_t<std::is_pointer_v<decltype(res)>,
-                               /*True*/ void *, /*False*/ decltype(res)>;
-  fmt::print(stderr, "{:>{}} {}({}) = {} in {}\n", ">", nspace, name,
-             fmt::join(std::forward_as_tuple(args...), ", "),
-             reinterpret_cast<R>(res), time);
+  auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
+      std::chrono::high_resolution_clock::now() - ts);
+  fmt::print(stderr, "{:>{}} {}(", ">", nspace, name);
+  print(std::forward<Args>(args)...);
+  std::cerr << ") = " << res << " in " << duration.count() << " ns\n";
   nspace += config::indent;
   print_backtrace();
   nspace -= config::indent;
@@ -165,24 +182,24 @@ int fcntl(int fd, int cmd, ...) {
 }
 int access(const char *path, int mode) { CALL(access, path, mode); }
 int __fxstat(int ver, int fd, struct stat *buf) {
-  CALL(__fxstat, ver, fd, (void *)buf);
+  CALL(__fxstat, ver, fd, buf);
 }
 int __fxstat64(int ver, int fd, struct stat64 *buf) {
-  CALL(__fxstat64, ver, fd, (void *)buf);
+  CALL(__fxstat64, ver, fd, buf);
 }
 int __xstat(int ver, const char *path, struct stat *buf) {
-  CALL(__xstat, ver, path, (void *)buf);
+  CALL(__xstat, ver, path, buf);
 }
 int __xstat64(int ver, const char *path, struct stat64 *buf) {
-  CALL(__xstat64, ver, path, (void *)buf);
+  CALL(__xstat64, ver, path, buf);
 }
 int unlink(const char *path) { CALL(unlink, path); }
 int mkdir(const char *path, mode_t mode) { CALL(mkdir, path, mode); }
 int rmdir(const char *path) { CALL(rmdir, path); }
 DIR *opendir(const char *path) { CALL(opendir, path); }
-int closedir(DIR *dir) { CALL(closedir, (void *)dir); }
+int closedir(DIR *dir) { CALL(closedir, dir); }
 struct dirent *readdir(DIR *dir) {
-  CALL(readdir, (void *)dir);
+  CALL(readdir, dir);
 }
 void *mmap(void *addr, size_t len, int prot, int flags, int fd, off_t off) {
   CALL(mmap, addr, len, prot, flags, fd, off);
