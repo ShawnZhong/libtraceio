@@ -4,7 +4,7 @@
 
 #include <cstdio>
 
-#include "test_common.h"
+#include "common.h"
 
 void hello_shared_lib();
 void hello_static_lib();
