@@ -27,21 +27,21 @@ Output:
  > test3(char const*)
   > test2(char const*, int, int)
    > test(char const*)
-    > open(/dev/null, 0) = 3 in 4838ns
+    > open(/dev/null, 0) = 3 in 6232 ns
      = backtraces:
      = [3] test(char const*)
      = [2] test2(char const*, int, int)
      = [1] test3(char const*)
      = [0] main(...)
     < open(...)
-    > read(3, 0x0, 0) = 0 in 426ns
+    > read(3, 0, 0) = 0 in 362 ns
      = backtraces:
      = [3] test(char const*)
      = [2] test2(char const*, int, int)
      = [1] test3(char const*)
      = [0] main(...)
     < read(...)
-    > close(3) = 0 in 710ns
+    > close(3) = 0 in 1104 ns
      = backtraces:
      = [3] test(char const*)
      = [2] test2(char const*, int, int)

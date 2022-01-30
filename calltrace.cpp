@@ -39,8 +39,6 @@ __attribute__((constructor)) void ctor() {
 
 std::vector<void *> call_stack;
 
-static int nspace = 1;
-
 static void print_fn_name(void *addr) {
   Dl_info dlinfo{};
   auto rc = dladdr(addr, &dlinfo);
@@ -65,6 +63,7 @@ static void print_fn_name(void *addr) {
 
 static void print_backtrace() {
   if (!config::print_io_backtrace) return;
+  const auto nspace = (call_stack.size() + 2) * config::indent;
   fmt::print(stderr, "{:>{}} backtraces:\n", "=", nspace);
   for (int i = call_stack.size() - 1; i >= 0; --i) {
     fmt::print(stderr, "{:>{}} [{}] ", "=", nspace, i);
@@ -74,18 +73,18 @@ static void print_backtrace() {
 
 static void print_enter_trace(void *addr) {
   call_stack.emplace_back(addr);
-  if (!config::print_fn_trace) return;
-  fmt::print(stderr, "{:>{}} ", ">", nspace);
-  print_fn_name(addr);
-  nspace += config::indent;
+  if (config::print_fn_trace) {
+    fmt::print(stderr, "{:>{}} ", ">", call_stack.size() * config::indent);
+    print_fn_name(addr);
+  }
 }
 
 static void print_exit_trace(void *addr) {
+  if (config::print_fn_trace) {
+    fmt::print(stderr, "{:>{}} ", "<", call_stack.size() * config::indent);
+    print_fn_name(addr);
+  }
   call_stack.pop_back();
-  if (!config::print_fn_trace) return;
-  nspace -= config::indent;
-  fmt::print(stderr, "{:>{}} ", "<", nspace);
-  print_fn_name(addr);
 }
 
 std::ostream &operator<<(std::ostream &os, const struct stat *s) {
@@ -116,12 +115,11 @@ inline static auto call(const char *name, Args &&...args) {
   auto res = reinterpret_cast<decltype(Fn)>(fn)(std::forward<Args>(args)...);
   auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
       std::chrono::high_resolution_clock::now() - ts);
+  const auto nspace = (call_stack.size() + 1) * config::indent;
   fmt::print(stderr, "{:>{}} {}(", ">", nspace, name);
   print(std::forward<Args>(args)...);
   std::cerr << ") = " << res << " in " << duration.count() << " ns\n";
-  nspace += config::indent;
   print_backtrace();
-  nspace -= config::indent;
   fmt::print(stderr, "{:>{}} {}(...)\n", "<", nspace, name);
   return res;
 }
