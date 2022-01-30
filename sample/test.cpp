@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include <cstdio>
@@ -24,6 +25,7 @@ void test_io() {
   write(fd, nullptr, 0);
   pwrite(fd, nullptr, 0, 0);
   pwrite64(fd, nullptr, 0, 0);
+  fstat(fd, nullptr);
   close(fd);
 }
 

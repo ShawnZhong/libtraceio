@@ -28,7 +28,7 @@ namespace trace {
 namespace config {
 static int indent = 1;
 static bool print_io_backtrace = true;
-static bool print_fn_trace = true;
+static bool print_fn_trace = false;
 }  // namespace config
 
 __attribute__((constructor)) void ctor() {
@@ -93,13 +93,15 @@ static void print_exit_trace(void *addr) {
 
 template <auto Fn, typename... Args>
 inline static auto call(const char *name, Args &&...args) {
-  using R = decltype(Fn(std::forward<Args>(args)...));
-  static void *fn_ptr = dlsym(RTLD_NEXT, name);
+  static void *fn = dlsym(RTLD_NEXT, name);
   auto ts = std::chrono::high_resolution_clock::now();
-  R res = reinterpret_cast<decltype(Fn)>(fn_ptr)(std::forward<Args>(args)...);
+  auto res = reinterpret_cast<decltype(Fn)>(fn)(std::forward<Args>(args)...);
   auto time = std::chrono::high_resolution_clock::now() - ts;
+  using R = std::conditional_t<std::is_pointer_v<decltype(res)>,
+                               /*True*/ void *, /*False*/ decltype(res)>;
   fmt::print(stderr, "{:>{}} {}({}) = {} in {}\n", ">", nspace, name,
-             fmt::join(std::forward_as_tuple(args...), ", "), res, time);
+             fmt::join(std::forward_as_tuple(args...), ", "),
+             reinterpret_cast<R>(res), time);
   nspace += config::indent;
   print_backtrace();
   nspace -= config::indent;
@@ -162,9 +164,26 @@ int fcntl(int fd, int cmd, ...) {
   CALL(fcntl, fd, cmd, ptr);
 }
 int access(const char *path, int mode) { CALL(access, path, mode); }
+int __fxstat(int ver, int fd, struct stat *buf) {
+  CALL(__fxstat, ver, fd, (void *)buf);
+}
+int __fxstat64(int ver, int fd, struct stat64 *buf) {
+  CALL(__fxstat64, ver, fd, (void *)buf);
+}
+int __xstat(int ver, const char *path, struct stat *buf) {
+  CALL(__xstat, ver, path, (void *)buf);
+}
+int __xstat64(int ver, const char *path, struct stat64 *buf) {
+  CALL(__xstat64, ver, path, (void *)buf);
+}
 int unlink(const char *path) { CALL(unlink, path); }
 int mkdir(const char *path, mode_t mode) { CALL(mkdir, path, mode); }
 int rmdir(const char *path) { CALL(rmdir, path); }
+DIR *opendir(const char *path) { CALL(opendir, path); }
+int closedir(DIR *dir) { CALL(closedir, (void *)dir); }
+struct dirent *readdir(DIR *dir) {
+  CALL(readdir, (void *)dir);
+}
 void *mmap(void *addr, size_t len, int prot, int flags, int fd, off_t off) {
   CALL(mmap, addr, len, prot, flags, fd, off);
 }

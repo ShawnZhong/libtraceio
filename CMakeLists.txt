@@ -9,4 +9,4 @@ set_property(TARGET fmt PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 add_library(trace SHARED trace.cpp trace.h)
 target_link_libraries(trace PRIVATE dl fmt::fmt)
-target_compile_options(trace PRIVATE "-fno-instrument-functions")
+target_compile_options(trace PRIVATE "-fno-instrument-functions" "-fpermissive")

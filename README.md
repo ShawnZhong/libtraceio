@@ -61,7 +61,7 @@ Output:
 
   ```
   make leveldb_trace
-  ./build-sample/leveldb_trace 2> traces/leveldb-full.txt
+  TRACE_PRINT_FN_TRACE=1 ./build-sample/leveldb_trace 2> traces/leveldb-full.txt
   TRACE_PRINT_FN_TRACE=0 ./build-sample/leveldb_trace 2> traces/leveldb-io.txt
   ```
 
