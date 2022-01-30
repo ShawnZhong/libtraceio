@@ -3,7 +3,7 @@ project(sample)
 
 add_subdirectory(.. ${CMAKE_CURRENT_BINARY_DIR}/trace)
 
-add_compile_options(-finstrument-functions)
+add_compile_options(-finstrument-functions -finstrument-functions-exclude-file-list=/usr/include)
 add_link_options(-Wl,-export-dynamic)
 
 # basic_trace

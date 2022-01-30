@@ -28,7 +28,7 @@ namespace trace {
 namespace config {
 static int indent = 1;
 static bool print_io_backtrace = true;
-static bool print_fn_trace = false;
+static bool print_fn_trace = true;
 }  // namespace config
 
 __attribute__((constructor)) void ctor() {
