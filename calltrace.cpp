@@ -34,7 +34,7 @@ __attribute__((constructor)) void ctor() {
     config::print_fn_trace = env[0] == '1';
 }
 
-std::vector<void *> call_stack;
+thread_local std::vector<void *> call_stack;
 static size_t get_nspace(size_t offset = 0) {
   if (config::print_fn_trace) offset += call_stack.size();
   return offset * config::indent;
