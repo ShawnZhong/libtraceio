@@ -39,6 +39,10 @@ __attribute__((constructor)) void ctor() {
 }
 
 std::vector<void *> call_stack;
+size_t get_nspace(size_t offset = 0) {
+  if (config::print_fn_trace) offset += call_stack.size();
+  return offset * config::indent;
+}
 
 static void print_fn_name(void *addr) {
   Dl_info dlinfo{};
@@ -64,7 +68,7 @@ static void print_fn_name(void *addr) {
 
 static void print_backtrace() {
   if (!config::print_io_backtrace) return;
-  const auto nspace = (call_stack.size() + 2) * config::indent;
+  const auto nspace = get_nspace(2);
   fmt::print(stderr, "{:>{}} backtraces:\n", "=", nspace);
   for (int i = call_stack.size() - 1; i >= 0; --i) {
     fmt::print(stderr, "{:>{}} [{}] ", "=", nspace, i);
@@ -75,14 +79,14 @@ static void print_backtrace() {
 static void print_enter_trace(void *addr) {
   call_stack.emplace_back(addr);
   if (config::print_fn_trace) {
-    fmt::print(stderr, "{:>{}} ", ">", call_stack.size() * config::indent);
+    fmt::print(stderr, "{:>{}} ", ">", get_nspace());
     print_fn_name(addr);
   }
 }
 
 static void print_exit_trace(void *addr) {
   if (config::print_fn_trace) {
-    fmt::print(stderr, "{:>{}} ", "<", call_stack.size() * config::indent);
+    fmt::print(stderr, "{:>{}} ", "<", get_nspace());
     print_fn_name(addr);
   }
   call_stack.pop_back();
@@ -135,7 +139,7 @@ inline static auto call(const char *name, Args &&...args) {
   auto res = reinterpret_cast<decltype(Fn)>(fn)(std::forward<Args>(args)...);
   auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
       std::chrono::high_resolution_clock::now() - ts);
-  const auto nspace = (call_stack.size() + 1) * config::indent;
+  const auto nspace = get_nspace(1);
   fmt::print(stderr, "{:>{}} {}(", ">", nspace, name);
   print(std::forward<Args>(args)...);
   print</*Sep=*/false>(") = ", res, " in ", duration, "\n");
