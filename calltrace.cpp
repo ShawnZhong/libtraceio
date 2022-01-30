@@ -1,7 +1,7 @@
 #define _FORTIFY_SOURCE 2
 #define __OPTIMIZE__ 1
 
-#include "trace.h"
+#include "calltrace.h"
 
 #include <cxxabi.h>
 #include <dirent.h>
@@ -24,7 +24,7 @@
 #include <iostream>
 #include <vector>
 
-namespace trace {
+namespace calltrace {
 namespace config {
 static int indent = 1;
 static bool print_io_backtrace = true;
@@ -207,4 +207,4 @@ void __cyg_profile_func_exit(void *this_fn, void *call_site) {
   print_exit_trace(this_fn);
 }
 }
-}  // namespace trace
+}  // namespace calltrace

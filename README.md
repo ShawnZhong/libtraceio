@@ -1,12 +1,12 @@
-# IOTrace
+# libcalltrace
 
-A library for tracing function calls and I/O code path.
+A library for tracing function calls and I/O syscalls.
 
 ## Usage
 
 1. Add `-finstrument-functions -Wl,--export-dynamic` to the compiler flags.
 
-2. Run your program with `libtrace.so` loaded.
+2. Run your program with `libcalltrace.so` loaded.
 
 ## Example
 
@@ -16,8 +16,8 @@ Compile and run:
 
 ```shell
 g++ sample/basic.cpp -O2 -finstrument-functions -Wl,--export-dynamic
-make # compile libtrace.so
-LD_PRELOAD=./build/libtrace.so ./a.out
+make # compile libcalltrace.so
+LD_PRELOAD=./build/libcalltrace.so ./a.out
 ```
 
 Output:
