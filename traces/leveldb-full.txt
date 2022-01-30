@@ -1,44 +1,44 @@
-> 0x15b50 in ./build/sample/trace_leveldb
- > 0x15ea0 in ./build/sample/trace_leveldb
- < 0x15ea0 in ./build/sample/trace_leveldb
-< 0x15b50 in ./build/sample/trace_leveldb
+> 0x15b50 in trace_leveldb
+ > 0x15ea0 in trace_leveldb
+ < 0x15ea0 in trace_leveldb
+< 0x15b50 in trace_leveldb
 > main(...)
  > leveldb::Options::Options()
   > leveldb::BytewiseComparator()
-   > 0x62d60 in ./build/sample/trace_leveldb
-    > 0x62cf0 in ./build/sample/trace_leveldb
+   > 0x62d60 in trace_leveldb
+    > 0x62cf0 in trace_leveldb
      > leveldb::Comparator::Comparator()
      < leveldb::Comparator::Comparator()
-    < 0x62cf0 in ./build/sample/trace_leveldb
-   < 0x62d60 in ./build/sample/trace_leveldb
-   > 0x62c50 in ./build/sample/trace_leveldb
-   < 0x62c50 in ./build/sample/trace_leveldb
+    < 0x62cf0 in trace_leveldb
+   < 0x62d60 in trace_leveldb
+   > 0x62c50 in trace_leveldb
+   < 0x62c50 in trace_leveldb
   < leveldb::BytewiseComparator()
   > leveldb::Env::Default()
-   > 0x67fc0 in ./build/sample/trace_leveldb
-    > 0x67c90 in ./build/sample/trace_leveldb
+   > 0x67fc0 in trace_leveldb
+    > 0x67c90 in trace_leveldb
      > leveldb::Env::Env()
      < leveldb::Env::Env()
      > leveldb::port::Mutex::Mutex()
      < leveldb::port::Mutex::Mutex()
      > leveldb::port::CondVar::CondVar(leveldb::port::Mutex*)
      < leveldb::port::CondVar::CondVar(leveldb::port::Mutex*)
-     > 0x66d00 in ./build/sample/trace_leveldb
+     > 0x66d00 in trace_leveldb
       > leveldb::port::Mutex::Mutex()
       < leveldb::port::Mutex::Mutex()
-     < 0x66d00 in ./build/sample/trace_leveldb
-     > 0x66260 in ./build/sample/trace_leveldb
-     < 0x66260 in ./build/sample/trace_leveldb
-     > 0x662e0 in ./build/sample/trace_leveldb
-     < 0x662e0 in ./build/sample/trace_leveldb
-     > 0x66800 in ./build/sample/trace_leveldb
-     < 0x66800 in ./build/sample/trace_leveldb
-     > 0x662e0 in ./build/sample/trace_leveldb
-     < 0x662e0 in ./build/sample/trace_leveldb
-    < 0x67c90 in ./build/sample/trace_leveldb
-   < 0x67fc0 in ./build/sample/trace_leveldb
-   > 0x662a0 in ./build/sample/trace_leveldb
-   < 0x662a0 in ./build/sample/trace_leveldb
+     < 0x66d00 in trace_leveldb
+     > 0x66260 in trace_leveldb
+     < 0x66260 in trace_leveldb
+     > 0x662e0 in trace_leveldb
+     < 0x662e0 in trace_leveldb
+     > 0x66800 in trace_leveldb
+     < 0x66800 in trace_leveldb
+     > 0x662e0 in trace_leveldb
+     < 0x662e0 in trace_leveldb
+    < 0x67c90 in trace_leveldb
+   < 0x67fc0 in trace_leveldb
+   > 0x662a0 in trace_leveldb
+   < 0x662a0 in trace_leveldb
   < leveldb::Env::Default()
  < leveldb::Options::Options()
  > leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
@@ -54,18 +54,18 @@
     < leveldb::FilterPolicy::FilterPolicy()
    < leveldb::InternalFilterPolicy::InternalFilterPolicy(leveldb::FilterPolicy const*)
    > leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&)
-    > 0x16000 in ./build/sample/trace_leveldb
-    < 0x16000 in ./build/sample/trace_leveldb
-    > 0x16050 in ./build/sample/trace_leveldb
-    < 0x16050 in ./build/sample/trace_leveldb
-    > 0x16050 in ./build/sample/trace_leveldb
-    < 0x16050 in ./build/sample/trace_leveldb
-    > 0x16050 in ./build/sample/trace_leveldb
-    < 0x16050 in ./build/sample/trace_leveldb
-    > 0x685d0 in ./build/sample/trace_leveldb
-     > mkdir(testdb, 493) = 0 in 28147ns
+    > 0x16000 in trace_leveldb
+    < 0x16000 in trace_leveldb
+    > 0x16050 in trace_leveldb
+    < 0x16050 in trace_leveldb
+    > 0x16050 in trace_leveldb
+    < 0x16050 in trace_leveldb
+    > 0x16050 in trace_leveldb
+    < 0x16050 in trace_leveldb
+    > 0x685d0 in trace_leveldb
+     > mkdir(testdb, 493) = 0 in 29438ns
       = backtraces:
-      = [4] 0x685d0 in ./build/sample/trace_leveldb
+      = [4] 0x685d0 in trace_leveldb
       = [3] leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&)
       = [2] leveldb::DBImpl::DBImpl(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
@@ -75,15 +75,15 @@
       > leveldb::Status::Status()
       < leveldb::Status::Status()
      < leveldb::Status::OK()
-    < 0x685d0 in ./build/sample/trace_leveldb
+    < 0x685d0 in trace_leveldb
     > leveldb::Status::~Status()
     < leveldb::Status::~Status()
     > leveldb::OldInfoLogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     < leveldb::OldInfoLogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     > leveldb::InfoLogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     < leveldb::InfoLogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-    > 0x686b0 in ./build/sample/trace_leveldb
-     > 0x67130 in ./build/sample/trace_leveldb
+    > 0x686b0 in trace_leveldb
+     > 0x67130 in trace_leveldb
       > leveldb::Slice::Slice(char const*)
       < leveldb::Slice::Slice(char const*)
       > leveldb::Slice::Slice(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
@@ -100,16 +100,16 @@
         < leveldb::Slice::data() const
        < leveldb::Status::Status(leveldb::Status::Code, leveldb::Slice const&, leveldb::Slice const&)
       < leveldb::Status::NotFound(leveldb::Slice const&, leveldb::Slice const&)
-     < 0x67130 in ./build/sample/trace_leveldb
-    < 0x686b0 in ./build/sample/trace_leveldb
+     < 0x67130 in trace_leveldb
+    < 0x686b0 in trace_leveldb
     > leveldb::Status::~Status()
     < leveldb::Status::~Status()
     > leveldb::InfoLogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     < leveldb::InfoLogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-    > 0x68b70 in ./build/sample/trace_leveldb
-     > open(testdb/LOG, 525377, 420) = 4 in 7639ns
+    > 0x68b70 in trace_leveldb
+     > open(testdb/LOG, 525377, 420) = 4 in 7799ns
       = backtraces:
-      = [4] 0x68b70 in ./build/sample/trace_leveldb
+      = [4] 0x68b70 in trace_leveldb
       = [3] leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&)
       = [2] leveldb::DBImpl::DBImpl(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
@@ -123,350 +123,350 @@
       > leveldb::Status::Status()
       < leveldb::Status::Status()
      < leveldb::Status::OK()
-    < 0x68b70 in ./build/sample/trace_leveldb
+    < 0x68b70 in trace_leveldb
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
     > leveldb::Status::~Status()
     < leveldb::Status::~Status()
     > leveldb::NewLRUCache(unsigned long)
-     > 0x5e1b0 in ./build/sample/trace_leveldb
+     > 0x5e1b0 in trace_leveldb
       > leveldb::Cache::Cache()
       < leveldb::Cache::Cache()
-      > 0x5eff0 in ./build/sample/trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
       > leveldb::port::Mutex::Mutex()
       < leveldb::port::Mutex::Mutex()
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-     < 0x5e1b0 in ./build/sample/trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+     < 0x5e1b0 in trace_leveldb
     < leveldb::NewLRUCache(unsigned long)
    < leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&)
-   > 0x160b0 in ./build/sample/trace_leveldb
-   < 0x160b0 in ./build/sample/trace_leveldb
+   > 0x160b0 in trace_leveldb
+   < 0x160b0 in trace_leveldb
    > leveldb::TableCache::TableCache(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::Options const&, int)
     > leveldb::NewLRUCache(unsigned long)
-     > 0x5e1b0 in ./build/sample/trace_leveldb
+     > 0x5e1b0 in trace_leveldb
       > leveldb::Cache::Cache()
       < leveldb::Cache::Cache()
-      > 0x5eff0 in ./build/sample/trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
-      > 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
+      > 0x5eff0 in trace_leveldb
        > leveldb::port::Mutex::Mutex()
        < leveldb::port::Mutex::Mutex()
-       > 0x5eec0 in ./build/sample/trace_leveldb
-        > 0x5da80 in ./build/sample/trace_leveldb
-        < 0x5da80 in ./build/sample/trace_leveldb
-       < 0x5eec0 in ./build/sample/trace_leveldb
-      < 0x5eff0 in ./build/sample/trace_leveldb
+       > 0x5eec0 in trace_leveldb
+        > 0x5da80 in trace_leveldb
+        < 0x5da80 in trace_leveldb
+       < 0x5eec0 in trace_leveldb
+      < 0x5eff0 in trace_leveldb
       > leveldb::port::Mutex::Mutex()
       < leveldb::port::Mutex::Mutex()
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-      > 0x5d910 in ./build/sample/trace_leveldb
-      < 0x5d910 in ./build/sample/trace_leveldb
-     < 0x5e1b0 in ./build/sample/trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+      > 0x5d910 in trace_leveldb
+      < 0x5d910 in trace_leveldb
+     < 0x5e1b0 in trace_leveldb
     < leveldb::NewLRUCache(unsigned long)
    < leveldb::TableCache::TableCache(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::Options const&, int)
    > leveldb::port::Mutex::Mutex()
@@ -523,15 +523,15 @@
   > leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
    > leveldb::port::Mutex::AssertHeld()
    < leveldb::port::Mutex::AssertHeld()
-   > 0x685d0 in ./build/sample/trace_leveldb
-    > mkdir(testdb, 493) = -1 in 1487ns
+   > 0x685d0 in trace_leveldb
+    > mkdir(testdb, 493) = -1 in 866ns
      = backtraces:
-     = [3] 0x685d0 in ./build/sample/trace_leveldb
+     = [3] 0x685d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < mkdir(...)
-    > 0x67130 in ./build/sample/trace_leveldb
+    > 0x67130 in trace_leveldb
      > leveldb::Slice::Slice(char const*)
      < leveldb::Slice::Slice(char const*)
      > leveldb::Slice::Slice(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
@@ -548,58 +548,58 @@
        < leveldb::Slice::data() const
       < leveldb::Status::Status(leveldb::Status::Code, leveldb::Slice const&, leveldb::Slice const&)
      < leveldb::Status::IOError(leveldb::Slice const&, leveldb::Slice const&)
-    < 0x67130 in ./build/sample/trace_leveldb
-   < 0x685d0 in ./build/sample/trace_leveldb
+    < 0x67130 in trace_leveldb
+   < 0x685d0 in trace_leveldb
    > leveldb::Status::~Status()
    < leveldb::Status::~Status()
    > leveldb::LockFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
    < leveldb::LockFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-   > 0x6c340 in ./build/sample/trace_leveldb
-    > open(testdb/LOCK, 524354, 420) = 5 in 10849ns
+   > 0x6c340 in trace_leveldb
+    > open(testdb/LOCK, 524354, 420) = 5 in 9385ns
      = backtraces:
-     = [3] 0x6c340 in ./build/sample/trace_leveldb
+     = [3] 0x6c340 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < open(...)
-    > 0x6c060 in ./build/sample/trace_leveldb
+    > 0x6c060 in trace_leveldb
      > leveldb::port::Mutex::Lock()
      < leveldb::port::Mutex::Lock()
      > leveldb::port::Mutex::Unlock()
      < leveldb::port::Mutex::Unlock()
-    < 0x6c060 in ./build/sample/trace_leveldb
-    > 0x66580 in ./build/sample/trace_leveldb
-     > fcntl(5, 6, 0x7fff6508a300) = 0 in 3675ns
+    < 0x6c060 in trace_leveldb
+    > 0x66580 in trace_leveldb
+     > fcntl(5, 6, 0x7ffc1d401f90) = 0 in 3782ns
       = backtraces:
-      = [4] 0x66580 in ./build/sample/trace_leveldb
-      = [3] 0x6c340 in ./build/sample/trace_leveldb
+      = [4] 0x66580 in trace_leveldb
+      = [3] 0x6c340 in trace_leveldb
       = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
       = [0] main(...)
      < fcntl(...)
-    < 0x66580 in ./build/sample/trace_leveldb
-    > 0x66b70 in ./build/sample/trace_leveldb
+    < 0x66580 in trace_leveldb
+    > 0x66b70 in trace_leveldb
      > leveldb::FileLock::FileLock()
      < leveldb::FileLock::FileLock()
-    < 0x66b70 in ./build/sample/trace_leveldb
+    < 0x66b70 in trace_leveldb
     > leveldb::Status::OK()
      > leveldb::Status::Status()
      < leveldb::Status::Status()
     < leveldb::Status::OK()
-   < 0x6c340 in ./build/sample/trace_leveldb
+   < 0x6c340 in trace_leveldb
    > leveldb::Status::ok() const
    < leveldb::Status::ok() const
    > leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
    < leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-   > 0x66680 in ./build/sample/trace_leveldb
-    > access(testdb/CURRENT, 0) = -1 in 3366ns
+   > 0x66680 in trace_leveldb
+    > access(testdb/CURRENT, 0) = -1 in 2458ns
      = backtraces:
-     = [3] 0x66680 in ./build/sample/trace_leveldb
+     = [3] 0x66680 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < access(...)
-   < 0x66680 in ./build/sample/trace_leveldb
+   < 0x66680 in trace_leveldb
    > leveldb::Log(leveldb::Logger*, char const*, ...)
     > leveldb::PosixLogger::Logv(char const*, __va_list_tag*)
     < leveldb::PosixLogger::Logv(char const*, __va_list_tag*)
@@ -613,8 +613,8 @@
      > leveldb::InternalKeyComparator::user_comparator() const
      < leveldb::InternalKeyComparator::user_comparator() const
     < leveldb::DBImpl::user_comparator() const
-    > 0x62bb0 in ./build/sample/trace_leveldb
-    < 0x62bb0 in ./build/sample/trace_leveldb
+    > 0x62bb0 in trace_leveldb
+    < 0x62bb0 in trace_leveldb
     > leveldb::Slice::Slice(char const*)
     < leveldb::Slice::Slice(char const*)
     > leveldb::VersionEdit::SetComparatorName(leveldb::Slice const&)
@@ -629,75 +629,75 @@
     < leveldb::VersionEdit::SetLastSequence(unsigned long)
     > leveldb::DescriptorFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
     < leveldb::DescriptorFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
-    > 0x6bf10 in ./build/sample/trace_leveldb
-     > open(testdb/MANIFEST-000001, 524865, 420) = 6 in 9622ns
+    > 0x6bf10 in trace_leveldb
+     > open(testdb/MANIFEST-000001, 524865, 420) = 6 in 7928ns
       = backtraces:
-      = [4] 0x6bf10 in ./build/sample/trace_leveldb
+      = [4] 0x6bf10 in trace_leveldb
       = [3] leveldb::DBImpl::NewDB()
       = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
       = [0] main(...)
      < open(...)
-     > 0x694c0 in ./build/sample/trace_leveldb
+     > 0x694c0 in trace_leveldb
       > leveldb::WritableFile::WritableFile()
       < leveldb::WritableFile::WritableFile()
-      > 0x67b40 in ./build/sample/trace_leveldb
-       > 0x66eb0 in ./build/sample/trace_leveldb
+      > 0x67b40 in trace_leveldb
+       > 0x66eb0 in trace_leveldb
         > leveldb::Slice::Slice(char const*, unsigned long)
         < leveldb::Slice::Slice(char const*, unsigned long)
-       < 0x66eb0 in ./build/sample/trace_leveldb
+       < 0x66eb0 in trace_leveldb
        > leveldb::Slice::Slice(char const*)
        < leveldb::Slice::Slice(char const*)
        > leveldb::Slice::starts_with(leveldb::Slice const&) const
        < leveldb::Slice::starts_with(leveldb::Slice const&) const
-      < 0x67b40 in ./build/sample/trace_leveldb
-      > 0x69390 in ./build/sample/trace_leveldb
-      < 0x69390 in ./build/sample/trace_leveldb
-     < 0x694c0 in ./build/sample/trace_leveldb
+      < 0x67b40 in trace_leveldb
+      > 0x69390 in trace_leveldb
+      < 0x69390 in trace_leveldb
+     < 0x694c0 in trace_leveldb
      > leveldb::Status::OK()
       > leveldb::Status::Status()
       < leveldb::Status::Status()
      < leveldb::Status::OK()
-    < 0x6bf10 in ./build/sample/trace_leveldb
+    < 0x6bf10 in trace_leveldb
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
     > leveldb::log::Writer::Writer(leveldb::WritableFile*)
-     > 0x34730 in ./build/sample/trace_leveldb
+     > 0x34730 in trace_leveldb
       > leveldb::crc32c::Value(char const*, unsigned long)
        > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-        > 0x63210 in ./build/sample/trace_leveldb
+        > 0x63210 in trace_leveldb
          > leveldb::port::AcceleratedCRC32C(unsigned int, char const*, unsigned long)
          < leveldb::port::AcceleratedCRC32C(unsigned int, char const*, unsigned long)
-        < 0x63210 in ./build/sample/trace_leveldb
-        > 0x63270 in ./build/sample/trace_leveldb
-        < 0x63270 in ./build/sample/trace_leveldb
+        < 0x63210 in trace_leveldb
+        > 0x63270 in trace_leveldb
+        < 0x63270 in trace_leveldb
        < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       < leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Value(char const*, unsigned long)
        > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-        > 0x63270 in ./build/sample/trace_leveldb
-        < 0x63270 in ./build/sample/trace_leveldb
+        > 0x63270 in trace_leveldb
+        < 0x63270 in trace_leveldb
        < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       < leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Value(char const*, unsigned long)
        > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-        > 0x63270 in ./build/sample/trace_leveldb
-        < 0x63270 in ./build/sample/trace_leveldb
+        > 0x63270 in trace_leveldb
+        < 0x63270 in trace_leveldb
        < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       < leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Value(char const*, unsigned long)
        > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-        > 0x63270 in ./build/sample/trace_leveldb
-        < 0x63270 in ./build/sample/trace_leveldb
+        > 0x63270 in trace_leveldb
+        < 0x63270 in trace_leveldb
        < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       < leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Value(char const*, unsigned long)
        > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-        > 0x63270 in ./build/sample/trace_leveldb
-        < 0x63270 in ./build/sample/trace_leveldb
+        > 0x63270 in trace_leveldb
+        < 0x63270 in trace_leveldb
        < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       < leveldb::crc32c::Value(char const*, unsigned long)
-     < 0x34730 in ./build/sample/trace_leveldb
+     < 0x34730 in trace_leveldb
     < leveldb::log::Writer::Writer(leveldb::WritableFile*)
     > leveldb::VersionEdit::EncodeTo(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) const
      > leveldb::PutVarint32(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, unsigned int)
@@ -754,40 +754,40 @@
      < leveldb::Status::Status()
      > leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       > leveldb::crc32c::Mask(unsigned int)
       < leveldb::crc32c::Mask(unsigned int)
@@ -795,7 +795,7 @@
       < leveldb::EncodeFixed32(char*, unsigned int)
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-      > 0x6a580 in ./build/sample/trace_leveldb
+      > 0x6a580 in trace_leveldb
        > leveldb::Slice::size() const
        < leveldb::Slice::size() const
        > leveldb::Slice::data() const
@@ -804,12 +804,12 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6a580 in ./build/sample/trace_leveldb
+      < 0x6a580 in trace_leveldb
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-      > 0x6a580 in ./build/sample/trace_leveldb
+      > 0x6a580 in trace_leveldb
        > leveldb::Slice::size() const
        < leveldb::Slice::size() const
        > leveldb::Slice::data() const
@@ -818,21 +818,21 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6a580 in ./build/sample/trace_leveldb
+      < 0x6a580 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
-      > 0x68a10 in ./build/sample/trace_leveldb
-       > 0x68d00 in ./build/sample/trace_leveldb
-        > 0x68e40 in ./build/sample/trace_leveldb
-         > write(6, 0x559bfdadf568, 41) = 41 in 6400ns
+      > 0x68a10 in trace_leveldb
+       > 0x68d00 in trace_leveldb
+        > 0x68e40 in trace_leveldb
+         > write(6, 0x55ba2c690568, 41) = 41 in 5076ns
           = backtraces:
-          = [8] 0x68e40 in ./build/sample/trace_leveldb
-          = [7] 0x68d00 in ./build/sample/trace_leveldb
-          = [6] 0x68a10 in ./build/sample/trace_leveldb
+          = [8] 0x68e40 in trace_leveldb
+          = [7] 0x68d00 in trace_leveldb
+          = [6] 0x68a10 in trace_leveldb
           = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
           = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
           = [3] leveldb::DBImpl::NewDB()
@@ -844,9 +844,9 @@
           > leveldb::Status::Status()
           < leveldb::Status::Status()
          < leveldb::Status::OK()
-        < 0x68e40 in ./build/sample/trace_leveldb
-       < 0x68d00 in ./build/sample/trace_leveldb
-      < 0x68a10 in ./build/sample/trace_leveldb
+        < 0x68e40 in trace_leveldb
+       < 0x68d00 in trace_leveldb
+      < 0x68a10 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
@@ -865,25 +865,25 @@
     < leveldb::Status::~Status()
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
-    > 0x69d50 in ./build/sample/trace_leveldb
-     > 0x69af0 in ./build/sample/trace_leveldb
+    > 0x69d50 in trace_leveldb
+     > 0x69af0 in trace_leveldb
       > leveldb::Status::Status()
       < leveldb::Status::Status()
-      > open(testdb, 524288) = 7 in 1856ns
+      > open(testdb, 524288) = 7 in 1405ns
        = backtraces:
-       = [5] 0x69af0 in ./build/sample/trace_leveldb
-       = [4] 0x69d50 in ./build/sample/trace_leveldb
+       = [5] 0x69af0 in trace_leveldb
+       = [4] 0x69d50 in trace_leveldb
        = [3] leveldb::DBImpl::NewDB()
        = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
        = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
        = [0] main(...)
       < open(...)
-      > 0x68330 in ./build/sample/trace_leveldb
-       > fdatasync(7) = 0 in 20177322ns
+      > 0x68330 in trace_leveldb
+       > fdatasync(7) = 0 in 19692672ns
         = backtraces:
-        = [6] 0x68330 in ./build/sample/trace_leveldb
-        = [5] 0x69af0 in ./build/sample/trace_leveldb
-        = [4] 0x69d50 in ./build/sample/trace_leveldb
+        = [6] 0x68330 in trace_leveldb
+        = [5] 0x69af0 in trace_leveldb
+        = [4] 0x69d50 in trace_leveldb
         = [3] leveldb::DBImpl::NewDB()
         = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
         = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
@@ -893,42 +893,42 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x68330 in ./build/sample/trace_leveldb
+      < 0x68330 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
-      > close(7) = 0 in 3054ns
+      > close(7) = 0 in 2381ns
        = backtraces:
-       = [5] 0x69af0 in ./build/sample/trace_leveldb
-       = [4] 0x69d50 in ./build/sample/trace_leveldb
+       = [5] 0x69af0 in trace_leveldb
+       = [4] 0x69d50 in trace_leveldb
        = [3] leveldb::DBImpl::NewDB()
        = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
        = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
        = [0] main(...)
       < close(...)
-     < 0x69af0 in ./build/sample/trace_leveldb
+     < 0x69af0 in trace_leveldb
      > leveldb::Status::ok() const
      < leveldb::Status::ok() const
-     > 0x68d00 in ./build/sample/trace_leveldb
-      > 0x68e40 in ./build/sample/trace_leveldb
+     > 0x68d00 in trace_leveldb
+      > 0x68e40 in trace_leveldb
        > leveldb::Status::OK()
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x68e40 in ./build/sample/trace_leveldb
-     < 0x68d00 in ./build/sample/trace_leveldb
+      < 0x68e40 in trace_leveldb
+     < 0x68d00 in trace_leveldb
      > leveldb::Status::operator=(leveldb::Status&&)
      < leveldb::Status::operator=(leveldb::Status&&)
      > leveldb::Status::~Status()
      < leveldb::Status::~Status()
      > leveldb::Status::ok() const
      < leveldb::Status::ok() const
-     > 0x68330 in ./build/sample/trace_leveldb
-      > fdatasync(6) = 0 in 24840068ns
+     > 0x68330 in trace_leveldb
+      > fdatasync(6) = 0 in 24805851ns
        = backtraces:
-       = [5] 0x68330 in ./build/sample/trace_leveldb
-       = [4] 0x69d50 in ./build/sample/trace_leveldb
+       = [5] 0x68330 in trace_leveldb
+       = [4] 0x69d50 in trace_leveldb
        = [3] leveldb::DBImpl::NewDB()
        = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
        = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
@@ -938,46 +938,46 @@
        > leveldb::Status::Status()
        < leveldb::Status::Status()
       < leveldb::Status::OK()
-     < 0x68330 in ./build/sample/trace_leveldb
+     < 0x68330 in trace_leveldb
      > leveldb::Status::~Status()
      < leveldb::Status::~Status()
-    < 0x69d50 in ./build/sample/trace_leveldb
+    < 0x69d50 in trace_leveldb
     > leveldb::Status::operator=(leveldb::Status&&)
     < leveldb::Status::operator=(leveldb::Status&&)
     > leveldb::Status::~Status()
     < leveldb::Status::~Status()
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
-    > 0x69170 in ./build/sample/trace_leveldb
-     > 0x68d00 in ./build/sample/trace_leveldb
-      > 0x68e40 in ./build/sample/trace_leveldb
+    > 0x69170 in trace_leveldb
+     > 0x68d00 in trace_leveldb
+      > 0x68e40 in trace_leveldb
        > leveldb::Status::OK()
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x68e40 in ./build/sample/trace_leveldb
-     < 0x68d00 in ./build/sample/trace_leveldb
-     > close(6) = 0 in 2855ns
+      < 0x68e40 in trace_leveldb
+     < 0x68d00 in trace_leveldb
+     > close(6) = 0 in 2803ns
       = backtraces:
-      = [4] 0x69170 in ./build/sample/trace_leveldb
+      = [4] 0x69170 in trace_leveldb
       = [3] leveldb::DBImpl::NewDB()
       = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
       = [0] main(...)
      < close(...)
-    < 0x69170 in ./build/sample/trace_leveldb
+    < 0x69170 in trace_leveldb
     > leveldb::Status::operator=(leveldb::Status&&)
     < leveldb::Status::operator=(leveldb::Status&&)
     > leveldb::Status::~Status()
     < leveldb::Status::~Status()
     > leveldb::log::Writer::~Writer()
     < leveldb::log::Writer::~Writer()
-    > 0x697f0 in ./build/sample/trace_leveldb
-     > 0x6a2b0 in ./build/sample/trace_leveldb
+    > 0x697f0 in trace_leveldb
+     > 0x6a2b0 in trace_leveldb
       > leveldb::WritableFile::~WritableFile()
       < leveldb::WritableFile::~WritableFile()
-     < 0x6a2b0 in ./build/sample/trace_leveldb
-    < 0x697f0 in ./build/sample/trace_leveldb
+     < 0x6a2b0 in trace_leveldb
+    < 0x697f0 in trace_leveldb
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
     > leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
@@ -988,20 +988,20 @@
      > leveldb::Slice::remove_prefix(unsigned long)
      < leveldb::Slice::remove_prefix(unsigned long)
      > leveldb::TempFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
-      > 0x323a0 in ./build/sample/trace_leveldb
-      < 0x323a0 in ./build/sample/trace_leveldb
+      > 0x323a0 in trace_leveldb
+      < 0x323a0 in trace_leveldb
      < leveldb::TempFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
      > leveldb::Slice::ToString[abi:cxx11]() const
      < leveldb::Slice::ToString[abi:cxx11]() const
      > leveldb::Slice::Slice(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
      < leveldb::Slice::Slice(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
      > leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-      > 0x64420 in ./build/sample/trace_leveldb
-       > 0x6bf10 in ./build/sample/trace_leveldb
-        > open(testdb/000001.dbtmp, 524865, 420) = 6 in 18247ns
+      > 0x64420 in trace_leveldb
+       > 0x6bf10 in trace_leveldb
+        > open(testdb/000001.dbtmp, 524865, 420) = 6 in 15806ns
          = backtraces:
-         = [7] 0x6bf10 in ./build/sample/trace_leveldb
-         = [6] 0x64420 in ./build/sample/trace_leveldb
+         = [7] 0x6bf10 in trace_leveldb
+         = [6] 0x64420 in trace_leveldb
          = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
          = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
          = [3] leveldb::DBImpl::NewDB()
@@ -1009,30 +1009,30 @@
          = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
          = [0] main(...)
         < open(...)
-        > 0x694c0 in ./build/sample/trace_leveldb
+        > 0x694c0 in trace_leveldb
          > leveldb::WritableFile::WritableFile()
          < leveldb::WritableFile::WritableFile()
-         > 0x67b40 in ./build/sample/trace_leveldb
-          > 0x66eb0 in ./build/sample/trace_leveldb
+         > 0x67b40 in trace_leveldb
+          > 0x66eb0 in trace_leveldb
            > leveldb::Slice::Slice(char const*, unsigned long)
            < leveldb::Slice::Slice(char const*, unsigned long)
-          < 0x66eb0 in ./build/sample/trace_leveldb
+          < 0x66eb0 in trace_leveldb
           > leveldb::Slice::Slice(char const*)
           < leveldb::Slice::Slice(char const*)
           > leveldb::Slice::starts_with(leveldb::Slice const&) const
           < leveldb::Slice::starts_with(leveldb::Slice const&) const
-         < 0x67b40 in ./build/sample/trace_leveldb
-         > 0x69390 in ./build/sample/trace_leveldb
-         < 0x69390 in ./build/sample/trace_leveldb
-        < 0x694c0 in ./build/sample/trace_leveldb
+         < 0x67b40 in trace_leveldb
+         > 0x69390 in trace_leveldb
+         < 0x69390 in trace_leveldb
+        < 0x694c0 in trace_leveldb
         > leveldb::Status::OK()
          > leveldb::Status::Status()
          < leveldb::Status::Status()
         < leveldb::Status::OK()
-       < 0x6bf10 in ./build/sample/trace_leveldb
+       < 0x6bf10 in trace_leveldb
        > leveldb::Status::ok() const
        < leveldb::Status::ok() const
-       > 0x6a580 in ./build/sample/trace_leveldb
+       > 0x6a580 in trace_leveldb
         > leveldb::Slice::size() const
         < leveldb::Slice::size() const
         > leveldb::Slice::data() const
@@ -1041,28 +1041,28 @@
          > leveldb::Status::Status()
          < leveldb::Status::Status()
         < leveldb::Status::OK()
-       < 0x6a580 in ./build/sample/trace_leveldb
+       < 0x6a580 in trace_leveldb
        > leveldb::Status::operator=(leveldb::Status&&)
        < leveldb::Status::operator=(leveldb::Status&&)
        > leveldb::Status::~Status()
        < leveldb::Status::~Status()
        > leveldb::Status::ok() const
        < leveldb::Status::ok() const
-       > 0x69d50 in ./build/sample/trace_leveldb
-        > 0x69af0 in ./build/sample/trace_leveldb
+       > 0x69d50 in trace_leveldb
+        > 0x69af0 in trace_leveldb
          > leveldb::Status::Status()
          < leveldb::Status::Status()
-        < 0x69af0 in ./build/sample/trace_leveldb
+        < 0x69af0 in trace_leveldb
         > leveldb::Status::ok() const
         < leveldb::Status::ok() const
-        > 0x68d00 in ./build/sample/trace_leveldb
-         > 0x68e40 in ./build/sample/trace_leveldb
-          > write(6, 0x559bfdadf568, 16) = 16 in 8829ns
+        > 0x68d00 in trace_leveldb
+         > 0x68e40 in trace_leveldb
+          > write(6, 0x55ba2c690568, 16) = 16 in 6527ns
            = backtraces:
-           = [9] 0x68e40 in ./build/sample/trace_leveldb
-           = [8] 0x68d00 in ./build/sample/trace_leveldb
-           = [7] 0x69d50 in ./build/sample/trace_leveldb
-           = [6] 0x64420 in ./build/sample/trace_leveldb
+           = [9] 0x68e40 in trace_leveldb
+           = [8] 0x68d00 in trace_leveldb
+           = [7] 0x69d50 in trace_leveldb
+           = [6] 0x64420 in trace_leveldb
            = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
            = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
            = [3] leveldb::DBImpl::NewDB()
@@ -1074,20 +1074,20 @@
            > leveldb::Status::Status()
            < leveldb::Status::Status()
           < leveldb::Status::OK()
-         < 0x68e40 in ./build/sample/trace_leveldb
-        < 0x68d00 in ./build/sample/trace_leveldb
+         < 0x68e40 in trace_leveldb
+        < 0x68d00 in trace_leveldb
         > leveldb::Status::operator=(leveldb::Status&&)
         < leveldb::Status::operator=(leveldb::Status&&)
         > leveldb::Status::~Status()
         < leveldb::Status::~Status()
         > leveldb::Status::ok() const
         < leveldb::Status::ok() const
-        > 0x68330 in ./build/sample/trace_leveldb
-         > fdatasync(6) = 0 in 24346022ns
+        > 0x68330 in trace_leveldb
+         > fdatasync(6) = 0 in 24230581ns
           = backtraces:
-          = [8] 0x68330 in ./build/sample/trace_leveldb
-          = [7] 0x69d50 in ./build/sample/trace_leveldb
-          = [6] 0x64420 in ./build/sample/trace_leveldb
+          = [8] 0x68330 in trace_leveldb
+          = [7] 0x69d50 in trace_leveldb
+          = [6] 0x64420 in trace_leveldb
           = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
           = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
           = [3] leveldb::DBImpl::NewDB()
@@ -1099,29 +1099,29 @@
           > leveldb::Status::Status()
           < leveldb::Status::Status()
          < leveldb::Status::OK()
-        < 0x68330 in ./build/sample/trace_leveldb
+        < 0x68330 in trace_leveldb
         > leveldb::Status::~Status()
         < leveldb::Status::~Status()
-       < 0x69d50 in ./build/sample/trace_leveldb
+       < 0x69d50 in trace_leveldb
        > leveldb::Status::operator=(leveldb::Status&&)
        < leveldb::Status::operator=(leveldb::Status&&)
        > leveldb::Status::~Status()
        < leveldb::Status::~Status()
        > leveldb::Status::ok() const
        < leveldb::Status::ok() const
-       > 0x69170 in ./build/sample/trace_leveldb
-        > 0x68d00 in ./build/sample/trace_leveldb
-         > 0x68e40 in ./build/sample/trace_leveldb
+       > 0x69170 in trace_leveldb
+        > 0x68d00 in trace_leveldb
+         > 0x68e40 in trace_leveldb
           > leveldb::Status::OK()
            > leveldb::Status::Status()
            < leveldb::Status::Status()
           < leveldb::Status::OK()
-         < 0x68e40 in ./build/sample/trace_leveldb
-        < 0x68d00 in ./build/sample/trace_leveldb
-        > close(6) = 0 in 3828ns
+         < 0x68e40 in trace_leveldb
+        < 0x68d00 in trace_leveldb
+        > close(6) = 0 in 2483ns
          = backtraces:
-         = [7] 0x69170 in ./build/sample/trace_leveldb
-         = [6] 0x64420 in ./build/sample/trace_leveldb
+         = [7] 0x69170 in trace_leveldb
+         = [6] 0x64420 in trace_leveldb
          = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
          = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
          = [3] leveldb::DBImpl::NewDB()
@@ -1129,31 +1129,31 @@
          = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
          = [0] main(...)
         < close(...)
-       < 0x69170 in ./build/sample/trace_leveldb
+       < 0x69170 in trace_leveldb
        > leveldb::Status::operator=(leveldb::Status&&)
        < leveldb::Status::operator=(leveldb::Status&&)
        > leveldb::Status::~Status()
        < leveldb::Status::~Status()
-       > 0x697f0 in ./build/sample/trace_leveldb
-        > 0x6a2b0 in ./build/sample/trace_leveldb
+       > 0x697f0 in trace_leveldb
+        > 0x6a2b0 in trace_leveldb
          > leveldb::WritableFile::~WritableFile()
          < leveldb::WritableFile::~WritableFile()
-        < 0x6a2b0 in ./build/sample/trace_leveldb
-       < 0x697f0 in ./build/sample/trace_leveldb
+        < 0x6a2b0 in trace_leveldb
+       < 0x697f0 in trace_leveldb
        > leveldb::Status::ok() const
        < leveldb::Status::ok() const
-      < 0x64420 in ./build/sample/trace_leveldb
+      < 0x64420 in trace_leveldb
      < leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
      > leveldb::Status::ok() const
      < leveldb::Status::ok() const
      > leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
      < leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-     > 0x686b0 in ./build/sample/trace_leveldb
+     > 0x686b0 in trace_leveldb
       > leveldb::Status::OK()
        > leveldb::Status::Status()
        < leveldb::Status::Status()
       < leveldb::Status::OK()
-     < 0x686b0 in ./build/sample/trace_leveldb
+     < 0x686b0 in trace_leveldb
      > leveldb::Status::operator=(leveldb::Status&&)
      < leveldb::Status::operator=(leveldb::Status&&)
      > leveldb::Status::~Status()
@@ -1178,35 +1178,35 @@
     > leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     < leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     > leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
-     > 0x6bbd0 in ./build/sample/trace_leveldb
-      > open(testdb/CURRENT, 524288) = 6 in 3412ns
+     > 0x6bbd0 in trace_leveldb
+      > open(testdb/CURRENT, 524288) = 6 in 2725ns
        = backtraces:
-       = [5] 0x6bbd0 in ./build/sample/trace_leveldb
+       = [5] 0x6bbd0 in trace_leveldb
        = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
        = [3] leveldb::VersionSet::Recover(bool*)
        = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
        = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
        = [0] main(...)
       < open(...)
-      > 0x66ab0 in ./build/sample/trace_leveldb
+      > 0x66ab0 in trace_leveldb
        > leveldb::SequentialFile::SequentialFile()
        < leveldb::SequentialFile::SequentialFile()
-      < 0x66ab0 in ./build/sample/trace_leveldb
+      < 0x66ab0 in trace_leveldb
       > leveldb::Status::OK()
        > leveldb::Status::Status()
        < leveldb::Status::Status()
       < leveldb::Status::OK()
-     < 0x6bbd0 in ./build/sample/trace_leveldb
+     < 0x6bbd0 in trace_leveldb
      > leveldb::Status::ok() const
      < leveldb::Status::ok() const
      > leveldb::Slice::Slice()
      < leveldb::Slice::Slice()
-     > 0x680c0 in ./build/sample/trace_leveldb
+     > 0x680c0 in trace_leveldb
       > leveldb::Status::Status()
       < leveldb::Status::Status()
-      > read(6, 0x559bfdadf560, 8192) = 16 in 2808ns
+      > read(6, 0x55ba2c690560, 8192) = 16 in 2167ns
        = backtraces:
-       = [5] 0x680c0 in ./build/sample/trace_leveldb
+       = [5] 0x680c0 in trace_leveldb
        = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
        = [3] leveldb::VersionSet::Recover(bool*)
        = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
@@ -1215,7 +1215,7 @@
       < read(...)
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-     < 0x680c0 in ./build/sample/trace_leveldb
+     < 0x680c0 in trace_leveldb
      > leveldb::Status::operator=(leveldb::Status&&)
      < leveldb::Status::operator=(leveldb::Status&&)
      > leveldb::Status::~Status()
@@ -1230,12 +1230,12 @@
      < leveldb::Slice::empty() const
      > leveldb::Slice::Slice()
      < leveldb::Slice::Slice()
-     > 0x680c0 in ./build/sample/trace_leveldb
+     > 0x680c0 in trace_leveldb
       > leveldb::Status::Status()
       < leveldb::Status::Status()
-      > read(6, 0x559bfdadf560, 8192) = 0 in 469ns
+      > read(6, 0x55ba2c690560, 8192) = 0 in 356ns
        = backtraces:
-       = [5] 0x680c0 in ./build/sample/trace_leveldb
+       = [5] 0x680c0 in trace_leveldb
        = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
        = [3] leveldb::VersionSet::Recover(bool*)
        = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
@@ -1244,7 +1244,7 @@
       < read(...)
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-     < 0x680c0 in ./build/sample/trace_leveldb
+     < 0x680c0 in trace_leveldb
      > leveldb::Status::operator=(leveldb::Status&&)
      < leveldb::Status::operator=(leveldb::Status&&)
      > leveldb::Status::~Status()
@@ -1257,12 +1257,12 @@
      < leveldb::Slice::data() const
      > leveldb::Slice::empty() const
      < leveldb::Slice::empty() const
-     > 0x67000 in ./build/sample/trace_leveldb
-      > 0x66750 in ./build/sample/trace_leveldb
-       > close(6) = 0 in 922ns
+     > 0x67000 in trace_leveldb
+      > 0x66750 in trace_leveldb
+       > close(6) = 0 in 882ns
         = backtraces:
-        = [6] 0x66750 in ./build/sample/trace_leveldb
-        = [5] 0x67000 in ./build/sample/trace_leveldb
+        = [6] 0x66750 in trace_leveldb
+        = [5] 0x67000 in trace_leveldb
         = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
         = [3] leveldb::VersionSet::Recover(bool*)
         = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
@@ -1271,29 +1271,29 @@
        < close(...)
        > leveldb::SequentialFile::~SequentialFile()
        < leveldb::SequentialFile::~SequentialFile()
-      < 0x66750 in ./build/sample/trace_leveldb
-     < 0x67000 in ./build/sample/trace_leveldb
+      < 0x66750 in trace_leveldb
+     < 0x67000 in trace_leveldb
     < leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
-    > 0x6bbd0 in ./build/sample/trace_leveldb
-     > open(testdb/MANIFEST-000001, 524288) = 6 in 1791ns
+    > 0x6bbd0 in trace_leveldb
+     > open(testdb/MANIFEST-000001, 524288) = 6 in 1365ns
       = backtraces:
-      = [4] 0x6bbd0 in ./build/sample/trace_leveldb
+      = [4] 0x6bbd0 in trace_leveldb
       = [3] leveldb::VersionSet::Recover(bool*)
       = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
       = [0] main(...)
      < open(...)
-     > 0x66ab0 in ./build/sample/trace_leveldb
+     > 0x66ab0 in trace_leveldb
       > leveldb::SequentialFile::SequentialFile()
       < leveldb::SequentialFile::SequentialFile()
-     < 0x66ab0 in ./build/sample/trace_leveldb
+     < 0x66ab0 in trace_leveldb
      > leveldb::Status::OK()
       > leveldb::Status::Status()
       < leveldb::Status::Status()
      < leveldb::Status::OK()
-    < 0x6bbd0 in ./build/sample/trace_leveldb
+    < 0x6bbd0 in trace_leveldb
     > leveldb::Status::operator=(leveldb::Status&&)
     < leveldb::Status::operator=(leveldb::Status&&)
     > leveldb::Status::~Status()
@@ -1318,10 +1318,10 @@
      > leveldb::Version::Ref()
      < leveldb::Version::Ref()
     < leveldb::VersionSet::Builder::Builder(leveldb::VersionSet*, leveldb::Version*)
-    > 0x3bee0 in ./build/sample/trace_leveldb
+    > 0x3bee0 in trace_leveldb
      > leveldb::log::Reader::Reporter::Reporter()
      < leveldb::log::Reader::Reporter::Reporter()
-    < 0x3bee0 in ./build/sample/trace_leveldb
+    < 0x3bee0 in trace_leveldb
     > leveldb::log::Reader::Reader(leveldb::SequentialFile*, leveldb::log::Reader::Reporter*, bool, unsigned long)
      > leveldb::Slice::Slice()
      < leveldb::Slice::Slice()
@@ -1338,12 +1338,12 @@
       < leveldb::Slice::size() const
       > leveldb::Slice::clear()
       < leveldb::Slice::clear()
-      > 0x680c0 in ./build/sample/trace_leveldb
+      > 0x680c0 in trace_leveldb
        > leveldb::Status::Status()
        < leveldb::Status::Status()
-       > read(6, 0x559bfdadf560, 32768) = 41 in 1450ns
+       > read(6, 0x55ba2c690560, 32768) = 41 in 1239ns
         = backtraces:
-        = [6] 0x680c0 in ./build/sample/trace_leveldb
+        = [6] 0x680c0 in trace_leveldb
         = [5] leveldb::log::Reader::ReadPhysicalRecord(leveldb::Slice*)
         = [4] leveldb::log::Reader::ReadRecord(leveldb::Slice*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
         = [3] leveldb::VersionSet::Recover(bool*)
@@ -1353,7 +1353,7 @@
        < read(...)
        > leveldb::Slice::Slice(char const*, unsigned long)
        < leveldb::Slice::Slice(char const*, unsigned long)
-      < 0x680c0 in ./build/sample/trace_leveldb
+      < 0x680c0 in trace_leveldb
       > leveldb::Slice::size() const
       < leveldb::Slice::size() const
       > leveldb::Status::ok() const
@@ -1374,40 +1374,40 @@
       < leveldb::crc32c::Unmask(unsigned int)
       > leveldb::crc32c::Value(char const*, unsigned long)
        > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-        > 0x63270 in ./build/sample/trace_leveldb
-        < 0x63270 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        > 0x63270 in trace_leveldb
+        < 0x63270 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
-        > 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
+        > 0x632b0 in trace_leveldb
          > leveldb::DecodeFixed32(char const*)
          < leveldb::DecodeFixed32(char const*)
-        < 0x632b0 in ./build/sample/trace_leveldb
+        < 0x632b0 in trace_leveldb
        < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       < leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::Slice::remove_prefix(unsigned long)
@@ -1564,8 +1564,8 @@
     < leveldb::Status::ok() const
     > leveldb::InternalKeyComparator::user_comparator() const
     < leveldb::InternalKeyComparator::user_comparator() const
-    > 0x62bb0 in ./build/sample/trace_leveldb
-    < 0x62bb0 in ./build/sample/trace_leveldb
+    > 0x62bb0 in trace_leveldb
+    < 0x62bb0 in trace_leveldb
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
     > leveldb::VersionSet::Builder::Apply(leveldb::VersionEdit const*)
@@ -1590,16 +1590,16 @@
     < leveldb::log::Reader::ReadRecord(leveldb::Slice*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
     > leveldb::log::Reader::~Reader()
     < leveldb::log::Reader::~Reader()
-    > 0x3bdc0 in ./build/sample/trace_leveldb
+    > 0x3bdc0 in trace_leveldb
      > leveldb::log::Reader::Reporter::~Reporter()
      < leveldb::log::Reader::Reporter::~Reporter()
-    < 0x3bdc0 in ./build/sample/trace_leveldb
-    > 0x67000 in ./build/sample/trace_leveldb
-     > 0x66750 in ./build/sample/trace_leveldb
-      > close(6) = 0 in 567ns
+    < 0x3bdc0 in trace_leveldb
+    > 0x67000 in trace_leveldb
+     > 0x66750 in trace_leveldb
+      > close(6) = 0 in 846ns
        = backtraces:
-       = [5] 0x66750 in ./build/sample/trace_leveldb
-       = [4] 0x67000 in ./build/sample/trace_leveldb
+       = [5] 0x66750 in trace_leveldb
+       = [4] 0x67000 in trace_leveldb
        = [3] leveldb::VersionSet::Recover(bool*)
        = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
        = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
@@ -1607,8 +1607,8 @@
       < close(...)
       > leveldb::SequentialFile::~SequentialFile()
       < leveldb::SequentialFile::~SequentialFile()
-     < 0x66750 in ./build/sample/trace_leveldb
-    < 0x67000 in ./build/sample/trace_leveldb
+     < 0x66750 in trace_leveldb
+    < 0x67000 in trace_leveldb
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
     > leveldb::VersionSet::MarkFileNumberUsed(unsigned long)
@@ -1622,26 +1622,26 @@
     > leveldb::VersionSet::Builder::SaveTo(leveldb::Version*)
     < leveldb::VersionSet::Builder::SaveTo(leveldb::Version*)
     > leveldb::VersionSet::Finalize(leveldb::Version*)
-     > 0x3bd50 in ./build/sample/trace_leveldb
-     < 0x3bd50 in ./build/sample/trace_leveldb
-     > 0x3bbb0 in ./build/sample/trace_leveldb
-     < 0x3bbb0 in ./build/sample/trace_leveldb
-     > 0x3bd50 in ./build/sample/trace_leveldb
-     < 0x3bd50 in ./build/sample/trace_leveldb
-     > 0x3bbb0 in ./build/sample/trace_leveldb
-     < 0x3bbb0 in ./build/sample/trace_leveldb
-     > 0x3bd50 in ./build/sample/trace_leveldb
-     < 0x3bd50 in ./build/sample/trace_leveldb
-     > 0x3bbb0 in ./build/sample/trace_leveldb
-     < 0x3bbb0 in ./build/sample/trace_leveldb
-     > 0x3bd50 in ./build/sample/trace_leveldb
-     < 0x3bd50 in ./build/sample/trace_leveldb
-     > 0x3bbb0 in ./build/sample/trace_leveldb
-     < 0x3bbb0 in ./build/sample/trace_leveldb
-     > 0x3bd50 in ./build/sample/trace_leveldb
-     < 0x3bd50 in ./build/sample/trace_leveldb
-     > 0x3bbb0 in ./build/sample/trace_leveldb
-     < 0x3bbb0 in ./build/sample/trace_leveldb
+     > 0x3bd50 in trace_leveldb
+     < 0x3bd50 in trace_leveldb
+     > 0x3bbb0 in trace_leveldb
+     < 0x3bbb0 in trace_leveldb
+     > 0x3bd50 in trace_leveldb
+     < 0x3bd50 in trace_leveldb
+     > 0x3bbb0 in trace_leveldb
+     < 0x3bbb0 in trace_leveldb
+     > 0x3bd50 in trace_leveldb
+     < 0x3bd50 in trace_leveldb
+     > 0x3bbb0 in trace_leveldb
+     < 0x3bbb0 in trace_leveldb
+     > 0x3bd50 in trace_leveldb
+     < 0x3bd50 in trace_leveldb
+     > 0x3bbb0 in trace_leveldb
+     < 0x3bbb0 in trace_leveldb
+     > 0x3bd50 in trace_leveldb
+     < 0x3bd50 in trace_leveldb
+     > 0x3bbb0 in trace_leveldb
+     < 0x3bbb0 in trace_leveldb
     < leveldb::VersionSet::Finalize(leveldb::Version*)
     > leveldb::VersionSet::AppendVersion(leveldb::Version*)
      > leveldb::Version::Unref()
@@ -1686,65 +1686,65 @@
    < leveldb::VersionSet::LogNumber() const
    > leveldb::VersionSet::PrevLogNumber() const
    < leveldb::VersionSet::PrevLogNumber() const
-   > 0x6a9d0 in ./build/sample/trace_leveldb
-    > opendir(testdb) = 0x559bfdadf560 in 2729ns
+   > 0x6a9d0 in trace_leveldb
+    > opendir(testdb) = 0x55ba2c690560 in 2818ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < opendir(...)
-    > readdir(0x559bfdadf560) = {d_ino=10621040, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name=MANIFEST-000001} in 3600ns
+    > readdir(0x55ba2c690560) = {d_ino=10621048, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name=MANIFEST-000001} in 3863ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdadf560) = {d_ino=10619708, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name=LOG} in 41ns
+    > readdir(0x55ba2c690560) = {d_ino=10619708, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name=LOG} in 48ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdadf560) = {d_ino=10621041, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name=CURRENT} in 19ns
+    > readdir(0x55ba2c690560) = {d_ino=10621051, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name=CURRENT} in 45ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdadf560) = {d_ino=10619709, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name=LOCK} in 19ns
+    > readdir(0x55ba2c690560) = {d_ino=10619709, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name=LOCK} in 34ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdadf560) = {d_ino=10619705, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name=.} in 20ns
+    > readdir(0x55ba2c690560) = {d_ino=10619705, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name=.} in 21ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdadf560) = {d_ino=10619469, d_off=9223372036854775807, d_reclen=24, d_type=4, d_name=..} in 20ns
+    > readdir(0x55ba2c690560) = {d_ino=10619469, d_off=9223372036854775807, d_reclen=24, d_type=4, d_name=..} in 22ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdadf560) = nullptr     = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+    > readdir(0x55ba2c690560) = nullptr     = backtraces:
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > closedir(0x559bfdadf560) = 0 in 1065ns
+    > closedir(0x55ba2c690560) = 0 in 937ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
@@ -1753,7 +1753,7 @@
      > leveldb::Status::Status()
      < leveldb::Status::Status()
     < leveldb::Status::OK()
-   < 0x6a9d0 in ./build/sample/trace_leveldb
+   < 0x6a9d0 in trace_leveldb
    > leveldb::Status::operator=(leveldb::Status&&)
    < leveldb::Status::operator=(leveldb::Status&&)
    > leveldb::Status::~Status()
@@ -2002,37 +2002,37 @@
   > leveldb::VersionSet::NewFileNumber()
   < leveldb::VersionSet::NewFileNumber()
   > leveldb::LogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
-   > 0x323a0 in ./build/sample/trace_leveldb
-   < 0x323a0 in ./build/sample/trace_leveldb
+   > 0x323a0 in trace_leveldb
+   < 0x323a0 in trace_leveldb
   < leveldb::LogFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
-  > 0x6bf10 in ./build/sample/trace_leveldb
-   > open(testdb/000003.log, 524865, 420) = 6 in 11598ns
+  > 0x6bf10 in trace_leveldb
+   > open(testdb/000003.log, 524865, 420) = 6 in 12025ns
     = backtraces:
-    = [2] 0x6bf10 in ./build/sample/trace_leveldb
+    = [2] 0x6bf10 in trace_leveldb
     = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
     = [0] main(...)
    < open(...)
-   > 0x694c0 in ./build/sample/trace_leveldb
+   > 0x694c0 in trace_leveldb
     > leveldb::WritableFile::WritableFile()
     < leveldb::WritableFile::WritableFile()
-    > 0x67b40 in ./build/sample/trace_leveldb
-     > 0x66eb0 in ./build/sample/trace_leveldb
+    > 0x67b40 in trace_leveldb
+     > 0x66eb0 in trace_leveldb
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-     < 0x66eb0 in ./build/sample/trace_leveldb
+     < 0x66eb0 in trace_leveldb
      > leveldb::Slice::Slice(char const*)
      < leveldb::Slice::Slice(char const*)
      > leveldb::Slice::starts_with(leveldb::Slice const&) const
      < leveldb::Slice::starts_with(leveldb::Slice const&) const
-    < 0x67b40 in ./build/sample/trace_leveldb
-    > 0x69390 in ./build/sample/trace_leveldb
-    < 0x69390 in ./build/sample/trace_leveldb
-   < 0x694c0 in ./build/sample/trace_leveldb
+    < 0x67b40 in trace_leveldb
+    > 0x69390 in trace_leveldb
+    < 0x69390 in trace_leveldb
+   < 0x694c0 in trace_leveldb
    > leveldb::Status::OK()
     > leveldb::Status::Status()
     < leveldb::Status::Status()
    < leveldb::Status::OK()
-  < 0x6bf10 in ./build/sample/trace_leveldb
+  < 0x6bf10 in trace_leveldb
   > leveldb::Status::operator=(leveldb::Status&&)
   < leveldb::Status::operator=(leveldb::Status&&)
   > leveldb::Status::~Status()
@@ -2042,38 +2042,38 @@
   > leveldb::VersionEdit::SetLogNumber(unsigned long)
   < leveldb::VersionEdit::SetLogNumber(unsigned long)
   > leveldb::log::Writer::Writer(leveldb::WritableFile*)
-   > 0x34730 in ./build/sample/trace_leveldb
+   > 0x34730 in trace_leveldb
     > leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-      > 0x63270 in ./build/sample/trace_leveldb
-      < 0x63270 in ./build/sample/trace_leveldb
+      > 0x63270 in trace_leveldb
+      < 0x63270 in trace_leveldb
      < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
     < leveldb::crc32c::Value(char const*, unsigned long)
     > leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-      > 0x63270 in ./build/sample/trace_leveldb
-      < 0x63270 in ./build/sample/trace_leveldb
+      > 0x63270 in trace_leveldb
+      < 0x63270 in trace_leveldb
      < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
     < leveldb::crc32c::Value(char const*, unsigned long)
     > leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-      > 0x63270 in ./build/sample/trace_leveldb
-      < 0x63270 in ./build/sample/trace_leveldb
+      > 0x63270 in trace_leveldb
+      < 0x63270 in trace_leveldb
      < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
     < leveldb::crc32c::Value(char const*, unsigned long)
     > leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-      > 0x63270 in ./build/sample/trace_leveldb
-      < 0x63270 in ./build/sample/trace_leveldb
+      > 0x63270 in trace_leveldb
+      < 0x63270 in trace_leveldb
      < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
     < leveldb::crc32c::Value(char const*, unsigned long)
     > leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-      > 0x63270 in ./build/sample/trace_leveldb
-      < 0x63270 in ./build/sample/trace_leveldb
+      > 0x63270 in trace_leveldb
+      < 0x63270 in trace_leveldb
      < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
     < leveldb::crc32c::Value(char const*, unsigned long)
-   < 0x34730 in ./build/sample/trace_leveldb
+   < 0x34730 in trace_leveldb
   < leveldb::log::Writer::Writer(leveldb::WritableFile*)
   > leveldb::MemTable::MemTable(leveldb::InternalKeyComparator const&)
    > leveldb::MemTable::KeyComparator::KeyComparator(leveldb::InternalKeyComparator const&)
@@ -2197,60 +2197,60 @@
     < leveldb::VersionSet::Builder::LevelState::~LevelState()
    < leveldb::VersionSet::Builder::~Builder()
    > leveldb::VersionSet::Finalize(leveldb::Version*)
-    > 0x3bd50 in ./build/sample/trace_leveldb
-    < 0x3bd50 in ./build/sample/trace_leveldb
-    > 0x3bbb0 in ./build/sample/trace_leveldb
-    < 0x3bbb0 in ./build/sample/trace_leveldb
-    > 0x3bd50 in ./build/sample/trace_leveldb
-    < 0x3bd50 in ./build/sample/trace_leveldb
-    > 0x3bbb0 in ./build/sample/trace_leveldb
-    < 0x3bbb0 in ./build/sample/trace_leveldb
-    > 0x3bd50 in ./build/sample/trace_leveldb
-    < 0x3bd50 in ./build/sample/trace_leveldb
-    > 0x3bbb0 in ./build/sample/trace_leveldb
-    < 0x3bbb0 in ./build/sample/trace_leveldb
-    > 0x3bd50 in ./build/sample/trace_leveldb
-    < 0x3bd50 in ./build/sample/trace_leveldb
-    > 0x3bbb0 in ./build/sample/trace_leveldb
-    < 0x3bbb0 in ./build/sample/trace_leveldb
-    > 0x3bd50 in ./build/sample/trace_leveldb
-    < 0x3bd50 in ./build/sample/trace_leveldb
-    > 0x3bbb0 in ./build/sample/trace_leveldb
-    < 0x3bbb0 in ./build/sample/trace_leveldb
+    > 0x3bd50 in trace_leveldb
+    < 0x3bd50 in trace_leveldb
+    > 0x3bbb0 in trace_leveldb
+    < 0x3bbb0 in trace_leveldb
+    > 0x3bd50 in trace_leveldb
+    < 0x3bd50 in trace_leveldb
+    > 0x3bbb0 in trace_leveldb
+    < 0x3bbb0 in trace_leveldb
+    > 0x3bd50 in trace_leveldb
+    < 0x3bd50 in trace_leveldb
+    > 0x3bbb0 in trace_leveldb
+    < 0x3bbb0 in trace_leveldb
+    > 0x3bd50 in trace_leveldb
+    < 0x3bd50 in trace_leveldb
+    > 0x3bbb0 in trace_leveldb
+    < 0x3bbb0 in trace_leveldb
+    > 0x3bd50 in trace_leveldb
+    < 0x3bd50 in trace_leveldb
+    > 0x3bbb0 in trace_leveldb
+    < 0x3bbb0 in trace_leveldb
    < leveldb::VersionSet::Finalize(leveldb::Version*)
    > leveldb::Status::Status()
    < leveldb::Status::Status()
    > leveldb::DescriptorFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
    < leveldb::DescriptorFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
-   > 0x6bf10 in ./build/sample/trace_leveldb
-    > open(testdb/MANIFEST-000002, 524865, 420) = 7 in 11520ns
+   > 0x6bf10 in trace_leveldb
+    > open(testdb/MANIFEST-000002, 524865, 420) = 7 in 8846ns
      = backtraces:
-     = [3] 0x6bf10 in ./build/sample/trace_leveldb
+     = [3] 0x6bf10 in trace_leveldb
      = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < open(...)
-    > 0x694c0 in ./build/sample/trace_leveldb
+    > 0x694c0 in trace_leveldb
      > leveldb::WritableFile::WritableFile()
      < leveldb::WritableFile::WritableFile()
-     > 0x67b40 in ./build/sample/trace_leveldb
-      > 0x66eb0 in ./build/sample/trace_leveldb
+     > 0x67b40 in trace_leveldb
+      > 0x66eb0 in trace_leveldb
        > leveldb::Slice::Slice(char const*, unsigned long)
        < leveldb::Slice::Slice(char const*, unsigned long)
-      < 0x66eb0 in ./build/sample/trace_leveldb
+      < 0x66eb0 in trace_leveldb
       > leveldb::Slice::Slice(char const*)
       < leveldb::Slice::Slice(char const*)
       > leveldb::Slice::starts_with(leveldb::Slice const&) const
       < leveldb::Slice::starts_with(leveldb::Slice const&) const
-     < 0x67b40 in ./build/sample/trace_leveldb
-     > 0x69390 in ./build/sample/trace_leveldb
-     < 0x69390 in ./build/sample/trace_leveldb
-    < 0x694c0 in ./build/sample/trace_leveldb
+     < 0x67b40 in trace_leveldb
+     > 0x69390 in trace_leveldb
+     < 0x69390 in trace_leveldb
+    < 0x694c0 in trace_leveldb
     > leveldb::Status::OK()
      > leveldb::Status::Status()
      < leveldb::Status::Status()
     < leveldb::Status::OK()
-   < 0x6bf10 in ./build/sample/trace_leveldb
+   < 0x6bf10 in trace_leveldb
    > leveldb::Status::operator=(leveldb::Status&&)
    < leveldb::Status::operator=(leveldb::Status&&)
    > leveldb::Status::~Status()
@@ -2258,38 +2258,38 @@
    > leveldb::Status::ok() const
    < leveldb::Status::ok() const
    > leveldb::log::Writer::Writer(leveldb::WritableFile*)
-    > 0x34730 in ./build/sample/trace_leveldb
+    > 0x34730 in trace_leveldb
      > leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
      < leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
      < leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
      < leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
      < leveldb::crc32c::Value(char const*, unsigned long)
      > leveldb::crc32c::Value(char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
      < leveldb::crc32c::Value(char const*, unsigned long)
-    < 0x34730 in ./build/sample/trace_leveldb
+    < 0x34730 in trace_leveldb
    < leveldb::log::Writer::Writer(leveldb::WritableFile*)
    > leveldb::VersionSet::WriteSnapshot(leveldb::log::Writer*)
     > leveldb::VersionEdit::VersionEdit()
@@ -2298,8 +2298,8 @@
     < leveldb::VersionEdit::VersionEdit()
     > leveldb::InternalKeyComparator::user_comparator() const
     < leveldb::InternalKeyComparator::user_comparator() const
-    > 0x62bb0 in ./build/sample/trace_leveldb
-    < 0x62bb0 in ./build/sample/trace_leveldb
+    > 0x62bb0 in trace_leveldb
+    < 0x62bb0 in trace_leveldb
     > leveldb::Slice::Slice(char const*)
     < leveldb::Slice::Slice(char const*)
     > leveldb::VersionEdit::SetComparatorName(leveldb::Slice const&)
@@ -2337,36 +2337,36 @@
      < leveldb::Status::Status()
      > leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       > leveldb::crc32c::Mask(unsigned int)
       < leveldb::crc32c::Mask(unsigned int)
@@ -2374,7 +2374,7 @@
       < leveldb::EncodeFixed32(char*, unsigned int)
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-      > 0x6a580 in ./build/sample/trace_leveldb
+      > 0x6a580 in trace_leveldb
        > leveldb::Slice::size() const
        < leveldb::Slice::size() const
        > leveldb::Slice::data() const
@@ -2383,12 +2383,12 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6a580 in ./build/sample/trace_leveldb
+      < 0x6a580 in trace_leveldb
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-      > 0x6a580 in ./build/sample/trace_leveldb
+      > 0x6a580 in trace_leveldb
        > leveldb::Slice::size() const
        < leveldb::Slice::size() const
        > leveldb::Slice::data() const
@@ -2397,21 +2397,21 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6a580 in ./build/sample/trace_leveldb
+      < 0x6a580 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
-      > 0x68a10 in ./build/sample/trace_leveldb
-       > 0x68d00 in ./build/sample/trace_leveldb
-        > 0x68e40 in ./build/sample/trace_leveldb
-         > write(7, 0x559bfdaf05d8, 35) = 35 in 7450ns
+      > 0x68a10 in trace_leveldb
+       > 0x68d00 in trace_leveldb
+        > 0x68e40 in trace_leveldb
+         > write(7, 0x55ba2c6a15d8, 35) = 35 in 6777ns
           = backtraces:
-          = [8] 0x68e40 in ./build/sample/trace_leveldb
-          = [7] 0x68d00 in ./build/sample/trace_leveldb
-          = [6] 0x68a10 in ./build/sample/trace_leveldb
+          = [8] 0x68e40 in trace_leveldb
+          = [7] 0x68d00 in trace_leveldb
+          = [6] 0x68a10 in trace_leveldb
           = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
           = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
           = [3] leveldb::VersionSet::WriteSnapshot(leveldb::log::Writer*)
@@ -2423,9 +2423,9 @@
           > leveldb::Status::Status()
           < leveldb::Status::Status()
          < leveldb::Status::OK()
-        < 0x68e40 in ./build/sample/trace_leveldb
-       < 0x68d00 in ./build/sample/trace_leveldb
-      < 0x68a10 in ./build/sample/trace_leveldb
+        < 0x68e40 in trace_leveldb
+       < 0x68d00 in trace_leveldb
+      < 0x68a10 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
@@ -2494,8 +2494,8 @@
     < leveldb::Status::Status()
     > leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
      > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-      > 0x63270 in ./build/sample/trace_leveldb
-      < 0x63270 in ./build/sample/trace_leveldb
+      > 0x63270 in trace_leveldb
+      < 0x63270 in trace_leveldb
      < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
      > leveldb::crc32c::Mask(unsigned int)
      < leveldb::crc32c::Mask(unsigned int)
@@ -2503,7 +2503,7 @@
      < leveldb::EncodeFixed32(char*, unsigned int)
      > leveldb::Slice::Slice(char const*, unsigned long)
      < leveldb::Slice::Slice(char const*, unsigned long)
-     > 0x6a580 in ./build/sample/trace_leveldb
+     > 0x6a580 in trace_leveldb
       > leveldb::Slice::size() const
       < leveldb::Slice::size() const
       > leveldb::Slice::data() const
@@ -2512,12 +2512,12 @@
        > leveldb::Status::Status()
        < leveldb::Status::Status()
       < leveldb::Status::OK()
-     < 0x6a580 in ./build/sample/trace_leveldb
+     < 0x6a580 in trace_leveldb
      > leveldb::Status::ok() const
      < leveldb::Status::ok() const
      > leveldb::Slice::Slice(char const*, unsigned long)
      < leveldb::Slice::Slice(char const*, unsigned long)
-     > 0x6a580 in ./build/sample/trace_leveldb
+     > 0x6a580 in trace_leveldb
       > leveldb::Slice::size() const
       < leveldb::Slice::size() const
       > leveldb::Slice::data() const
@@ -2526,21 +2526,21 @@
        > leveldb::Status::Status()
        < leveldb::Status::Status()
       < leveldb::Status::OK()
-     < 0x6a580 in ./build/sample/trace_leveldb
+     < 0x6a580 in trace_leveldb
      > leveldb::Status::operator=(leveldb::Status&&)
      < leveldb::Status::operator=(leveldb::Status&&)
      > leveldb::Status::~Status()
      < leveldb::Status::~Status()
      > leveldb::Status::ok() const
      < leveldb::Status::ok() const
-     > 0x68a10 in ./build/sample/trace_leveldb
-      > 0x68d00 in ./build/sample/trace_leveldb
-       > 0x68e40 in ./build/sample/trace_leveldb
-        > write(7, 0x559bfdaf05d8, 15) = 15 in 4147ns
+     > 0x68a10 in trace_leveldb
+      > 0x68d00 in trace_leveldb
+       > 0x68e40 in trace_leveldb
+        > write(7, 0x55ba2c6a15d8, 15) = 15 in 2836ns
          = backtraces:
-         = [7] 0x68e40 in ./build/sample/trace_leveldb
-         = [6] 0x68d00 in ./build/sample/trace_leveldb
-         = [5] 0x68a10 in ./build/sample/trace_leveldb
+         = [7] 0x68e40 in trace_leveldb
+         = [6] 0x68d00 in trace_leveldb
+         = [5] 0x68a10 in trace_leveldb
          = [4] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
          = [3] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
          = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
@@ -2551,9 +2551,9 @@
          > leveldb::Status::Status()
          < leveldb::Status::Status()
         < leveldb::Status::OK()
-       < 0x68e40 in ./build/sample/trace_leveldb
-      < 0x68d00 in ./build/sample/trace_leveldb
-     < 0x68a10 in ./build/sample/trace_leveldb
+       < 0x68e40 in trace_leveldb
+      < 0x68d00 in trace_leveldb
+     < 0x68a10 in trace_leveldb
      > leveldb::Status::operator=(leveldb::Status&&)
      < leveldb::Status::operator=(leveldb::Status&&)
      > leveldb::Status::~Status()
@@ -2572,24 +2572,24 @@
    < leveldb::Status::~Status()
    > leveldb::Status::ok() const
    < leveldb::Status::ok() const
-   > 0x69d50 in ./build/sample/trace_leveldb
-    > 0x69af0 in ./build/sample/trace_leveldb
+   > 0x69d50 in trace_leveldb
+    > 0x69af0 in trace_leveldb
      > leveldb::Status::Status()
      < leveldb::Status::Status()
-     > open(testdb, 524288) = 8 in 1784ns
+     > open(testdb, 524288) = 8 in 1330ns
       = backtraces:
-      = [4] 0x69af0 in ./build/sample/trace_leveldb
-      = [3] 0x69d50 in ./build/sample/trace_leveldb
+      = [4] 0x69af0 in trace_leveldb
+      = [3] 0x69d50 in trace_leveldb
       = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
       = [0] main(...)
      < open(...)
-     > 0x68330 in ./build/sample/trace_leveldb
-      > fdatasync(8) = 0 in 11430176ns
+     > 0x68330 in trace_leveldb
+      > fdatasync(8) = 0 in 11294855ns
        = backtraces:
-       = [5] 0x68330 in ./build/sample/trace_leveldb
-       = [4] 0x69af0 in ./build/sample/trace_leveldb
-       = [3] 0x69d50 in ./build/sample/trace_leveldb
+       = [5] 0x68330 in trace_leveldb
+       = [4] 0x69af0 in trace_leveldb
+       = [3] 0x69d50 in trace_leveldb
        = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
        = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
        = [0] main(...)
@@ -2598,41 +2598,41 @@
        > leveldb::Status::Status()
        < leveldb::Status::Status()
       < leveldb::Status::OK()
-     < 0x68330 in ./build/sample/trace_leveldb
+     < 0x68330 in trace_leveldb
      > leveldb::Status::operator=(leveldb::Status&&)
      < leveldb::Status::operator=(leveldb::Status&&)
      > leveldb::Status::~Status()
      < leveldb::Status::~Status()
-     > close(8) = 0 in 2747ns
+     > close(8) = 0 in 2908ns
       = backtraces:
-      = [4] 0x69af0 in ./build/sample/trace_leveldb
-      = [3] 0x69d50 in ./build/sample/trace_leveldb
+      = [4] 0x69af0 in trace_leveldb
+      = [3] 0x69d50 in trace_leveldb
       = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
       = [0] main(...)
      < close(...)
-    < 0x69af0 in ./build/sample/trace_leveldb
+    < 0x69af0 in trace_leveldb
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
-    > 0x68d00 in ./build/sample/trace_leveldb
-     > 0x68e40 in ./build/sample/trace_leveldb
+    > 0x68d00 in trace_leveldb
+     > 0x68e40 in trace_leveldb
       > leveldb::Status::OK()
        > leveldb::Status::Status()
        < leveldb::Status::Status()
       < leveldb::Status::OK()
-     < 0x68e40 in ./build/sample/trace_leveldb
-    < 0x68d00 in ./build/sample/trace_leveldb
+     < 0x68e40 in trace_leveldb
+    < 0x68d00 in trace_leveldb
     > leveldb::Status::operator=(leveldb::Status&&)
     < leveldb::Status::operator=(leveldb::Status&&)
     > leveldb::Status::~Status()
     < leveldb::Status::~Status()
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
-    > 0x68330 in ./build/sample/trace_leveldb
-     > fdatasync(7) = 0 in 24760643ns
+    > 0x68330 in trace_leveldb
+     > fdatasync(7) = 0 in 24934512ns
       = backtraces:
-      = [4] 0x68330 in ./build/sample/trace_leveldb
-      = [3] 0x69d50 in ./build/sample/trace_leveldb
+      = [4] 0x68330 in trace_leveldb
+      = [3] 0x69d50 in trace_leveldb
       = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
       = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
       = [0] main(...)
@@ -2641,10 +2641,10 @@
       > leveldb::Status::Status()
       < leveldb::Status::Status()
      < leveldb::Status::OK()
-    < 0x68330 in ./build/sample/trace_leveldb
+    < 0x68330 in trace_leveldb
     > leveldb::Status::~Status()
     < leveldb::Status::~Status()
-   < 0x69d50 in ./build/sample/trace_leveldb
+   < 0x69d50 in trace_leveldb
    > leveldb::Status::operator=(leveldb::Status&&)
    < leveldb::Status::operator=(leveldb::Status&&)
    > leveldb::Status::~Status()
@@ -2661,50 +2661,50 @@
     > leveldb::Slice::remove_prefix(unsigned long)
     < leveldb::Slice::remove_prefix(unsigned long)
     > leveldb::TempFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
-     > 0x323a0 in ./build/sample/trace_leveldb
-     < 0x323a0 in ./build/sample/trace_leveldb
+     > 0x323a0 in trace_leveldb
+     < 0x323a0 in trace_leveldb
     < leveldb::TempFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
     > leveldb::Slice::ToString[abi:cxx11]() const
     < leveldb::Slice::ToString[abi:cxx11]() const
     > leveldb::Slice::Slice(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     < leveldb::Slice::Slice(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     > leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-     > 0x64420 in ./build/sample/trace_leveldb
-      > 0x6bf10 in ./build/sample/trace_leveldb
-       > open(testdb/000002.dbtmp, 524865, 420) = 8 in 21925ns
+     > 0x64420 in trace_leveldb
+      > 0x6bf10 in trace_leveldb
+       > open(testdb/000002.dbtmp, 524865, 420) = 8 in 16296ns
         = backtraces:
-        = [6] 0x6bf10 in ./build/sample/trace_leveldb
-        = [5] 0x64420 in ./build/sample/trace_leveldb
+        = [6] 0x6bf10 in trace_leveldb
+        = [5] 0x64420 in trace_leveldb
         = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
         = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
         = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
         = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
         = [0] main(...)
        < open(...)
-       > 0x694c0 in ./build/sample/trace_leveldb
+       > 0x694c0 in trace_leveldb
         > leveldb::WritableFile::WritableFile()
         < leveldb::WritableFile::WritableFile()
-        > 0x67b40 in ./build/sample/trace_leveldb
-         > 0x66eb0 in ./build/sample/trace_leveldb
+        > 0x67b40 in trace_leveldb
+         > 0x66eb0 in trace_leveldb
           > leveldb::Slice::Slice(char const*, unsigned long)
           < leveldb::Slice::Slice(char const*, unsigned long)
-         < 0x66eb0 in ./build/sample/trace_leveldb
+         < 0x66eb0 in trace_leveldb
          > leveldb::Slice::Slice(char const*)
          < leveldb::Slice::Slice(char const*)
          > leveldb::Slice::starts_with(leveldb::Slice const&) const
          < leveldb::Slice::starts_with(leveldb::Slice const&) const
-        < 0x67b40 in ./build/sample/trace_leveldb
-        > 0x69390 in ./build/sample/trace_leveldb
-        < 0x69390 in ./build/sample/trace_leveldb
-       < 0x694c0 in ./build/sample/trace_leveldb
+        < 0x67b40 in trace_leveldb
+        > 0x69390 in trace_leveldb
+        < 0x69390 in trace_leveldb
+       < 0x694c0 in trace_leveldb
        > leveldb::Status::OK()
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6bf10 in ./build/sample/trace_leveldb
+      < 0x6bf10 in trace_leveldb
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
-      > 0x6a580 in ./build/sample/trace_leveldb
+      > 0x6a580 in trace_leveldb
        > leveldb::Slice::size() const
        < leveldb::Slice::size() const
        > leveldb::Slice::data() const
@@ -2713,28 +2713,28 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6a580 in ./build/sample/trace_leveldb
+      < 0x6a580 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
-      > 0x69d50 in ./build/sample/trace_leveldb
-       > 0x69af0 in ./build/sample/trace_leveldb
+      > 0x69d50 in trace_leveldb
+       > 0x69af0 in trace_leveldb
         > leveldb::Status::Status()
         < leveldb::Status::Status()
-       < 0x69af0 in ./build/sample/trace_leveldb
+       < 0x69af0 in trace_leveldb
        > leveldb::Status::ok() const
        < leveldb::Status::ok() const
-       > 0x68d00 in ./build/sample/trace_leveldb
-        > 0x68e40 in ./build/sample/trace_leveldb
-         > write(8, 0x559bfdb00638, 16) = 16 in 8807ns
+       > 0x68d00 in trace_leveldb
+        > 0x68e40 in trace_leveldb
+         > write(8, 0x55ba2c6b1638, 16) = 16 in 6523ns
           = backtraces:
-          = [8] 0x68e40 in ./build/sample/trace_leveldb
-          = [7] 0x68d00 in ./build/sample/trace_leveldb
-          = [6] 0x69d50 in ./build/sample/trace_leveldb
-          = [5] 0x64420 in ./build/sample/trace_leveldb
+          = [8] 0x68e40 in trace_leveldb
+          = [7] 0x68d00 in trace_leveldb
+          = [6] 0x69d50 in trace_leveldb
+          = [5] 0x64420 in trace_leveldb
           = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
           = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
           = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
@@ -2745,20 +2745,20 @@
           > leveldb::Status::Status()
           < leveldb::Status::Status()
          < leveldb::Status::OK()
-        < 0x68e40 in ./build/sample/trace_leveldb
-       < 0x68d00 in ./build/sample/trace_leveldb
+        < 0x68e40 in trace_leveldb
+       < 0x68d00 in trace_leveldb
        > leveldb::Status::operator=(leveldb::Status&&)
        < leveldb::Status::operator=(leveldb::Status&&)
        > leveldb::Status::~Status()
        < leveldb::Status::~Status()
        > leveldb::Status::ok() const
        < leveldb::Status::ok() const
-       > 0x68330 in ./build/sample/trace_leveldb
-        > fdatasync(8) = 0 in 26574812ns
+       > 0x68330 in trace_leveldb
+        > fdatasync(8) = 0 in 24718153ns
          = backtraces:
-         = [7] 0x68330 in ./build/sample/trace_leveldb
-         = [6] 0x69d50 in ./build/sample/trace_leveldb
-         = [5] 0x64420 in ./build/sample/trace_leveldb
+         = [7] 0x68330 in trace_leveldb
+         = [6] 0x69d50 in trace_leveldb
+         = [5] 0x64420 in trace_leveldb
          = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
          = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
          = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
@@ -2769,60 +2769,60 @@
          > leveldb::Status::Status()
          < leveldb::Status::Status()
         < leveldb::Status::OK()
-       < 0x68330 in ./build/sample/trace_leveldb
+       < 0x68330 in trace_leveldb
        > leveldb::Status::~Status()
        < leveldb::Status::~Status()
-      < 0x69d50 in ./build/sample/trace_leveldb
+      < 0x69d50 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
-      > 0x69170 in ./build/sample/trace_leveldb
-       > 0x68d00 in ./build/sample/trace_leveldb
-        > 0x68e40 in ./build/sample/trace_leveldb
+      > 0x69170 in trace_leveldb
+       > 0x68d00 in trace_leveldb
+        > 0x68e40 in trace_leveldb
          > leveldb::Status::OK()
           > leveldb::Status::Status()
           < leveldb::Status::Status()
          < leveldb::Status::OK()
-        < 0x68e40 in ./build/sample/trace_leveldb
-       < 0x68d00 in ./build/sample/trace_leveldb
-       > close(8) = 0 in 3450ns
+        < 0x68e40 in trace_leveldb
+       < 0x68d00 in trace_leveldb
+       > close(8) = 0 in 2853ns
         = backtraces:
-        = [6] 0x69170 in ./build/sample/trace_leveldb
-        = [5] 0x64420 in ./build/sample/trace_leveldb
+        = [6] 0x69170 in trace_leveldb
+        = [5] 0x64420 in trace_leveldb
         = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
         = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
         = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
         = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
         = [0] main(...)
        < close(...)
-      < 0x69170 in ./build/sample/trace_leveldb
+      < 0x69170 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
-      > 0x697f0 in ./build/sample/trace_leveldb
-       > 0x6a2b0 in ./build/sample/trace_leveldb
+      > 0x697f0 in trace_leveldb
+       > 0x6a2b0 in trace_leveldb
         > leveldb::WritableFile::~WritableFile()
         < leveldb::WritableFile::~WritableFile()
-       < 0x6a2b0 in ./build/sample/trace_leveldb
-      < 0x697f0 in ./build/sample/trace_leveldb
+       < 0x6a2b0 in trace_leveldb
+      < 0x697f0 in trace_leveldb
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
-     < 0x64420 in ./build/sample/trace_leveldb
+     < 0x64420 in trace_leveldb
     < leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
     > leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
     < leveldb::CurrentFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-    > 0x686b0 in ./build/sample/trace_leveldb
+    > 0x686b0 in trace_leveldb
      > leveldb::Status::OK()
       > leveldb::Status::Status()
       < leveldb::Status::Status()
      < leveldb::Status::OK()
-    < 0x686b0 in ./build/sample/trace_leveldb
+    < 0x686b0 in trace_leveldb
     > leveldb::Status::operator=(leveldb::Status&&)
     < leveldb::Status::operator=(leveldb::Status&&)
     > leveldb::Status::~Status()
@@ -2860,79 +2860,79 @@
    < leveldb::Status::ok() const
    > leveldb::VersionSet::AddLiveFiles(std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> >*)
    < leveldb::VersionSet::AddLiveFiles(std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> >*)
-   > 0x6a9d0 in ./build/sample/trace_leveldb
-    > opendir(testdb) = 0x559bfdb00630 in 7224ns
+   > 0x6a9d0 in trace_leveldb
+    > opendir(testdb) = 0x55ba2c6b1630 in 6060ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < opendir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10621048, d_off=1501108754394894498, d_reclen=32, d_type=8, d_name=000003.log} in 4229ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10624793, d_off=1501108754394894498, d_reclen=32, d_type=8, d_name=000003.log} in 4161ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10621040, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name=MANIFEST-000001} in 43ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10621048, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name=MANIFEST-000001} in 27ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10619708, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name=LOG} in 40ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10619708, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name=LOG} in 32ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10624793, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name=CURRENT} in 32ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10624954, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name=CURRENT} in 37ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10619709, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name=LOCK} in 40ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10619709, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name=LOCK} in 21ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10619705, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name=.} in 23ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10619705, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name=.} in 35ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10619469, d_off=9061853741421941179, d_reclen=24, d_type=4, d_name=..} in 26ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10619469, d_off=9061853741421941179, d_reclen=24, d_type=4, d_name=..} in 20ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = {d_ino=10621051, d_off=9223372036854775807, d_reclen=40, d_type=8, d_name=MANIFEST-000002} in 21ns
+    > readdir(0x55ba2c6b1630) = {d_ino=10624864, d_off=9223372036854775807, d_reclen=40, d_type=8, d_name=MANIFEST-000002} in 20ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > readdir(0x559bfdb00630) = nullptr     = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+    > readdir(0x55ba2c6b1630) = nullptr     = backtraces:
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
     < readdir(...)
-    > closedir(0x559bfdb00630) = 0 in 1465ns
+    > closedir(0x55ba2c6b1630) = 0 in 1414ns
      = backtraces:
-     = [3] 0x6a9d0 in ./build/sample/trace_leveldb
+     = [3] 0x6a9d0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
@@ -2941,7 +2941,7 @@
      > leveldb::Status::Status()
      < leveldb::Status::Status()
     < leveldb::Status::OK()
-   < 0x6a9d0 in ./build/sample/trace_leveldb
+   < 0x6a9d0 in trace_leveldb
    > leveldb::Status::~Status()
    < leveldb::Status::~Status()
    > leveldb::ParseFileName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long*, leveldb::FileType*)
@@ -3296,10 +3296,10 @@
    < leveldb::VersionSet::ManifestFileNumber() const
    > leveldb::port::Mutex::Unlock()
    < leveldb::port::Mutex::Unlock()
-   > 0x684f0 in ./build/sample/trace_leveldb
-    > unlink(testdb/MANIFEST-000001) = 0 in 15735ns
+   > 0x684f0 in trace_leveldb
+    > unlink(testdb/MANIFEST-000001) = 0 in 13377ns
      = backtraces:
-     = [3] 0x684f0 in ./build/sample/trace_leveldb
+     = [3] 0x684f0 in trace_leveldb
      = [2] leveldb::DBImpl::RemoveObsoleteFiles()
      = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
      = [0] main(...)
@@ -3308,7 +3308,7 @@
      > leveldb::Status::Status()
      < leveldb::Status::Status()
     < leveldb::Status::OK()
-   < 0x684f0 in ./build/sample/trace_leveldb
+   < 0x684f0 in trace_leveldb
    > leveldb::Status::~Status()
    < leveldb::Status::~Status()
    > leveldb::port::Mutex::Lock()
@@ -3433,28 +3433,28 @@
      < leveldb::Status::Status()
      > leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
       > leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
-       > 0x63270 in ./build/sample/trace_leveldb
-       < 0x63270 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       > 0x63270 in trace_leveldb
+       < 0x63270 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
-       > 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
+       > 0x632b0 in trace_leveldb
         > leveldb::DecodeFixed32(char const*)
         < leveldb::DecodeFixed32(char const*)
-       < 0x632b0 in ./build/sample/trace_leveldb
+       < 0x632b0 in trace_leveldb
       < leveldb::crc32c::Extend(unsigned int, char const*, unsigned long)
       > leveldb::crc32c::Mask(unsigned int)
       < leveldb::crc32c::Mask(unsigned int)
@@ -3462,7 +3462,7 @@
       < leveldb::EncodeFixed32(char*, unsigned int)
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-      > 0x6a580 in ./build/sample/trace_leveldb
+      > 0x6a580 in trace_leveldb
        > leveldb::Slice::size() const
        < leveldb::Slice::size() const
        > leveldb::Slice::data() const
@@ -3471,12 +3471,12 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6a580 in ./build/sample/trace_leveldb
+      < 0x6a580 in trace_leveldb
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
       > leveldb::Slice::Slice(char const*, unsigned long)
       < leveldb::Slice::Slice(char const*, unsigned long)
-      > 0x6a580 in ./build/sample/trace_leveldb
+      > 0x6a580 in trace_leveldb
        > leveldb::Slice::size() const
        < leveldb::Slice::size() const
        > leveldb::Slice::data() const
@@ -3485,21 +3485,21 @@
         > leveldb::Status::Status()
         < leveldb::Status::Status()
        < leveldb::Status::OK()
-      < 0x6a580 in ./build/sample/trace_leveldb
+      < 0x6a580 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
       > leveldb::Status::ok() const
       < leveldb::Status::ok() const
-      > 0x68a10 in ./build/sample/trace_leveldb
-       > 0x68d00 in ./build/sample/trace_leveldb
-        > 0x68e40 in ./build/sample/trace_leveldb
-         > write(6, 0x559bfdadf568, 30) = 30 in 8190ns
+      > 0x68a10 in trace_leveldb
+       > 0x68d00 in trace_leveldb
+        > 0x68e40 in trace_leveldb
+         > write(6, 0x55ba2c690568, 30) = 30 in 6482ns
           = backtraces:
-          = [8] 0x68e40 in ./build/sample/trace_leveldb
-          = [7] 0x68d00 in ./build/sample/trace_leveldb
-          = [6] 0x68a10 in ./build/sample/trace_leveldb
+          = [8] 0x68e40 in trace_leveldb
+          = [7] 0x68d00 in trace_leveldb
+          = [6] 0x68a10 in trace_leveldb
           = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
           = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
           = [3] leveldb::DBImpl::Write(leveldb::WriteOptions const&, leveldb::WriteBatch*)
@@ -3511,9 +3511,9 @@
           > leveldb::Status::Status()
           < leveldb::Status::Status()
          < leveldb::Status::OK()
-        < 0x68e40 in ./build/sample/trace_leveldb
-       < 0x68d00 in ./build/sample/trace_leveldb
-      < 0x68a10 in ./build/sample/trace_leveldb
+        < 0x68e40 in trace_leveldb
+       < 0x68d00 in trace_leveldb
+      < 0x68a10 in trace_leveldb
       > leveldb::Status::operator=(leveldb::Status&&)
       < leveldb::Status::operator=(leveldb::Status&&)
       > leveldb::Status::~Status()
@@ -3535,10 +3535,10 @@
     > leveldb::Status::ok() const
     < leveldb::Status::ok() const
     > leveldb::WriteBatchInternal::InsertInto(leveldb::WriteBatch const*, leveldb::MemTable*)
-     > 0x4c000 in ./build/sample/trace_leveldb
+     > 0x4c000 in trace_leveldb
       > leveldb::WriteBatch::Handler::Handler()
       < leveldb::WriteBatch::Handler::Handler()
-     < 0x4c000 in ./build/sample/trace_leveldb
+     < 0x4c000 in trace_leveldb
      > leveldb::WriteBatchInternal::Sequence(leveldb::WriteBatch const*)
       > leveldb::DecodeFixed64(char const*)
       < leveldb::DecodeFixed64(char const*)
@@ -3600,7 +3600,7 @@
        > leveldb::Slice::remove_prefix(unsigned long)
        < leveldb::Slice::remove_prefix(unsigned long)
       < leveldb::GetLengthPrefixedSlice(leveldb::Slice*, leveldb::Slice*)
-      > 0x4bfa0 in ./build/sample/trace_leveldb
+      > 0x4bfa0 in trace_leveldb
        > leveldb::MemTable::Add(unsigned long, leveldb::ValueType, leveldb::Slice const&, leveldb::Slice const&)
         > leveldb::Slice::size() const
         < leveldb::Slice::size() const
@@ -3665,7 +3665,7 @@
          < leveldb::SkipList<char const*, leveldb::MemTable::KeyComparator>::Node::SetNext(int, leveldb::SkipList<char const*, leveldb::MemTable::KeyComparator>::Node*)
         < leveldb::SkipList<char const*, leveldb::MemTable::KeyComparator>::Insert(char const* const&)
        < leveldb::MemTable::Add(unsigned long, leveldb::ValueType, leveldb::Slice const&, leveldb::Slice const&)
-      < 0x4bfa0 in ./build/sample/trace_leveldb
+      < 0x4bfa0 in trace_leveldb
       > leveldb::Slice::empty() const
       < leveldb::Slice::empty() const
       > leveldb::WriteBatchInternal::Count(leveldb::WriteBatch const*)
@@ -3677,10 +3677,10 @@
        < leveldb::Status::Status()
       < leveldb::Status::OK()
      < leveldb::WriteBatch::Iterate(leveldb::WriteBatch::Handler*) const
-     > 0x4be60 in ./build/sample/trace_leveldb
+     > 0x4be60 in trace_leveldb
       > leveldb::WriteBatch::Handler::~Handler()
       < leveldb::WriteBatch::Handler::~Handler()
-     < 0x4be60 in ./build/sample/trace_leveldb
+     < 0x4be60 in trace_leveldb
     < leveldb::WriteBatchInternal::InsertInto(leveldb::WriteBatch const*, leveldb::MemTable*)
     > leveldb::Status::operator=(leveldb::Status&&)
     < leveldb::Status::operator=(leveldb::Status&&)
@@ -3717,47 +3717,47 @@
    < leveldb::port::Mutex::Lock()
    > leveldb::port::Mutex::Unlock()
    < leveldb::port::Mutex::Unlock()
-   > 0x6b050 in ./build/sample/trace_leveldb
-    > 0x66220 in ./build/sample/trace_leveldb
-    < 0x66220 in ./build/sample/trace_leveldb
-    > 0x66580 in ./build/sample/trace_leveldb
-     > fcntl(5, 6, 0x7fff6508a580) = 0 in 1804ns
+   > 0x6b050 in trace_leveldb
+    > 0x66220 in trace_leveldb
+    < 0x66220 in trace_leveldb
+    > 0x66580 in trace_leveldb
+     > fcntl(5, 6, 0x7ffc1d402210) = 0 in 1972ns
       = backtraces:
-      = [4] 0x66580 in ./build/sample/trace_leveldb
-      = [3] 0x6b050 in ./build/sample/trace_leveldb
+      = [4] 0x66580 in trace_leveldb
+      = [3] 0x6b050 in trace_leveldb
       = [2] leveldb::DBImpl::~DBImpl()
       = [1] leveldb::DBImpl::~DBImpl()
       = [0] main(...)
      < fcntl(...)
-    < 0x66580 in ./build/sample/trace_leveldb
-    > 0x661f0 in ./build/sample/trace_leveldb
-    < 0x661f0 in ./build/sample/trace_leveldb
-    > 0x6ac10 in ./build/sample/trace_leveldb
+    < 0x66580 in trace_leveldb
+    > 0x661f0 in trace_leveldb
+    < 0x661f0 in trace_leveldb
+    > 0x6ac10 in trace_leveldb
      > leveldb::port::Mutex::Lock()
      < leveldb::port::Mutex::Lock()
      > leveldb::port::Mutex::Unlock()
      < leveldb::port::Mutex::Unlock()
-    < 0x6ac10 in ./build/sample/trace_leveldb
-    > 0x66220 in ./build/sample/trace_leveldb
-    < 0x66220 in ./build/sample/trace_leveldb
-    > close(5) = 0 in 1700ns
+    < 0x6ac10 in trace_leveldb
+    > 0x66220 in trace_leveldb
+    < 0x66220 in trace_leveldb
+    > close(5) = 0 in 1052ns
      = backtraces:
-     = [3] 0x6b050 in ./build/sample/trace_leveldb
+     = [3] 0x6b050 in trace_leveldb
      = [2] leveldb::DBImpl::~DBImpl()
      = [1] leveldb::DBImpl::~DBImpl()
      = [0] main(...)
     < close(...)
-    > 0x66f80 in ./build/sample/trace_leveldb
-     > 0x66630 in ./build/sample/trace_leveldb
+    > 0x66f80 in trace_leveldb
+     > 0x66630 in trace_leveldb
       > leveldb::FileLock::~FileLock()
       < leveldb::FileLock::~FileLock()
-     < 0x66630 in ./build/sample/trace_leveldb
-    < 0x66f80 in ./build/sample/trace_leveldb
+     < 0x66630 in trace_leveldb
+    < 0x66f80 in trace_leveldb
     > leveldb::Status::OK()
      > leveldb::Status::Status()
      < leveldb::Status::Status()
     < leveldb::Status::OK()
-   < 0x6b050 in ./build/sample/trace_leveldb
+   < 0x6b050 in trace_leveldb
    > leveldb::Status::~Status()
    < leveldb::Status::~Status()
    > leveldb::VersionSet::~VersionSet()
@@ -3767,34 +3767,34 @@
     < leveldb::Version::Unref()
     > leveldb::log::Writer::~Writer()
     < leveldb::log::Writer::~Writer()
-    > 0x697f0 in ./build/sample/trace_leveldb
-     > 0x6a2b0 in ./build/sample/trace_leveldb
-      > 0x69170 in ./build/sample/trace_leveldb
-       > 0x68d00 in ./build/sample/trace_leveldb
-        > 0x68e40 in ./build/sample/trace_leveldb
+    > 0x697f0 in trace_leveldb
+     > 0x6a2b0 in trace_leveldb
+      > 0x69170 in trace_leveldb
+       > 0x68d00 in trace_leveldb
+        > 0x68e40 in trace_leveldb
          > leveldb::Status::OK()
           > leveldb::Status::Status()
           < leveldb::Status::Status()
          < leveldb::Status::OK()
-        < 0x68e40 in ./build/sample/trace_leveldb
-       < 0x68d00 in ./build/sample/trace_leveldb
-       > close(7) = 0 in 644ns
+        < 0x68e40 in trace_leveldb
+       < 0x68d00 in trace_leveldb
+       > close(7) = 0 in 493ns
         = backtraces:
-        = [6] 0x69170 in ./build/sample/trace_leveldb
-        = [5] 0x6a2b0 in ./build/sample/trace_leveldb
-        = [4] 0x697f0 in ./build/sample/trace_leveldb
+        = [6] 0x69170 in trace_leveldb
+        = [5] 0x6a2b0 in trace_leveldb
+        = [4] 0x697f0 in trace_leveldb
         = [3] leveldb::VersionSet::~VersionSet()
         = [2] leveldb::DBImpl::~DBImpl()
         = [1] leveldb::DBImpl::~DBImpl()
         = [0] main(...)
        < close(...)
-      < 0x69170 in ./build/sample/trace_leveldb
+      < 0x69170 in trace_leveldb
       > leveldb::Status::~Status()
       < leveldb::Status::~Status()
       > leveldb::WritableFile::~WritableFile()
       < leveldb::WritableFile::~WritableFile()
-     < 0x6a2b0 in ./build/sample/trace_leveldb
-    < 0x697f0 in ./build/sample/trace_leveldb
+     < 0x6a2b0 in trace_leveldb
+    < 0x697f0 in trace_leveldb
     > leveldb::Version::~Version()
     < leveldb::Version::~Version()
     > leveldb::InternalKeyComparator::~InternalKeyComparator()
@@ -3826,104 +3826,104 @@
    < leveldb::WriteBatch::~WriteBatch()
    > leveldb::log::Writer::~Writer()
    < leveldb::log::Writer::~Writer()
-   > 0x697f0 in ./build/sample/trace_leveldb
-    > 0x6a2b0 in ./build/sample/trace_leveldb
-     > 0x69170 in ./build/sample/trace_leveldb
-      > 0x68d00 in ./build/sample/trace_leveldb
-       > 0x68e40 in ./build/sample/trace_leveldb
+   > 0x697f0 in trace_leveldb
+    > 0x6a2b0 in trace_leveldb
+     > 0x69170 in trace_leveldb
+      > 0x68d00 in trace_leveldb
+       > 0x68e40 in trace_leveldb
         > leveldb::Status::OK()
          > leveldb::Status::Status()
          < leveldb::Status::Status()
         < leveldb::Status::OK()
-       < 0x68e40 in ./build/sample/trace_leveldb
-      < 0x68d00 in ./build/sample/trace_leveldb
-      > close(6) = 0 in 1453ns
+       < 0x68e40 in trace_leveldb
+      < 0x68d00 in trace_leveldb
+      > close(6) = 0 in 541ns
        = backtraces:
-       = [5] 0x69170 in ./build/sample/trace_leveldb
-       = [4] 0x6a2b0 in ./build/sample/trace_leveldb
-       = [3] 0x697f0 in ./build/sample/trace_leveldb
+       = [5] 0x69170 in trace_leveldb
+       = [4] 0x6a2b0 in trace_leveldb
+       = [3] 0x697f0 in trace_leveldb
        = [2] leveldb::DBImpl::~DBImpl()
        = [1] leveldb::DBImpl::~DBImpl()
        = [0] main(...)
       < close(...)
-     < 0x69170 in ./build/sample/trace_leveldb
+     < 0x69170 in trace_leveldb
      > leveldb::Status::~Status()
      < leveldb::Status::~Status()
      > leveldb::WritableFile::~WritableFile()
      < leveldb::WritableFile::~WritableFile()
-    < 0x6a2b0 in ./build/sample/trace_leveldb
-   < 0x697f0 in ./build/sample/trace_leveldb
+    < 0x6a2b0 in trace_leveldb
+   < 0x697f0 in trace_leveldb
    > leveldb::TableCache::~TableCache()
-    > 0x5deb0 in ./build/sample/trace_leveldb
-     > 0x5e5c0 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5fb20 in ./build/sample/trace_leveldb
-       > 0x5da40 in ./build/sample/trace_leveldb
-       < 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5fb20 in ./build/sample/trace_leveldb
+    > 0x5deb0 in trace_leveldb
+     > 0x5e5c0 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
+      > 0x5fb20 in trace_leveldb
+       > 0x5da40 in trace_leveldb
+       < 0x5da40 in trace_leveldb
+      < 0x5fb20 in trace_leveldb
       > leveldb::Cache::~Cache()
       < leveldb::Cache::~Cache()
-     < 0x5e5c0 in ./build/sample/trace_leveldb
-    < 0x5deb0 in ./build/sample/trace_leveldb
+     < 0x5e5c0 in trace_leveldb
+    < 0x5deb0 in trace_leveldb
    < leveldb::TableCache::~TableCache()
    > leveldb::PosixLogger::~PosixLogger()
     > leveldb::PosixLogger::~PosixLogger()
@@ -3931,76 +3931,76 @@
      < leveldb::Logger::~Logger()
     < leveldb::PosixLogger::~PosixLogger()
    < leveldb::PosixLogger::~PosixLogger()
-   > 0x5deb0 in ./build/sample/trace_leveldb
-    > 0x5e5c0 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
-     > 0x5fb20 in ./build/sample/trace_leveldb
-      > 0x5da40 in ./build/sample/trace_leveldb
-      < 0x5da40 in ./build/sample/trace_leveldb
-     < 0x5fb20 in ./build/sample/trace_leveldb
+   > 0x5deb0 in trace_leveldb
+    > 0x5e5c0 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
+     > 0x5fb20 in trace_leveldb
+      > 0x5da40 in trace_leveldb
+      < 0x5da40 in trace_leveldb
+     < 0x5fb20 in trace_leveldb
      > leveldb::Cache::~Cache()
      < leveldb::Cache::~Cache()
-    < 0x5e5c0 in ./build/sample/trace_leveldb
-   < 0x5deb0 in ./build/sample/trace_leveldb
+    < 0x5e5c0 in trace_leveldb
+   < 0x5deb0 in trace_leveldb
    > leveldb::Status::~Status()
    < leveldb::Status::~Status()
    > leveldb::SnapshotList::~SnapshotList()

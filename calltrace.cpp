@@ -16,6 +16,7 @@
 
 #include <chrono>
 #include <cstdarg>
+#include <cstring>
 #include <vector>
 
 namespace calltrace {
@@ -54,7 +55,9 @@ static void print_fn_name(void *addr) {
   if (dlinfo.dli_sname == nullptr) {
     auto rel_diff = reinterpret_cast<uintptr_t>(addr) -
                     reinterpret_cast<uintptr_t>(dlinfo.dli_fbase);
-    fmt::print(config.log_file, "{:#x} in {}\n", rel_diff, dlinfo.dli_fname);
+    auto str = std::strrchr(dlinfo.dli_fname, '/');
+    auto filename = str ? str + 1 : dlinfo.dli_fname;
+    fmt::print(config.log_file, "{:#x} in {}\n", rel_diff, filename);
     return;
   }
   auto name = abi::__cxa_demangle(dlinfo.dli_sname, nullptr, nullptr, nullptr);
