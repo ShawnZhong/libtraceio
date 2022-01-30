@@ -27,26 +27,26 @@ Output:
  > test3(char const*)
   > test2(char const*, int, int)
    > test(char const*)
-    > open(/dev/null, 0, 0) = 3
-     = backtraces: 
-     = [4] test(char const*)
-     = [3] test2(char const*, int, int)
-     = [2] test3(char const*)
-     = [1] main(...)
+    > open(/dev/null, 0) = 3 in 4838ns
+     = backtraces:
+     = [3] test(char const*)
+     = [2] test2(char const*, int, int)
+     = [1] test3(char const*)
+     = [0] main(...)
     < open(...)
-    > read(3, 0, 0) = 0
-     = backtraces: 
-     = [4] test(char const*)
-     = [3] test2(char const*, int, int)
-     = [2] test3(char const*)
-     = [1] main(...)
+    > read(3, 0x0, 0) = 0 in 426ns
+     = backtraces:
+     = [3] test(char const*)
+     = [2] test2(char const*, int, int)
+     = [1] test3(char const*)
+     = [0] main(...)
     < read(...)
-    > close(3) = 0
-     = backtraces: 
-     = [4] test(char const*)
-     = [3] test2(char const*, int, int)
-     = [2] test3(char const*)
-     = [1] main(...)
+    > close(3) = 0 in 710ns
+     = backtraces:
+     = [3] test(char const*)
+     = [2] test2(char const*, int, int)
+     = [1] test3(char const*)
+     = [0] main(...)
     < close(...)
    < test(char const*)
   < test2(char const*, int, int)
@@ -58,6 +58,10 @@ Output:
 
 - [sample/leveldb.cpp](sample/leveldb.cpp): [traces/leveldb.txt](https://raw.githubusercontent.com/ShawnZhong/FuncTrace/main/traces/leveldb.txt)
 
-  ```make leveldb_trace && (./build-sample/leveldb_trace 2> traces/leveldb.txt)```
+  ```
+  make leveldb_trace
+  ./build-sample/leveldb_trace 2> traces/leveldb-full.txt
+  TRACE_PRINT_FN_TRACE=0 ./build-sample/leveldb_trace 2> traces/leveldb-io.txt
+  ```
 
 

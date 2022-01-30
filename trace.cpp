@@ -28,8 +28,17 @@ namespace trace {
 namespace config {
 static int indent = 1;
 static bool print_io_backtrace = true;
-static bool print_fn_trace = false;
+static bool print_fn_trace = true;
 }  // namespace config
+
+__attribute__((constructor)) void ctor() {
+  if (auto env = getenv("TRACE_INDENT"); env != nullptr)
+    config::indent = std::stoi(env);
+  if (auto env = getenv("TRACE_PRINT_IO_BACKTRACE"); env != nullptr)
+    config::print_io_backtrace = env[0] == '1';
+  if (auto env = getenv("TRACE_PRINT_FN_TRACE"); env != nullptr)
+    config::print_fn_trace = env[0] == '1';
+}
 
 std::vector<void *> call_stack;
 
@@ -60,9 +69,9 @@ static void print_fn_name(void *addr) {
 static void print_backtrace() {
   if (!config::print_io_backtrace) return;
   fmt::print(stderr, "{:>{}} backtraces:\n", "=", nspace);
-  for (const auto &fn : call_stack) {
-    fmt::print(stderr, "{:>{}} ", "=", nspace);
-    print_fn_name(fn);
+  for (int i = call_stack.size() - 1; i >= 0; --i) {
+    fmt::print(stderr, "{:>{}} [{}] ", "=", nspace, i);
+    print_fn_name(call_stack[i]);
   }
 }
 
@@ -82,18 +91,6 @@ static void print_exit_trace(void *addr) {
   print_fn_name(addr);
 }
 
-__attribute__((constructor)) void ctor() {
-  if (auto env = getenv("TRACE_INDENT"); env != nullptr) {
-    config::indent = std::stoi(env);
-  }
-  if (auto env = getenv("TRACE_PRINT_IO_BACKTRACE"); env != nullptr) {
-    config::print_io_backtrace = env[0] == '1';
-  }
-  if (auto env = getenv("TRACE_PRINT_FN_TRACE"); env != nullptr) {
-    config::print_fn_trace = env[0] == '1';
-  }
-}
-
 template <auto Fn, typename... Args>
 inline static auto call(const char *name, Args &&...args) {
   using R = decltype(Fn(std::forward<Args>(args)...));
@@ -109,9 +106,9 @@ inline static auto call(const char *name, Args &&...args) {
   fmt::print(stderr, "{:>{}} {}(...)\n", "<", nspace, name);
   return res;
 }
+#define CALL(fn, ...) return call<::fn>(#fn, __VA_ARGS__)
 
 extern "C" {
-#define CALL(fn, ...) return call<::fn>(#fn, __VA_ARGS__)
 int open(const char *path, int flags, ...) {
   mode_t mode = 0;
   if (__OPEN_NEEDS_MODE(flags)) {
@@ -182,7 +179,6 @@ int msync(void *addr, size_t len, int flags) { CALL(msync, addr, len, flags); }
 int madvise(void *addr, size_t len, int advice) {
   CALL(madvise, addr, len, advice);
 }
-#undef CALL
 
 void __cyg_profile_func_enter(void *this_fn, void *call_site) {
   print_enter_trace(this_fn);
