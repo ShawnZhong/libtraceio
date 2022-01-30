@@ -6,7 +6,6 @@
 #include <cxxabi.h>
 #include <dirent.h>
 #include <dlfcn.h>
-#include <execinfo.h>
 #include <fcntl.h>
 #include <fmt/chrono.h>
 #include <fmt/core.h>
@@ -17,9 +16,6 @@
 
 #include <chrono>
 #include <cstdarg>
-#include <cstdint>
-#include <cstdio>
-#include <cstdlib>
 #include <vector>
 
 namespace calltrace {
@@ -48,21 +44,21 @@ static void print_fn_name(void *addr) {
   Dl_info dlinfo{};
   auto rc = dladdr(addr, &dlinfo);
   if (rc == 0) {
-    fprintf(stderr, "%p\n", addr);
+    fmt::print(stderr, "{}\n", addr);
     return;
   }
   if (dlinfo.dli_sname == nullptr) {
     auto rel_diff = reinterpret_cast<uintptr_t>(addr) -
                     reinterpret_cast<uintptr_t>(dlinfo.dli_fbase);
-    fprintf(stderr, "%#lx in %s\n", rel_diff, dlinfo.dli_fname);
+    fmt::print(stderr, "{:#x} in {}\n", rel_diff, dlinfo.dli_fname);
     return;
   }
   auto name = abi::__cxa_demangle(dlinfo.dli_sname, nullptr, nullptr, nullptr);
   if (name == nullptr) {
-    fprintf(stderr, "%s(...)\n", dlinfo.dli_sname);
+    fmt::print(stderr, "{}(...)\n", dlinfo.dli_sname);
     return;
   }
-  fprintf(stderr, "%s\n", name);
+  fmt::print(stderr, "{}\n", name);
   free(name);
 }
 
@@ -238,11 +234,11 @@ int madvise(void *addr, size_t len, int advice) {
   CALL(madvise, addr, len, advice);
 }
 
-void __cyg_profile_func_enter(void *this_fn, void *call_site) {
+[[maybe_unused]] void __cyg_profile_func_enter(void *this_fn, void *call_site) {
   print_enter_trace(this_fn);
 }
 
-void __cyg_profile_func_exit(void *this_fn, void *call_site) {
+[[maybe_unused]] void __cyg_profile_func_exit(void *this_fn, void *call_site) {
   print_exit_trace(this_fn);
 }
 }
