@@ -24,18 +24,25 @@ static struct Config {
   int indent = 1;
   bool log_io = true;
   bool log_fn = true;
+  const char *log_file_path = "stderr";
   FILE *log_file = stderr;
 
   Config() noexcept {
     if (auto s = getenv("TRACE_INDENT"); s) indent = std::stoi(s);
     if (auto s = getenv("TRACE_LOG_IO"); s) log_io = s[0] == '1';
     if (auto s = getenv("TRACE_LOG_FN"); s) log_fn = s[0] == '1';
-    if (auto s = getenv("TRACE_LOG_FILE"); s) log_file = fopen(s, "w");
-
-    if (!log_file) {
-      fmt::print(stderr, "Failed to open log file. Fallback to stderr\n");
-      log_file = stderr;
+    if (auto s = getenv("TRACE_LOG_FILE"); s) {
+      if (auto f = fopen(s, "w"); f) {
+        log_file_path = s;
+        log_file = f;
+      } else {
+        fmt::print(stderr, "Failed to open log file: {}\n", s);
+      }
     }
+
+    fmt::print(stderr,
+               "Config: indent={}, log_io={}, log_fn={}, log_file_path={}\n",
+               indent, log_io, log_fn, log_file_path);
   }
 } config;
 
