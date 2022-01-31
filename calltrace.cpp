@@ -102,8 +102,9 @@ static void print(Head const &h, Tail const &...t) {
       fmt::print(config.log_file, "nullptr");
       return;
     }
-    if constexpr (std::is_same_v<Head, struct stat *> ||
-                  std::is_same_v<Head, struct stat64 *>) {
+    using T = std::remove_const_t<std::remove_pointer_t<Head>>;
+    if constexpr (std::is_same_v<T, struct stat> ||
+                  std::is_same_v<T, struct stat64>) {
       fmt::print(
           config.log_file,
           "{{dev={}, ino={}, mode={}, nlink={}, uid={}, gid={}, rdev={}, "
@@ -113,13 +114,16 @@ static void print(Head const &h, Tail const &...t) {
           h->st_rdev, h->st_size, h->st_blksize, h->st_blocks,
           h->st_atim.tv_sec, h->st_atim.tv_nsec, h->st_mtim.tv_sec,
           h->st_mtim.tv_nsec, h->st_ctim.tv_sec, h->st_ctim.tv_nsec);
-    } else if constexpr (std::is_same_v<Head, struct dirent *> ||
-                         std::is_same_v<Head, struct dirent64 *>) {
-      fmt::print(config.log_file,
-                 "{{d_ino={}, d_off={}, d_reclen={}, d_type={}, d_name={}}}",
-                 h->d_ino, h->d_off, h->d_reclen, h->d_type, h->d_name);
-    } else if constexpr (std::is_same_v<Head, DIR *>) {
+    } else if constexpr (std::is_same_v<T, struct dirent> ||
+                         std::is_same_v<T, struct dirent64>) {
+      fmt::print(
+          config.log_file,
+          "{{d_ino={}, d_off={}, d_reclen={}, d_type={}, d_name=\"{}\"}}",
+          h->d_ino, h->d_off, h->d_reclen, h->d_type, h->d_name);
+    } else if constexpr (std::is_same_v<T, DIR>) {
       fmt::print(config.log_file, "{}", fmt::ptr(h));
+    } else if constexpr (std::is_same_v<T, char>) {
+      fmt::print(config.log_file, "\"{}\"", h);
     } else {
       fmt::print(config.log_file, "{}", h);
     }
