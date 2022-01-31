@@ -7,9 +7,9 @@ FetchContent_Declare(fmt GIT_REPOSITORY https://github.com/fmtlib/fmt.git)
 FetchContent_MakeAvailable(fmt)
 set_property(TARGET fmt PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-add_library(calltrace SHARED calltrace.cpp calltrace.h)
+add_library(calltrace SHARED calltrace.cpp calltrace.h resolver.cpp resolver.h)
 target_link_libraries(calltrace PRIVATE dl fmt::fmt)
-target_compile_options(calltrace PRIVATE "-fno-instrument-functions")
+target_compile_options(calltrace PRIVATE -fno-instrument-functions -Wall -Wextra -Wsign-compare)
 
 option(BUILD_SAMPLES "Build samples" OFF)
 if (BUILD_SAMPLES)

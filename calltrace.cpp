@@ -20,11 +20,16 @@
 #include <cstring>
 #include <vector>
 
+#include "resolver.h"
+
 namespace calltrace {
+
 static struct Config {
   int indent = 1;
   bool log_io = true;
   bool log_fn = true;
+  bool verbose_io = true;
+  bool verbose_fn = false;
   const char *log_file_path = "stderr";
   FILE *log_file = stderr;
 
@@ -34,6 +39,8 @@ static struct Config {
     if (auto s = getenv("TRACE_INDENT"); s) indent = std::stoi(s);
     if (auto s = getenv("TRACE_LOG_IO"); s) log_io = s[0] == '1';
     if (auto s = getenv("TRACE_LOG_FN"); s) log_fn = s[0] == '1';
+    if (auto s = getenv("TRACE_VERBOSE_IO"); s) verbose_io = s[0] == '1';
+    if (auto s = getenv("TRACE_VERBOSE_FN"); s) verbose_fn = s[0] == '1';
     if (auto s = getenv("TRACE_LOG_FILE"); s) {
       if (auto f = fopen(s, "w"); f) {
         log_file_path = s;
@@ -44,8 +51,9 @@ static struct Config {
     }
 
     fmt::print(stderr,
-               "Config: indent={}, log_io={}, log_fn={}, log_file_path={}\n",
-               indent, log_io, log_fn, log_file_path);
+               "Config: indent={}, log_io={}, log_fn={}, verbose_io={}, "
+               "verbose_fn={}, log_file_path={}\n",
+               indent, log_io, log_fn, verbose_io, verbose_fn, log_file_path);
   }
 } config;
 
@@ -55,28 +63,44 @@ static size_t get_nspace(size_t offset = 0) {
   return offset * config.indent;
 }
 
-static void print_fn_name(void *addr) {
-  Dl_info dlinfo{};
-  auto rc = dladdr(addr, &dlinfo);
+static void print_fn_name(void *addr, bool verbose) {
+  Dl_info info{};
+  auto rc = dladdr(addr, &info);
   if (rc == 0) {
     fmt::print(config.log_file, "{}\n", addr);
     return;
   }
-  if (dlinfo.dli_sname == nullptr) {
-    auto rel_diff = reinterpret_cast<uintptr_t>(addr) -
-                    reinterpret_cast<uintptr_t>(dlinfo.dli_fbase);
-    auto str = std::strrchr(dlinfo.dli_fname, '/');
-    auto filename = str ? str + 1 : dlinfo.dli_fname;
-    fmt::print(config.log_file, "{:#x} in {}\n", rel_diff, filename);
-    return;
+
+  const char *fn_name = info.dli_sname;
+  const char *filename = nullptr;
+  int line = 0;
+
+  if (verbose && info.dli_fname != nullptr) {
+    resolve(addr, info, fn_name, filename, line);
   }
-  auto name = abi::__cxa_demangle(dlinfo.dli_sname, nullptr, nullptr, nullptr);
-  if (name == nullptr) {
-    fmt::print(config.log_file, "{}(...)\n", dlinfo.dli_sname);
-    return;
+
+  // print the function name
+  if (fn_name == nullptr) {
+    auto rel_diff = reinterpret_cast<intptr_t>(addr) -
+                    reinterpret_cast<intptr_t>(info.dli_fbase);
+    fmt::print(config.log_file, "{:#x}", rel_diff);
+    filename = info.dli_fname;  // print the binary file name
+  } else if (auto n = abi::__cxa_demangle(fn_name, nullptr, nullptr, nullptr);
+             n) {
+    fmt::print(config.log_file, "{}", n);
+    free(n);
+  } else {
+    fmt::print(config.log_file, "{}(...)", fn_name);
   }
-  fmt::print(config.log_file, "{}\n", name);
-  free(name);
+
+  // print the filename and line number in verbose mode
+  if (filename != nullptr) {
+    fmt::print(config.log_file, " in {}", filename);
+    if (line != 0) {
+      fmt::print(config.log_file, ":{}", line);
+    }
+  }
+  fmt::print(config.log_file, "\n");
 }
 
 static void print_backtrace() {
@@ -86,7 +110,7 @@ static void print_backtrace() {
   if (!call_stack.empty()) {
     for (int i = call_stack.size() - 1; i >= 0; --i) {
       fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, i);
-      print_fn_name(call_stack[i]);
+      print_fn_name(call_stack[i], config.verbose_io);
     }
   } else {
     void *callstack[config.BACKTRACE_SIZE]{};
@@ -94,7 +118,7 @@ static void print_backtrace() {
     nptrs -= 2;  // skip __libc_start_main and _start
     for (int i = 2; i < nptrs; i++) {
       fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, nptrs - i);
-      print_fn_name(callstack[i]);
+      print_fn_name(callstack[i], config.verbose_io);
     }
   }
 }
@@ -103,14 +127,14 @@ static void print_enter_trace(void *addr) {
   call_stack.emplace_back(addr);
   if (config.log_fn) {
     fmt::print(config.log_file, "{:>{}} ", ">", get_nspace());
-    print_fn_name(addr);
+    print_fn_name(addr, config.verbose_fn);
   }
 }
 
 static void print_exit_trace(void *addr) {
   if (config.log_fn) {
     fmt::print(config.log_file, "{:>{}} ", "<", get_nspace());
-    print_fn_name(addr);
+    print_fn_name(addr, config.verbose_fn);
   }
   call_stack.pop_back();
 }
@@ -265,11 +289,13 @@ int madvise(void *addr, size_t len, int advice) {
   CALL(madvise, addr, len, advice);
 }
 
-[[maybe_unused]] void __cyg_profile_func_enter(void *this_fn, void *call_site) {
+[[maybe_unused]] void __cyg_profile_func_enter(
+    void *this_fn, [[maybe_unused]] void *call_site) {
   print_enter_trace(this_fn);
 }
 
-[[maybe_unused]] void __cyg_profile_func_exit(void *this_fn, void *call_site) {
+[[maybe_unused]] void __cyg_profile_func_exit(
+    void *this_fn, [[maybe_unused]] void *call_site) {
   print_exit_trace(this_fn);
 }
 }

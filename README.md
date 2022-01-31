@@ -77,33 +77,33 @@ Output:
 
 ```cpp
 > main(...)
- > some_namespace::test3(char const*)
+ > some_namespace::inline_fn(char const*)
   > some_namespace::test2(char const*, int, int)
    > some_namespace::test(char const*)
     > open("/dev/null", 0) = 3 in 6858ns
      = backtraces:
      = [3] some_namespace::test(char const*)
      = [2] some_namespace::test2(char const*, int, int)
-     = [1] some_namespace::test3(char const*)
+     = [1] some_namespace::inline_fn(char const*)
      = [0] main(...)
     < open(...)
     > read(3, 0x7ffe67ef9fb0, 0) = 0 in 380ns
      = backtraces:
      = [3] some_namespace::test(char const*)
      = [2] some_namespace::test2(char const*, int, int)
-     = [1] some_namespace::test3(char const*)
+     = [1] some_namespace::inline_fn(char const*)
      = [0] main(...)
     < read(...)
     > close(3) = 0 in 905ns
      = backtraces:
      = [3] some_namespace::test(char const*)
      = [2] some_namespace::test2(char const*, int, int)
-     = [1] some_namespace::test3(char const*)
+     = [1] some_namespace::inline_fn(char const*)
      = [0] main(...)
     < close(...)
    < some_namespace::test(char const*)
   < some_namespace::test2(char const*, int, int)
- < some_namespace::test3(char const*)
+ < some_namespace::inline_fn(char const*)
 < main(...)
 ```
 
