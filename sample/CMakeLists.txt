@@ -6,13 +6,12 @@ add_link_options(-Wl,-export-dynamic)
 
 # trace_basic
 add_executable(trace_basic basic.cpp)
-target_link_libraries(trace_basic PRIVATE calltrace)
 
 # trace_test
 add_executable(trace_test test/main.cpp test/common.h)
 add_library(test_shared_lib SHARED test/shared.cpp test/common.h)
 add_library(test_static_lib STATIC test/static.cpp test/common.h)
-target_link_libraries(trace_test PRIVATE calltrace test_shared_lib test_static_lib)
+target_link_libraries(trace_test test_shared_lib test_static_lib)
 
 # trace_leveldb
 add_executable(trace_leveldb leveldb.cpp)
@@ -23,7 +22,4 @@ FetchContent_Declare(
     GIT_TAG main
 )
 FetchContent_MakeAvailable(leveldb)
-target_link_libraries(trace_leveldb PRIVATE calltrace leveldb)
-
-# db_bench
-target_link_libraries(db_bench calltrace)
+target_link_libraries(trace_leveldb leveldb)
