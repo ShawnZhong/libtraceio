@@ -6,6 +6,7 @@
 #include <cxxabi.h>
 #include <dirent.h>
 #include <dlfcn.h>
+#include <execinfo.h>
 #include <fcntl.h>
 #include <fmt/chrono.h>
 #include <fmt/core.h>
@@ -26,6 +27,8 @@ static struct Config {
   bool log_fn = true;
   const char *log_file_path = "stderr";
   FILE *log_file = stderr;
+
+  static constexpr auto BACKTRACE_SIZE = 64;
 
   Config() noexcept {
     if (auto s = getenv("TRACE_INDENT"); s) indent = std::stoi(s);
@@ -80,9 +83,19 @@ static void print_backtrace() {
   if (!config.log_io) return;
   const auto nspace = get_nspace(2);
   fmt::print(config.log_file, "{:>{}} backtraces:\n", "=", nspace);
-  for (int i = call_stack.size() - 1; i >= 0; --i) {
-    fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, i);
-    print_fn_name(call_stack[i]);
+  if (!call_stack.empty()) {
+    for (int i = call_stack.size() - 1; i >= 0; --i) {
+      fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, i);
+      print_fn_name(call_stack[i]);
+    }
+  } else {
+    void *callstack[config.BACKTRACE_SIZE]{};
+    int nptrs = backtrace(callstack, config.BACKTRACE_SIZE);
+    nptrs -= 2;  // skip __libc_start_main and _start
+    for (int i = 2; i < nptrs; i++) {
+      fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, nptrs - i);
+      print_fn_name(callstack[i]);
+    }
   }
 }
 
