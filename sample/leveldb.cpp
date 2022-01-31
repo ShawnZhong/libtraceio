@@ -15,8 +15,11 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  leveldb::WriteOptions writeOptions;
-  db->Put(writeOptions, "key", "value");
+  std::string key = "key";
+  std::string value = "value";
+  db->Put(leveldb::WriteOptions(), key, value);
+  db->Get(leveldb::ReadOptions(), key, &value);
+  db->Delete(leveldb::WriteOptions(), key);
 
   delete db;
 }

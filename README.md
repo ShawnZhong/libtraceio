@@ -9,7 +9,7 @@ A library for tracing function calls and I/O system calls.
    ```
    -finstrument-functions \
    -finstrument-functions-exclude-file-list=/usr/include \
-   -Wl,--export-dynamic
+   -rdynamic
    ```
 
    <details>
@@ -68,7 +68,7 @@ A library for tracing function calls and I/O system calls.
 Compile [sample/basic.cpp](sample/basic.cpp) and run it with `libcalltrace.so`
 
 ```shell
-g++ sample/basic.cpp -O2 -finstrument-functions -finstrument-functions-exclude-file-list=/usr/include -Wl,--export-dynamic
+g++ sample/basic.cpp -O2 -finstrument-functions -finstrument-functions-exclude-file-list=/usr/include -rdynamic
 make # compile libcalltrace.so
 LD_PRELOAD=./build/libcalltrace.so ./a.out
 ```
@@ -109,8 +109,13 @@ Output:
 
 ## Sample Traces
 
-- [sample/leveldb.cpp](sample/leveldb.cpp): [traces/leveldb-full.txt](traces/leveldb-full.txt)
-  , [traces/leveldb-io.txt](traces/leveldb-io.txt)
+- LevelDB basic: put a single value into the database, get it back, and delete
+  it.
+    - Source code: [sample/leveldb.cpp](sample/leveldb.cpp)
+
+    - Full trace: [traces/leveldb-full.txt](traces/leveldb-full.txt)
+
+    - I/O trace: [traces/leveldb-io.txt](traces/leveldb-io.txt)
 
   ```shell
   make trace_leveldb
@@ -118,7 +123,11 @@ Output:
   TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/leveldb-io.txt ./build/sample/trace_leveldb
   ```
 
-- [leveldb/benchmarks/db_bench.cc](https://github.com/google/leveldb/blob/main/benchmarks/db_bench.cc): [traces/leveldb_bench.txt](traces/leveldb_bench.txt)
+- LevelDB benchmark
+    - Source code:
+      [leveldb/benchmarks/db_bench.cc](https://github.com/google/leveldb/blob/main/benchmarks/db_bench.cc)
+
+    - I/O trace: [traces/leveldb_bench.txt](traces/leveldb_bench.txt)
 
   ```shell
   make db_bench
