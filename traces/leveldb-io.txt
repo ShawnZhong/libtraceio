@@ -1,536 +1,536 @@
-> mkdir("testdb", 493) = 0 in 21598ns
+> mkdir("testdb", 493) = 0 in 28275ns
  = backtraces:
- = [4] 0x68810 in trace_leveldb
- = [3] leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&)
- = [2] leveldb::DBImpl::DBImpl(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixEnv::CreateDir(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:625
+ = [3] leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:97
+ = [2] leveldb::DBImpl::DBImpl(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:126
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < mkdir(...)
-> open("testdb/LOG", 525377, 420) = 4 in 7481ns
+> open("testdb/LOG", 525377, 420) = 5 in 28223ns
  = backtraces:
- = [4] 0x68db0 in trace_leveldb
- = [3] leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&)
- = [2] leveldb::DBImpl::DBImpl(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixEnv::NewLogger(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::Logger**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:717
+ = [3] leveldb::SanitizeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::InternalKeyComparator const*, leveldb::InternalFilterPolicy const*, leveldb::Options const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:97
+ = [2] leveldb::DBImpl::DBImpl(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:126
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> mkdir("testdb", 493) = -1 in 625ns
+> mkdir("testdb", 493) = -1 in 1469ns
  = backtraces:
- = [3] 0x68810 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::CreateDir(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:625
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < mkdir(...)
-> open("testdb/LOCK", 524354, 420) = 5 in 6046ns
+> open("testdb/LOCK", 524354, 420) = 6 in 9946ns
  = backtraces:
- = [3] 0x6c580 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::LockFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::FileLock**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:656
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> fcntl(5, 6, 0x7ffff029b0b0) = 0 in 2607ns
+> fcntl(6, 6, 0x7ffcb53402c0) = 0 in 5158ns
  = backtraces:
- = [4] 0x667c0 in trace_leveldb
- = [3] 0x6c580 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::LockOrUnlock(int, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:467
+ = [3] leveldb::(anonymous namespace)::PosixEnv::LockFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::FileLock**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:656
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fcntl(...)
-> access("testdb/CURRENT", 0) = -1 in 2484ns
+> access("testdb/CURRENT", 0) = -1 in 4216ns
  = backtraces:
- = [3] 0x668c0 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::FileExists(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:599
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < access(...)
-> open("testdb/MANIFEST-000001", 524865, 420) = 6 in 7635ns
+> open("testdb/MANIFEST-000001", 524865, 420) = 7 in 12354ns
  = backtraces:
- = [4] 0x6c150 in trace_leveldb
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixEnv::NewWritableFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::WritableFile**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:573
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> write(6, 0x5588a63934a8, 41) = 41 in 5577ns
+> write(7, 0x555e4760d328, 41) = 41 in 6637ns
  = backtraces:
- = [8] 0x69080 in trace_leveldb
- = [7] 0x68f40 in trace_leveldb
- = [6] 0x68c50 in trace_leveldb
- = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
- = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [8] leveldb::(anonymous namespace)::PosixWritableFile::WriteUnbuffered(char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:360
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::FlushBuffer() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:354
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Flush() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:332
+ = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:83
+ = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:34
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < write(...)
-> open("testdb", 524288) = 7 in 2433ns
+> open("testdb", 524288) = 8 in 3469ns
  = backtraces:
- = [5] 0x69d30 in trace_leveldb
- = [4] 0x69f90 in trace_leveldb
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::SyncDirIfManifest() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:375
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> fdatasync(7) = 0 in 23781852ns
+> fdatasync(8) = 0 in 14514912ns
  = backtraces:
- = [6] 0x68570 in trace_leveldb
- = [5] 0x69d30 in trace_leveldb
- = [4] 0x69f90 in trace_leveldb
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::SyncFd(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:397
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::SyncDirIfManifest() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:375
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fdatasync(...)
-> close(7) = 0 in 2015ns
+> close(8) = 0 in 2293ns
  = backtraces:
- = [5] 0x69d30 in trace_leveldb
- = [4] 0x69f90 in trace_leveldb
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::SyncDirIfManifest() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:375
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> fdatasync(6) = 0 in 24999179ns
+> fdatasync(7) = 0 in 24781640ns
  = backtraces:
- = [5] 0x68570 in trace_leveldb
- = [4] 0x69f90 in trace_leveldb
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::SyncFd(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:397
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fdatasync(...)
-> close(6) = 0 in 3288ns
+> close(7) = 0 in 3192ns
  = backtraces:
- = [4] 0x693b0 in trace_leveldb
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::Close() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:322
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> open("testdb/000001.dbtmp", 524865, 420) = 6 in 27184ns
+> open("testdb/000001.dbtmp", 524865, 420) = 7 in 23261ns
  = backtraces:
- = [7] 0x6c150 in trace_leveldb
- = [6] 0x64660 in trace_leveldb
- = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [7] leveldb::(anonymous namespace)::PosixEnv::NewWritableFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::WritableFile**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:573
+ = [6] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> write(6, 0x5588a63934a8, 16) = 16 in 8524ns
+> write(7, 0x555e47752258, 16) = 16 in 12603ns
  = backtraces:
- = [9] 0x69080 in trace_leveldb
- = [8] 0x68f40 in trace_leveldb
- = [7] 0x69f90 in trace_leveldb
- = [6] 0x64660 in trace_leveldb
- = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [9] leveldb::(anonymous namespace)::PosixWritableFile::WriteUnbuffered(char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:360
+ = [8] leveldb::(anonymous namespace)::PosixWritableFile::FlushBuffer() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:354
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [6] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < write(...)
-> fdatasync(6) = 0 in 24916023ns
+> fdatasync(7) = 0 in 22451424ns
  = backtraces:
- = [8] 0x68570 in trace_leveldb
- = [7] 0x69f90 in trace_leveldb
- = [6] 0x64660 in trace_leveldb
- = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [8] leveldb::(anonymous namespace)::PosixWritableFile::SyncFd(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:397
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [6] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fdatasync(...)
-> close(6) = 0 in 3054ns
+> close(7) = 0 in 17959ns
  = backtraces:
- = [7] 0x693b0 in trace_leveldb
- = [6] 0x64660 in trace_leveldb
- = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [3] leveldb::DBImpl::NewDB()
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::Close() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:322
+ = [6] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [5] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [4] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [3] leveldb::DBImpl::NewDB() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:181
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> open("testdb/CURRENT", 524288) = 6 in 2762ns
+> open("testdb/CURRENT", 524288) = 7 in 2401ns
  = backtraces:
- = [5] 0x6be10 in trace_leveldb
- = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
- = [3] leveldb::VersionSet::Recover(bool*)
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixEnv::NewSequentialFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::SequentialFile**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:528
+ = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:81
+ = [3] leveldb::VersionSet::Recover(bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:861
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> read(6, 0x5588a63934a0, 8192) = 16 in 2043ns
+> read(7, 0x555e47adba90, 8192) = 16 in 4860ns
  = backtraces:
- = [5] 0x68300 in trace_leveldb
- = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
- = [3] leveldb::VersionSet::Recover(bool*)
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixSequentialFile::Read(unsigned long, leveldb::Slice*, char*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:142
+ = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:81
+ = [3] leveldb::VersionSet::Recover(bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:861
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < read(...)
-> read(6, 0x5588a63934a0, 8192) = 0 in 310ns
+> read(7, 0x555e47adba90, 8192) = 0 in 383ns
  = backtraces:
- = [5] 0x68300 in trace_leveldb
- = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
- = [3] leveldb::VersionSet::Recover(bool*)
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixSequentialFile::Read(unsigned long, leveldb::Slice*, char*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:142
+ = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:81
+ = [3] leveldb::VersionSet::Recover(bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:861
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < read(...)
-> close(6) = 0 in 887ns
+> close(7) = 0 in 1452ns
  = backtraces:
- = [6] 0x66990 in trace_leveldb
- = [5] 0x67240 in trace_leveldb
- = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
- = [3] leveldb::VersionSet::Recover(bool*)
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [6] leveldb::(anonymous namespace)::PosixSequentialFile::~PosixSequentialFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:140
+ = [5] leveldb::(anonymous namespace)::PosixSequentialFile::~PosixSequentialFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:140
+ = [4] leveldb::ReadFileToString(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:81
+ = [3] leveldb::VersionSet::Recover(bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:861
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> open("testdb/MANIFEST-000001", 524288) = 6 in 1276ns
+> open("testdb/MANIFEST-000001", 524288) = 7 in 3954ns
  = backtraces:
- = [4] 0x6be10 in trace_leveldb
- = [3] leveldb::VersionSet::Recover(bool*)
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixEnv::NewSequentialFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::SequentialFile**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:528
+ = [3] leveldb::VersionSet::Recover(bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:861
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> read(6, 0x5588a63934a0, 32768) = 41 in 1054ns
+> read(7, 0x555e47addad0, 32768) = 41 in 1678ns
  = backtraces:
- = [6] 0x68300 in trace_leveldb
- = [5] leveldb::log::Reader::ReadPhysicalRecord(leveldb::Slice*)
- = [4] leveldb::log::Reader::ReadRecord(leveldb::Slice*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*)
- = [3] leveldb::VersionSet::Recover(bool*)
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [6] leveldb::(anonymous namespace)::PosixSequentialFile::Read(unsigned long, leveldb::Slice*, char*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:142
+ = [5] leveldb::log::Reader::ReadPhysicalRecord(leveldb::Slice*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_reader.cc:189
+ = [4] leveldb::log::Reader::ReadRecord(leveldb::Slice*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_reader.cc:56
+ = [3] leveldb::VersionSet::Recover(bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:861
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < read(...)
-> close(6) = 0 in 435ns
+> close(7) = 0 in 1429ns
  = backtraces:
- = [5] 0x66990 in trace_leveldb
- = [4] 0x67240 in trace_leveldb
- = [3] leveldb::VersionSet::Recover(bool*)
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixSequentialFile::~PosixSequentialFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:140
+ = [4] leveldb::(anonymous namespace)::PosixSequentialFile::~PosixSequentialFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:140
+ = [3] leveldb::VersionSet::Recover(bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:861
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> opendir("testdb") = 0x5588a63934a0 in 2160ns
+> opendir("testdb") = 0x555e47b4cba0 in 8003ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < opendir(...)
-> readdir(0x5588a63934a0) = {d_ino=7624715, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name="MANIFEST-000001"} in 4195ns
+> readdir(0x555e47b4cba0) = {d_ino=9972565, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name="MANIFEST-000001"} in 6439ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63934a0) = {d_ino=7624712, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name="LOG"} in 43ns
+> readdir(0x555e47b4cba0) = {d_ino=9972563, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name="LOG"} in 35ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63934a0) = {d_ino=7624716, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name="CURRENT"} in 20ns
+> readdir(0x555e47b4cba0) = {d_ino=9972566, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name="CURRENT"} in 27ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63934a0) = {d_ino=7624713, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name="LOCK"} in 23ns
+> readdir(0x555e47b4cba0) = {d_ino=9972564, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name="LOCK"} in 41ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63934a0) = {d_ino=7624707, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name="."} in 21ns
+> readdir(0x555e47b4cba0) = {d_ino=9972561, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name="."} in 27ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63934a0) = {d_ino=7624298, d_off=9223372036854775807, d_reclen=24, d_type=4, d_name=".."} in 22ns
+> readdir(0x555e47b4cba0) = {d_ino=7624299, d_off=9223372036854775807, d_reclen=24, d_type=4, d_name=".."} in 20ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63934a0) = nullptr = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+> readdir(0x555e47b4cba0) = nullptr = backtraces:
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> closedir(0x5588a63934a0) = 0 in 1175ns
+> closedir(0x555e47b4cba0) = 0 in 1515ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::Recover(leveldb::VersionEdit*, bool*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:292
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < closedir(...)
-> open("testdb/000003.log", 524865, 420) = 6 in 9358ns
+> open("testdb/000003.log", 524865, 420) = 7 in 14409ns
  = backtraces:
- = [2] 0x6c150 in trace_leveldb
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [2] leveldb::(anonymous namespace)::PosixEnv::NewWritableFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::WritableFile**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:573
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> open("testdb/MANIFEST-000002", 524865, 420) = 7 in 4926ns
+> open("testdb/MANIFEST-000002", 524865, 420) = 8 in 10283ns
  = backtraces:
- = [3] 0x6c150 in trace_leveldb
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::NewWritableFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::WritableFile**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:573
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> write(7, 0x5588a63a4518, 35) = 35 in 4429ns
+> write(8, 0x555e47b5cc08, 35) = 35 in 7968ns
  = backtraces:
- = [8] 0x69080 in trace_leveldb
- = [7] 0x68f40 in trace_leveldb
- = [6] 0x68c50 in trace_leveldb
- = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
- = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
- = [3] leveldb::VersionSet::WriteSnapshot(leveldb::log::Writer*)
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [8] leveldb::(anonymous namespace)::PosixWritableFile::WriteUnbuffered(char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:360
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::FlushBuffer() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:354
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Flush() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:332
+ = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:83
+ = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:34
+ = [3] leveldb::VersionSet::WriteSnapshot(leveldb::log::Writer*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:1069
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < write(...)
-> write(7, 0x5588a63a4518, 15) = 15 in 1103ns
+> write(8, 0x555e47b5cc08, 15) = 15 in 2818ns
  = backtraces:
- = [7] 0x69080 in trace_leveldb
- = [6] 0x68f40 in trace_leveldb
- = [5] 0x68c50 in trace_leveldb
- = [4] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
- = [3] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::WriteUnbuffered(char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:360
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::FlushBuffer() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:354
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::Flush() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:332
+ = [4] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:83
+ = [3] leveldb::log::Writer::AddRecord(leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:34
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < write(...)
-> open("testdb", 524288) = 8 in 1159ns
+> open("testdb", 524288) = 9 in 1682ns
  = backtraces:
- = [4] 0x69d30 in trace_leveldb
- = [3] 0x69f90 in trace_leveldb
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::SyncDirIfManifest() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:375
+ = [3] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> fdatasync(8) = 0 in 16088136ns
+> fdatasync(9) = 0 in 12858242ns
  = backtraces:
- = [5] 0x68570 in trace_leveldb
- = [4] 0x69d30 in trace_leveldb
- = [3] 0x69f90 in trace_leveldb
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::SyncFd(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:397
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::SyncDirIfManifest() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:375
+ = [3] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fdatasync(...)
-> close(8) = 0 in 5687ns
+> close(9) = 0 in 2808ns
  = backtraces:
- = [4] 0x69d30 in trace_leveldb
- = [3] 0x69f90 in trace_leveldb
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::SyncDirIfManifest() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:375
+ = [3] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> fdatasync(7) = 0 in 24896595ns
+> fdatasync(8) = 0 in 24715431ns
  = backtraces:
- = [4] 0x68570 in trace_leveldb
- = [3] 0x69f90 in trace_leveldb
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::SyncFd(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:397
+ = [3] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fdatasync(...)
-> open("testdb/000002.dbtmp", 524865, 420) = 8 in 29853ns
+> open("testdb/000002.dbtmp", 524865, 420) = 9 in 23074ns
  = backtraces:
- = [6] 0x6c150 in trace_leveldb
- = [5] 0x64660 in trace_leveldb
- = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [6] leveldb::(anonymous namespace)::PosixEnv::NewWritableFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::WritableFile**) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:573
+ = [5] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < open(...)
-> write(8, 0x5588a63b4578, 16) = 16 in 7753ns
+> write(9, 0x555e47b6cc68, 16) = 16 in 9589ns
  = backtraces:
- = [8] 0x69080 in trace_leveldb
- = [7] 0x68f40 in trace_leveldb
- = [6] 0x69f90 in trace_leveldb
- = [5] 0x64660 in trace_leveldb
- = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [8] leveldb::(anonymous namespace)::PosixWritableFile::WriteUnbuffered(char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:360
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::FlushBuffer() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:354
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [5] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < write(...)
-> fdatasync(8) = 0 in 24917617ns
+> fdatasync(9) = 0 in 24942852ns
  = backtraces:
- = [7] 0x68570 in trace_leveldb
- = [6] 0x69f90 in trace_leveldb
- = [5] 0x64660 in trace_leveldb
- = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::SyncFd(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:397
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Sync() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:334
+ = [5] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fdatasync(...)
-> close(8) = 0 in 2883ns
+> close(9) = 0 in 2607ns
  = backtraces:
- = [6] 0x693b0 in trace_leveldb
- = [5] 0x64660 in trace_leveldb
- = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
- = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long)
- = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*)
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Close() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:322
+ = [5] leveldb::DoWriteStringToFile(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:51
+ = [4] leveldb::WriteStringToFileSync(leveldb::Env*, leveldb::Slice const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env.cc:77
+ = [3] leveldb::SetCurrentFile(leveldb::Env*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/filename.cc:124
+ = [2] leveldb::VersionSet::LogAndApply(leveldb::VersionEdit*, leveldb::port::Mutex*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:777
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> opendir("testdb") = 0x5588a63b4570 in 6529ns
+> opendir("testdb") = 0x555e47b6cc60 in 6271ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < opendir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624717, d_off=1501108754394894498, d_reclen=32, d_type=8, d_name="000003.log"} in 4724ns
+> readdir(0x555e47b6cc60) = {d_ino=9972567, d_off=1501108754394894498, d_reclen=32, d_type=8, d_name="000003.log"} in 4269ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624715, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name="MANIFEST-000001"} in 45ns
+> readdir(0x555e47b6cc60) = {d_ino=9972565, d_off=1780414432903348703, d_reclen=40, d_type=8, d_name="MANIFEST-000001"} in 48ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624712, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name="LOG"} in 31ns
+> readdir(0x555e47b6cc60) = {d_ino=9972563, d_off=2253878239654665894, d_reclen=24, d_type=8, d_name="LOG"} in 31ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624721, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name="CURRENT"} in 20ns
+> readdir(0x555e47b6cc60) = {d_ino=9972598, d_off=3636117957198713864, d_reclen=32, d_type=8, d_name="CURRENT"} in 22ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624713, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name="LOCK"} in 20ns
+> readdir(0x555e47b6cc60) = {d_ino=9972564, d_off=4951630453071896342, d_reclen=24, d_type=8, d_name="LOCK"} in 26ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624707, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name="."} in 24ns
+> readdir(0x555e47b6cc60) = {d_ino=9972561, d_off=7043539781645960818, d_reclen=24, d_type=4, d_name="."} in 20ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624298, d_off=9061853741421941179, d_reclen=24, d_type=4, d_name=".."} in 20ns
+> readdir(0x555e47b6cc60) = {d_ino=7624299, d_off=9061853741421941179, d_reclen=24, d_type=4, d_name=".."} in 27ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = {d_ino=7624720, d_off=9223372036854775807, d_reclen=40, d_type=8, d_name="MANIFEST-000002"} in 21ns
+> readdir(0x555e47b6cc60) = {d_ino=9972597, d_off=9223372036854775807, d_reclen=40, d_type=8, d_name="MANIFEST-000002"} in 20ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> readdir(0x5588a63b4570) = nullptr = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+> readdir(0x555e47b6cc60) = nullptr = backtraces:
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < readdir(...)
-> closedir(0x5588a63b4570) = 0 in 1400ns
+> closedir(0x555e47b6cc60) = 0 in 1294ns
  = backtraces:
- = [3] 0x6ac10 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::GetChildren(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:603
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < closedir(...)
-> unlink("testdb/MANIFEST-000001") = 0 in 11958ns
+> unlink("testdb/MANIFEST-000001") = 0 in 17733ns
  = backtraces:
- = [3] 0x68730 in trace_leveldb
- = [2] leveldb::DBImpl::RemoveObsoleteFiles()
- = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**)
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::RemoveFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:618
+ = [2] leveldb::DBImpl::RemoveObsoleteFiles() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:225
+ = [1] leveldb::DB::Open(leveldb::Options const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, leveldb::DB**) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1483
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < unlink(...)
-> write(6, 0x5588a63934a8, 30) = 30 in 4775ns
+> write(7, 0x555e47b4cba8, 30) = 30 in 7210ns
  = backtraces:
- = [8] 0x69080 in trace_leveldb
- = [7] 0x68f40 in trace_leveldb
- = [6] 0x68c50 in trace_leveldb
- = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
- = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
- = [3] leveldb::DBImpl::Write(leveldb::WriteOptions const&, leveldb::WriteBatch*)
- = [2] leveldb::DB::Put(leveldb::WriteOptions const&, leveldb::Slice const&, leveldb::Slice const&)
- = [1] leveldb::DBImpl::Put(leveldb::WriteOptions const&, leveldb::Slice const&, leveldb::Slice const&)
- = [0] main(...)
+ = [8] leveldb::(anonymous namespace)::PosixWritableFile::WriteUnbuffered(char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:360
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::FlushBuffer() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:354
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Flush() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:332
+ = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:83
+ = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:34
+ = [3] leveldb::DBImpl::Write(leveldb::WriteOptions const&, leveldb::WriteBatch*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1200
+ = [2] leveldb::DB::Put(leveldb::WriteOptions const&, leveldb::Slice const&, leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1469
+ = [1] leveldb::DBImpl::Put(leveldb::WriteOptions const&, leveldb::Slice const&, leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1192
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < write(...)
-> write(6, 0x5588a63934a8, 24) = 24 in 1137ns
+> write(7, 0x555e47b4cba8, 24) = 24 in 3297ns
  = backtraces:
- = [8] 0x69080 in trace_leveldb
- = [7] 0x68f40 in trace_leveldb
- = [6] 0x68c50 in trace_leveldb
- = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long)
- = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&)
- = [3] leveldb::DBImpl::Write(leveldb::WriteOptions const&, leveldb::WriteBatch*)
- = [2] leveldb::DB::Delete(leveldb::WriteOptions const&, leveldb::Slice const&)
- = [1] leveldb::DBImpl::Delete(leveldb::WriteOptions const&, leveldb::Slice const&)
- = [0] main(...)
+ = [8] leveldb::(anonymous namespace)::PosixWritableFile::WriteUnbuffered(char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:360
+ = [7] leveldb::(anonymous namespace)::PosixWritableFile::FlushBuffer() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:354
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Flush() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:332
+ = [5] leveldb::log::Writer::EmitPhysicalRecord(leveldb::log::RecordType, char const*, unsigned long) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:83
+ = [4] leveldb::log::Writer::AddRecord(leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/log_writer.cc:34
+ = [3] leveldb::DBImpl::Write(leveldb::WriteOptions const&, leveldb::WriteBatch*) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1200
+ = [2] leveldb::DB::Delete(leveldb::WriteOptions const&, leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1475
+ = [1] leveldb::DBImpl::Delete(leveldb::WriteOptions const&, leveldb::Slice const&) in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:1196
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < write(...)
-> fcntl(5, 6, 0x7ffff029b330) = 0 in 1560ns
+> fcntl(6, 6, 0x7ffcb5340540) = 0 in 2605ns
  = backtraces:
- = [4] 0x667c0 in trace_leveldb
- = [3] 0x6b290 in trace_leveldb
- = [2] leveldb::DBImpl::~DBImpl()
- = [1] leveldb::DBImpl::~DBImpl()
- = [0] main(...)
+ = [4] leveldb::(anonymous namespace)::LockOrUnlock(int, bool) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:467
+ = [3] leveldb::(anonymous namespace)::PosixEnv::UnlockFile(leveldb::FileLock*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:680
+ = [2] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [1] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < fcntl(...)
-> close(5) = 0 in 1015ns
+> close(6) = 0 in 1278ns
  = backtraces:
- = [3] 0x6b290 in trace_leveldb
- = [2] leveldb::DBImpl::~DBImpl()
- = [1] leveldb::DBImpl::~DBImpl()
- = [0] main(...)
+ = [3] leveldb::(anonymous namespace)::PosixEnv::UnlockFile(leveldb::FileLock*) in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:680
+ = [2] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [1] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> close(7) = 0 in 447ns
+> close(8) = 0 in 622ns
  = backtraces:
- = [6] 0x693b0 in trace_leveldb
- = [5] 0x6a4f0 in trace_leveldb
- = [4] 0x69a30 in trace_leveldb
- = [3] leveldb::VersionSet::~VersionSet()
- = [2] leveldb::DBImpl::~DBImpl()
- = [1] leveldb::DBImpl::~DBImpl()
- = [0] main(...)
+ = [6] leveldb::(anonymous namespace)::PosixWritableFile::Close() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:322
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::~PosixWritableFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:286
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::~PosixWritableFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:286
+ = [3] leveldb::VersionSet::~VersionSet() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/version_set.cc:753
+ = [2] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [1] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)
-> close(6) = 0 in 422ns
+> close(7) = 0 in 533ns
  = backtraces:
- = [5] 0x693b0 in trace_leveldb
- = [4] 0x6a4f0 in trace_leveldb
- = [3] 0x69a30 in trace_leveldb
- = [2] leveldb::DBImpl::~DBImpl()
- = [1] leveldb::DBImpl::~DBImpl()
- = [0] main(...)
+ = [5] leveldb::(anonymous namespace)::PosixWritableFile::Close() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:322
+ = [4] leveldb::(anonymous namespace)::PosixWritableFile::~PosixWritableFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:286
+ = [3] leveldb::(anonymous namespace)::PosixWritableFile::~PosixWritableFile() in /home/szhong/IOTrace/build/_deps/leveldb-src/util/env_posix.cc:286
+ = [2] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [1] leveldb::DBImpl::~DBImpl() in /home/szhong/IOTrace/build/_deps/leveldb-src/db/db_impl.cc:152
+ = [0] main(...) in /home/szhong/IOTrace/sample/leveldb.cpp:5
 < close(...)

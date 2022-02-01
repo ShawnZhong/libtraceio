@@ -27,7 +27,7 @@ namespace calltrace {
 static struct Config {
   int indent = 1;
   bool log_io = true;
-  bool log_fn = true;
+  bool log_fn = false;
   bool verbose_io = true;
   bool verbose_fn = false;
   const char *log_file_path = "stderr";
@@ -84,7 +84,8 @@ static void print_fn_name(void *addr, bool verbose) {
     auto rel_diff = reinterpret_cast<intptr_t>(addr) -
                     reinterpret_cast<intptr_t>(info.dli_fbase);
     fmt::print(config.log_file, "{:#x}", rel_diff);
-    filename = info.dli_fname;  // print the binary file name
+    auto str = std::strrchr(info.dli_fname, '/');
+    filename = str ? str + 1 : info.dli_fname;  // print the binary file name
   } else if (auto n = abi::__cxa_demangle(fn_name, nullptr, nullptr, nullptr);
              n) {
     fmt::print(config.log_file, "{}", n);

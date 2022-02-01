@@ -9,7 +9,7 @@ A library for tracing function calls and I/O system calls.
    ```
    -finstrument-functions \
    -finstrument-functions-exclude-file-list=/usr/include \
-   -rdynamic
+   -rdynamic -g
    ```
 
    <details>
@@ -46,18 +46,28 @@ A library for tracing function calls and I/O system calls.
       of  `std::string` can generate 70 lines of call trace.
 
     - The `-Wl,--export-dynamic` flag adds all symbols to the dynamic symbol
-      table in the `.dynsym` section. Currently, we use
-      [`dladdr(3)`](https://man7.org/linux/man-pages/man3/dladdr.3.html) to
-      resolve the function name given a function address. However, `dladdr` can
-      only resolve the symbols in the dynamic library.
+      table in the `.dynsym` section.
 
-      If the flag is not set, the library can only print the relative address of
-      the function in the object file. One can use `nm` to resolve the function
-      name. For example, given the trace output `0x11a0 in trace_basic`, one can
-      use the following commands to get the function name:
+      For function name resolution, given a function address, we use first
+      [`dladdr(3)`](https://man7.org/linux/man-pages/man3/dladdr.3.html) to
+      obtain the function name if it is present in the dynamic symbol table.
+      This method does not work for static functions, since they are not
+      exported by the flag. If verbose mode is enabled (
+      i.e., `TRACE_VERBOSE_FN=1` or `TRACE_VERBOSE_IO=1`), then we also
+      use [`libbfd`](https://en.wikipedia.org/wiki/Binary_File_Descriptor_library)
+      to obtain the function name, source file name, and line number by reading
+      the ELF file.
+
+      If the flag is not set and/or verbosity is not enabled, then you may see
+      lines like `0x11a0 in trace_basic` in the trace output. One can manually
+      use `nm` to resolve the function name:
+
       ```shell
       nm -C trace_basic | grep 11a0 # prints `00000000000011a0 T main`
       ```
+
+    - The `-g` flag enables the generation of debugging information, so that the
+      source file and line number can be obtained.
 
      </details>
 
@@ -68,43 +78,43 @@ A library for tracing function calls and I/O system calls.
 Compile [sample/basic.cpp](sample/basic.cpp) and run it with `libcalltrace.so`
 
 ```shell
-g++ sample/basic.cpp -O2 -finstrument-functions -finstrument-functions-exclude-file-list=/usr/include -rdynamic
+g++ sample/basic.cpp -g -O3 -finstrument-functions -finstrument-functions-exclude-file-list=/usr/include -rdynamic
 make # compile libcalltrace.so
-LD_PRELOAD=./build/libcalltrace.so ./a.out
+TRACE_LOG_FN=1 TRACE_VERBOSE_FN=1 LD_PRELOAD=./build/libcalltrace.so ./a.out
 ```
 
 Output:
 
 ```cpp
-> main(...)
- > some_namespace::inline_fn(char const*)
-  > some_namespace::test2(char const*, int, int)
-   > some_namespace::test(char const*)
-    > open("/dev/null", 0) = 3 in 6858ns
+> main(...) in /home/szhong/IOTrace/sample/basic.cpp:18
+ > some_namespace::inline_fn() in /home/szhong/IOTrace/sample/basic.cpp:15
+  > some_namespace::static_fn(int, int) in /home/szhong/IOTrace/sample/basic.cpp:11
+   > some_namespace::io_fn(char const*) in /home/szhong/IOTrace/sample/basic.cpp:5
+    > open("/dev/null", 0) = 4 in 6606ns
      = backtraces:
-     = [3] some_namespace::test(char const*)
-     = [2] some_namespace::test2(char const*, int, int)
-     = [1] some_namespace::inline_fn(char const*)
-     = [0] main(...)
+     = [3] some_namespace::io_fn(char const*) in /home/szhong/IOTrace/sample/basic.cpp:5
+     = [2] some_namespace::static_fn(int, int) in /home/szhong/IOTrace/sample/basic.cpp:11
+     = [1] some_namespace::inline_fn() in /home/szhong/IOTrace/sample/basic.cpp:15
+     = [0] main(...) in /home/szhong/IOTrace/sample/basic.cpp:18
     < open(...)
-    > read(3, 0x7ffe67ef9fb0, 0) = 0 in 380ns
+    > read(4, 0x7ffcce260f10, 0) = 0 in 308ns
      = backtraces:
-     = [3] some_namespace::test(char const*)
-     = [2] some_namespace::test2(char const*, int, int)
-     = [1] some_namespace::inline_fn(char const*)
-     = [0] main(...)
+     = [3] some_namespace::io_fn(char const*) in /home/szhong/IOTrace/sample/basic.cpp:5
+     = [2] some_namespace::static_fn(int, int) in /home/szhong/IOTrace/sample/basic.cpp:11
+     = [1] some_namespace::inline_fn() in /home/szhong/IOTrace/sample/basic.cpp:15
+     = [0] main(...) in /home/szhong/IOTrace/sample/basic.cpp:18
     < read(...)
-    > close(3) = 0 in 905ns
+    > close(4) = 0 in 1176ns
      = backtraces:
-     = [3] some_namespace::test(char const*)
-     = [2] some_namespace::test2(char const*, int, int)
-     = [1] some_namespace::inline_fn(char const*)
-     = [0] main(...)
+     = [3] some_namespace::io_fn(char const*) in /home/szhong/IOTrace/sample/basic.cpp:5
+     = [2] some_namespace::static_fn(int, int) in /home/szhong/IOTrace/sample/basic.cpp:11
+     = [1] some_namespace::inline_fn() in /home/szhong/IOTrace/sample/basic.cpp:15
+     = [0] main(...) in /home/szhong/IOTrace/sample/basic.cpp:18
     < close(...)
-   < some_namespace::test(char const*)
-  < some_namespace::test2(char const*, int, int)
- < some_namespace::inline_fn(char const*)
-< main(...)
+   < some_namespace::io_fn(char const*) in /home/szhong/IOTrace/sample/basic.cpp:5
+  < some_namespace::static_fn(int, int) in /home/szhong/IOTrace/sample/basic.cpp:11
+ < some_namespace::inline_fn() in /home/szhong/IOTrace/sample/basic.cpp:15
+< main(...) in /home/szhong/IOTrace/sample/basic.cpp:18
 ```
 
 ## Sample Traces

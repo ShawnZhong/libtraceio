@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(sample)
 
-add_compile_options(-finstrument-functions -finstrument-functions-exclude-file-list=/usr/include)
+add_compile_options(-g -finstrument-functions -finstrument-functions-exclude-file-list=/usr/include)
 add_link_options(-rdynamic)
 
 # trace_basic
