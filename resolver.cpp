@@ -6,7 +6,7 @@
 #include <map>
 #include <memory>
 
-namespace calltrace {
+namespace traceio {
 
 static auto bfd_so = dlopen("libbfd.so", RTLD_LAZY | RTLD_DEEPBIND);
 static auto bfd_openr =
@@ -61,4 +61,4 @@ void resolve(void* address, Dl_info& info, const char*& fn_name,
   }
 }
 
-}  // namespace calltrace
+}  // namespace traceio

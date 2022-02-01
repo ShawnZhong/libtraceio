@@ -1,7 +1,7 @@
 #define _FORTIFY_SOURCE 2
 #define __OPTIMIZE__ 1
 
-#include "calltrace.h"
+#include "traceio.h"
 
 #include <cxxabi.h>
 #include <dirent.h>
@@ -22,7 +22,7 @@
 
 #include "resolver.h"
 
-namespace calltrace {
+namespace traceio {
 
 static struct Config {
   int indent = 1;
@@ -300,4 +300,4 @@ int madvise(void *addr, size_t len, int advice) {
   print_exit_trace(this_fn);
 }
 }
-}  // namespace calltrace
+}  // namespace traceio

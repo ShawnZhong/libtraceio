@@ -1,10 +1,11 @@
-# libcalltrace
+# libtraceio
 
-A library for tracing function calls and I/O system calls.
+A library for tracing I/O system calls and function call graph
 
 ## Usage
 
-1. (Optional) Add the following flags to the compiler's command line:
+1. (Optional but recommended) Add the following flags to the compiler's command
+   line:
 
    ```
    -finstrument-functions \
@@ -69,18 +70,18 @@ A library for tracing function calls and I/O system calls.
     - The `-g` flag enables the generation of debugging information, so that the
       source file and line number can be obtained.
 
-     </details>
+      </details>
 
-2. Run your program with `libcalltrace.so` loaded.
+2. Run your program with `libtraceio.so` loaded.
 
 ## Example
 
-Compile [sample/basic.cpp](sample/basic.cpp) and run it with `libcalltrace.so`
+Compile [sample/basic.cpp](sample/basic.cpp) and run it with `libtraceio.so`:
 
 ```shell
 g++ sample/basic.cpp -g -O3 -finstrument-functions -finstrument-functions-exclude-file-list=/usr/include -rdynamic
-make # compile libcalltrace.so
-TRACE_LOG_FN=1 TRACE_VERBOSE_FN=1 LD_PRELOAD=./build/libcalltrace.so ./a.out
+make # compile libtraceio.so
+TRACE_LOG_FN=1 TRACE_VERBOSE_FN=1 LD_PRELOAD=./build/libtraceio.so ./a.out
 ```
 
 Output:
@@ -123,14 +124,14 @@ Output:
   it.
     - Source code: [sample/leveldb.cpp](sample/leveldb.cpp)
 
-    - Full trace: [traces/leveldb-full.txt](traces/leveldb-full.txt)
-
     - I/O trace: [traces/leveldb-io.txt](traces/leveldb-io.txt)
+
+    - Full trace: [traces/leveldb-full.txt](traces/leveldb-full.txt)
 
   ```shell
   make trace_leveldb
-  TRACE_LOG_FN=1 TRACE_LOG_FILE=traces/leveldb-full.txt ./build/sample/trace_leveldb
   TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/leveldb-io.txt ./build/sample/trace_leveldb
+  TRACE_LOG_FN=1 TRACE_LOG_FILE=traces/leveldb-full.txt ./build/sample/trace_leveldb
   ```
 
 - LevelDB benchmark

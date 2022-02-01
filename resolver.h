@@ -2,7 +2,7 @@
 
 #include <dlfcn.h>
 
-namespace calltrace {
+namespace traceio {
 void resolve(void* address, Dl_info& info, const char*& fn_name,
              const char*& filename, int& line);
-}  // namespace calltrace
+}  // namespace traceio
