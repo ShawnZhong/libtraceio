@@ -138,49 +138,43 @@ static void print_backtrace() {
   }
 }
 
-template <char c>
-static void print_fn(void *addr) {
-  if (config.fn_verbosity == Config::Verbosity::NONE) return;
-  fmt::print(config.log_file, "{:>{}} ", c, get_nspace());
-  print_fn_name(addr, config.fn_verbosity);
+template <typename T>
+static void print_ptr(T const *h) {
+  if (h == nullptr) {
+    fmt::print(config.log_file, "nullptr");
+    return;
+  }
+  if constexpr (std::is_same_v<T, struct stat> ||
+                std::is_same_v<T, struct stat64>) {
+    fmt::print(config.log_file,
+               "{{dev={}, ino={}, mode={}, nlink={}, uid={}, gid={}, rdev={}, "
+               "size={}, blksize={}, blocks={}, atim={}.{}, mtim={}.{}, "
+               "ctim={}.{}}}",
+               h->st_dev, h->st_ino, h->st_mode, h->st_nlink, h->st_uid,
+               h->st_gid, h->st_rdev, h->st_size, h->st_blksize, h->st_blocks,
+               h->st_atim.tv_sec, h->st_atim.tv_nsec, h->st_mtim.tv_sec,
+               h->st_mtim.tv_nsec, h->st_ctim.tv_sec, h->st_ctim.tv_nsec);
+  } else if constexpr (std::is_same_v<T, struct dirent> ||
+                       std::is_same_v<T, struct dirent64>) {
+    fmt::print(config.log_file,
+               "{{d_ino={}, d_off={}, d_reclen={}, d_type={}, d_name=\"{}\"}}",
+               h->d_ino, h->d_off, h->d_reclen, h->d_type, h->d_name);
+  } else if constexpr (std::is_same_v<T, DIR>) {
+    fmt::print(config.log_file, "{}", fmt::ptr(h));
+  } else if constexpr (std::is_same_v<T, char>) {
+    fmt::print(config.log_file, "\"{}\"", h);
+  } else {
+    fmt::print(config.log_file, "{}", h);
+  }
 }
 
 template <bool Sep = true, class Head, class... Tail>
 static void print(Head const &h, Tail const &...t) {
   if constexpr (std::is_pointer_v<Head>) {
-    if (h == nullptr) {
-      fmt::print(config.log_file, "nullptr");
-      return;
-    }
-    using T = std::remove_const_t<std::remove_pointer_t<Head>>;
-    if constexpr (std::is_same_v<T, struct stat> ||
-                  std::is_same_v<T, struct stat64>) {
-      fmt::print(
-          config.log_file,
-          "{{dev={}, ino={}, mode={}, nlink={}, uid={}, gid={}, rdev={}, "
-          "size={}, blksize={}, blocks={}, atim={}.{}, mtim={}.{}, "
-          "ctim={}.{}}}",
-          h->st_dev, h->st_ino, h->st_mode, h->st_nlink, h->st_uid, h->st_gid,
-          h->st_rdev, h->st_size, h->st_blksize, h->st_blocks,
-          h->st_atim.tv_sec, h->st_atim.tv_nsec, h->st_mtim.tv_sec,
-          h->st_mtim.tv_nsec, h->st_ctim.tv_sec, h->st_ctim.tv_nsec);
-    } else if constexpr (std::is_same_v<T, struct dirent> ||
-                         std::is_same_v<T, struct dirent64>) {
-      fmt::print(
-          config.log_file,
-          "{{d_ino={}, d_off={}, d_reclen={}, d_type={}, d_name=\"{}\"}}",
-          h->d_ino, h->d_off, h->d_reclen, h->d_type, h->d_name);
-    } else if constexpr (std::is_same_v<T, DIR>) {
-      fmt::print(config.log_file, "{}", fmt::ptr(h));
-    } else if constexpr (std::is_same_v<T, char>) {
-      fmt::print(config.log_file, "\"{}\"", h);
-    } else {
-      fmt::print(config.log_file, "{}", h);
-    }
+    print_ptr(h);
   } else {
     fmt::print(config.log_file, "{}", h);
   }
-
   if constexpr (sizeof...(t) > 0) {
     if constexpr (Sep) {
       fmt::print(config.log_file, ", ");
@@ -201,7 +195,6 @@ inline static auto call(const char *name, Args &&...args) {
   print(std::forward<Args>(args)...);
   print</*Sep=*/false>(") = ", res, " in ", duration, "\n");
   print_backtrace();
-  fmt::print(config.log_file, "{:>{}} {}(...)\n", "<", nspace, name);
   return res;
 }
 #define CALL(fn, ...) return call<::fn>(#fn, __VA_ARGS__)
@@ -310,13 +303,15 @@ int madvise(void *addr, size_t len, int advice) {
     void *this_fn, [[maybe_unused]] void *call_site) {
   if (!config.trace_fn) return;
   call_stack.emplace_back(this_fn);
-  print_fn<'>'>(this_fn);
+  if (config.fn_verbosity != Config::Verbosity::NONE) {
+    fmt::print(config.log_file, "{:>{}} ", '>', get_nspace());
+    print_fn_name(this_fn, config.fn_verbosity);
+  }
 }
 
 [[maybe_unused]] void __cyg_profile_func_exit(
-    void *this_fn, [[maybe_unused]] void *call_site) {
+    [[maybe_unused]] void *this_fn, [[maybe_unused]] void *call_site) {
   if (!config.trace_fn) return;
-  print_fn<'<'>(this_fn);
   call_stack.pop_back();
 }
 }
