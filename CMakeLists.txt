@@ -8,7 +8,7 @@ FetchContent_MakeAvailable(fmt)
 set_property(TARGET fmt PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 add_library(traceio SHARED traceio.cpp traceio.h resolver.cpp resolver.h)
-target_link_libraries(traceio PRIVATE dl fmt::fmt)
+target_link_libraries(traceio PRIVATE dl unwind fmt::fmt)
 target_compile_options(traceio PRIVATE -fno-instrument-functions -Wall -Wextra -Wsign-compare)
 
 option(BUILD_SAMPLES "Build samples" OFF)

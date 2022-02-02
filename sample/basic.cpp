@@ -8,7 +8,7 @@ void io_fn(const char* pathname) {
   int rc = read(fd, buf, 0);
   close(fd);
 }
-static int static_fn(int a, int b) {
+int static_fn(int a, int b) {
   io_fn("/dev/null");
   return a + b;
 }
