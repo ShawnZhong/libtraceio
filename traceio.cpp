@@ -30,6 +30,7 @@ static struct Config {
   bool log_fn = false;
   bool verbose_io = true;
   bool verbose_fn = false;
+  bool show_filename = true;
   const char *log_file_path = "stderr";
   FILE *log_file = stderr;
 
@@ -41,6 +42,7 @@ static struct Config {
     if (auto s = getenv("TRACE_LOG_FN"); s) log_fn = s[0] == '1';
     if (auto s = getenv("TRACE_VERBOSE_IO"); s) verbose_io = s[0] == '1';
     if (auto s = getenv("TRACE_VERBOSE_FN"); s) verbose_fn = s[0] == '1';
+    if (auto s = getenv("TRACE_SHOW_FILENAME"); s) show_filename = s[0] == '1';
     if (auto s = getenv("TRACE_LOG_FILE"); s) {
       if (auto f = fopen(s, "w"); f) {
         log_file_path = s;
@@ -94,8 +96,8 @@ static void print_fn_name(void *addr, bool verbose) {
     fmt::print(config.log_file, "{}(...)", fn_name);
   }
 
-  // print the filename and line number in verbose mode
-  if (filename != nullptr) {
+  // print the filename and line number
+  if (config.show_filename && filename != nullptr) {
     fmt::print(config.log_file, " in {}", filename);
     if (line != 0) {
       fmt::print(config.log_file, ":{}", line);

@@ -16,7 +16,7 @@ target_link_libraries(trace_test test_shared_lib test_static_lib)
 # trace_sqlite
 FetchContent_Declare(sqlite3 URL "https://www.sqlite.org/2022/sqlite-amalgamation-3370200.zip")
 FetchContent_MakeAvailable(sqlite3)
-add_library(sqlite3 STATIC ${sqlite3_SOURCE_DIR}/sqlite3.c)
+add_library(sqlite3 SHARED ${sqlite3_SOURCE_DIR}/sqlite3.c)
 target_link_libraries(sqlite3 dl pthread)
 add_executable(trace_sqlite sqlite.cpp)
 target_include_directories(trace_sqlite PUBLIC ${sqlite3_SOURCE_DIR})

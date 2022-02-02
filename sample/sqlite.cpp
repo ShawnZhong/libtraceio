@@ -12,14 +12,14 @@ static void exec_sql(sqlite3 *db, const char *sql) {
 }
 
 int main() {
-  sqlite3 *db;
+  system("rm -f test.db");
 
+  sqlite3 *db;
   if (auto rc = sqlite3_open("test.db", &db); rc != SQLITE_OK) {
     std::cerr << "Cannot open database: " << sqlite3_errmsg(db) << std::endl;
     return EXIT_FAILURE;
   }
 
-  exec_sql(db, "DROP TABLE IF EXISTS Cars;");
   exec_sql(db, "CREATE TABLE Cars(Id INT, Name TEXT, Price INT);");
   exec_sql(db, "INSERT INTO Cars VALUES(1, 'Audi', 52642);");
 

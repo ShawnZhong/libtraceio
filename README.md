@@ -145,3 +145,15 @@ Output:
   TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/leveldb_bench.txt build/_deps/leveldb-build/db_bench --num=100
   ```
 
+- SQLite
+    - Source code: [sample/sqlite.cpp](sample/sqlite.cpp)
+
+    - I/O trace: [traces/sqlite-io.txt](traces/sqlite-io.txt)
+
+    - Full trace: [traces/sqlite-full.txt](traces/sqlite-full.txt)
+
+  ```shell
+  make trace_sqlite
+  TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/sqlite-io.txt ./build/sample/trace_sqlite
+  TRACE_LOG_FN=1 TRACE_VERBOSE_FN=1 TRACE_SHOW_FILENAME=0 TRACE_LOG_FILE=traces/sqlite-full.txt ./build/sample/trace_sqlite
+  ```
