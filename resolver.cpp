@@ -10,13 +10,13 @@
 
 namespace traceio {
 
+#define DEFINE_FN(handle, fn) \
+  static auto fn = reinterpret_cast<decltype(::fn)*>(dlsym(handle, #fn))
+
 static auto bfd_so = dlopen("libbfd.so", RTLD_LAZY | RTLD_DEEPBIND);
-static auto bfd_openr =
-    reinterpret_cast<decltype(::bfd_openr)*>(dlsym(bfd_so, "bfd_openr"));
-static auto bfd_close =
-    reinterpret_cast<decltype(::bfd_close)*>(dlsym(bfd_so, "bfd_close"));
-static auto bfd_check_format = reinterpret_cast<decltype(::bfd_check_format)*>(
-    dlsym(bfd_so, "bfd_check_format"));
+DEFINE_FN(bfd_so, bfd_openr);
+DEFINE_FN(bfd_so, bfd_close);
+DEFINE_FN(bfd_so, bfd_check_format);
 
 struct BfdWrapper {
   std::unique_ptr<struct bfd, decltype(bfd_close)> bfd;
