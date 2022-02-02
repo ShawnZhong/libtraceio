@@ -33,8 +33,8 @@ A library for tracing I/O system calls and function call graph
 
       Our library implements these functions to gather the function call trace
       and generate the backtrace for I/O system calls. If the flag is not set,
-      then our library cannot gather the call trace (i.e., `TRACE_LOG_FN=1` will
-      have no effect). The backtrace can still be generated using
+      then our library cannot gather the call trace (i.e., `TRACE_TRACE_FN=1`
+      will have no effect). The backtrace can still be generated using
       [`backtrace(3)`](https://man7.org/linux/man-pages/man3/backtrace.3.html).
       Since `backtrace` generates trace using the stack frame, some functions
       (i.e., inlined functions) might not be shown due to omission of the frame
@@ -81,7 +81,7 @@ Compile [sample/basic.cpp](sample/basic.cpp) and run it with `libtraceio.so`:
 ```shell
 g++ sample/basic.cpp -g -O3 -finstrument-functions -finstrument-functions-exclude-file-list=/usr/include -rdynamic
 make # compile libtraceio.so
-TRACE_LOG_FN=1 TRACE_VERBOSE_FN=1 LD_PRELOAD=./build/libtraceio.so ./a.out
+TRACE_FN_VERBOSITY=3 LD_PRELOAD=./build/libtraceio.so ./a.out
 ```
 
 Output:
@@ -130,8 +130,8 @@ Output:
 
   ```shell
   make trace_leveldb
-  TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/leveldb-io.txt ./build/sample/trace_leveldb
-  TRACE_LOG_FN=1 TRACE_LOG_FILE=traces/leveldb-full.txt ./build/sample/trace_leveldb
+  TRACE_FN_VERBOSITY=0 TRACE_LOG_FILE=traces/leveldb-io.txt ./build/sample/trace_leveldb
+  TRACE_FN_VERBOSITY=2 TRACE_LOG_FILE=traces/leveldb-full.txt ./build/sample/trace_leveldb
   ```
 
 - LevelDB benchmark
@@ -142,7 +142,7 @@ Output:
 
   ```shell
   make db_bench
-  TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/leveldb_bench.txt build/_deps/leveldb-build/db_bench --num=100
+  TRACE_FN_VERBOSITY=0 TRACE_LOG_FILE=traces/leveldb_bench.txt build/_deps/leveldb-build/db_bench --num=100
   ```
 
 - SQLite
@@ -154,6 +154,6 @@ Output:
 
   ```shell
   make trace_sqlite
-  TRACE_LOG_FN=0 TRACE_LOG_FILE=traces/sqlite-io.txt ./build/sample/trace_sqlite
-  TRACE_LOG_FN=1 TRACE_VERBOSE_FN=1 TRACE_SHOW_FILENAME=0 TRACE_LOG_FILE=traces/sqlite-full.txt ./build/sample/trace_sqlite
+  TRACE_FN_VERBOSITY=0 TRACE_LOG_FILE=traces/sqlite-io.txt ./build/sample/trace_sqlite
+  TRACE_FN_VERBOSITY=2 TRACE_LOG_FILE=traces/sqlite-full.txt ./build/sample/trace_sqlite
   ```

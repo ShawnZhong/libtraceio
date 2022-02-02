@@ -25,12 +25,17 @@
 namespace traceio {
 
 static struct Config {
+  enum class Verbosity : int {
+    NONE = 0,
+    NORMAL = 1,
+    VERBOSE = 2,
+    ALL = 3,
+  };
+
   int indent = 1;
-  bool log_io = true;
-  bool log_fn = false;
-  bool verbose_io = true;
-  bool verbose_fn = false;
-  bool show_filename = true;
+  bool trace_fn = true;
+  enum Verbosity io_verbosity = Verbosity::ALL;
+  enum Verbosity fn_verbosity = Verbosity::NONE;
   const char *log_file_path = "stderr";
   FILE *log_file = stderr;
 
@@ -38,11 +43,11 @@ static struct Config {
 
   Config() noexcept {
     if (auto s = getenv("TRACE_INDENT"); s) indent = std::stoi(s);
-    if (auto s = getenv("TRACE_LOG_IO"); s) log_io = s[0] == '1';
-    if (auto s = getenv("TRACE_LOG_FN"); s) log_fn = s[0] == '1';
-    if (auto s = getenv("TRACE_VERBOSE_IO"); s) verbose_io = s[0] == '1';
-    if (auto s = getenv("TRACE_VERBOSE_FN"); s) verbose_fn = s[0] == '1';
-    if (auto s = getenv("TRACE_SHOW_FILENAME"); s) show_filename = s[0] == '1';
+    if (auto s = getenv("TRACE_TRACE_FN"); s) trace_fn = s[0] == '1';
+    if (auto s = getenv("TRACE_IO_VERBOSITY"); s)
+      io_verbosity = Verbosity(std::stoi(s));
+    if (auto s = getenv("TRACE_FN_VERBOSITY"); s)
+      fn_verbosity = Verbosity(std::stoi(s));
     if (auto s = getenv("TRACE_LOG_FILE"); s) {
       if (auto f = fopen(s, "w"); f) {
         log_file_path = s;
@@ -52,20 +57,23 @@ static struct Config {
       }
     }
 
-    fmt::print(stderr,
-               "Config: indent={}, log_io={}, log_fn={}, verbose_io={}, "
-               "verbose_fn={}, log_file_path={}\n",
-               indent, log_io, log_fn, verbose_io, verbose_fn, log_file_path);
+    fmt::print(
+        stderr,
+        "Config: indent={}, trace_fn={}. io_verbosity={}, fn_verbosity={}, "
+        "log_file_path={}\n",
+        indent, trace_fn, fmt::underlying(io_verbosity),
+        fmt::underlying(fn_verbosity), log_file_path);
   }
 } config;
 
 thread_local std::vector<void *> call_stack;
 static size_t get_nspace(size_t offset = 0) {
-  if (config.log_fn) offset += call_stack.size();
+  if (config.fn_verbosity != Config::Verbosity::NONE)
+    offset += call_stack.size();
   return offset * config.indent;
 }
 
-static void print_fn_name(void *addr, bool verbose) {
+static void print_fn_name(void *addr, Config::Verbosity verbosity) {
   Dl_info info{};
   auto rc = dladdr(addr, &info);
   if (rc == 0) {
@@ -77,7 +85,7 @@ static void print_fn_name(void *addr, bool verbose) {
   const char *filename = nullptr;
   int line = 0;
 
-  if (verbose && info.dli_fname != nullptr) {
+  if (verbosity >= Config::Verbosity::VERBOSE && info.dli_fname != nullptr) {
     resolve(addr, info, fn_name, filename, line);
   }
 
@@ -97,7 +105,7 @@ static void print_fn_name(void *addr, bool verbose) {
   }
 
   // print the filename and line number
-  if (config.show_filename && filename != nullptr) {
+  if (verbosity >= Config::Verbosity::ALL && filename != nullptr) {
     fmt::print(config.log_file, " in {}", filename);
     if (line != 0) {
       fmt::print(config.log_file, ":{}", line);
@@ -107,39 +115,32 @@ static void print_fn_name(void *addr, bool verbose) {
 }
 
 static void print_backtrace() {
-  if (!config.log_io) return;
+  if (config.io_verbosity == Config::Verbosity::NONE) return;
   const auto nspace = get_nspace(2);
-  fmt::print(config.log_file, "{:>{}} backtraces:\n", "=", nspace);
   if (call_stack.size() > 1) {
+    fmt::print(config.log_file, "{:>{}} backtraces from fn trace:\n", "=",
+               nspace);
     for (int i = call_stack.size() - 1; i >= 0; --i) {
-      fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, i);
-      print_fn_name(call_stack[i], config.verbose_io);
+      fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, i + 1);
+      print_fn_name(call_stack[i], config.io_verbosity);
     }
   } else {
+    fmt::print(config.log_file, "{:>{}} backtraces from stack frame:\n", "=",
+               nspace);
     void *callstack[config.BACKTRACE_SIZE]{};
     int nptrs = backtrace(callstack, config.BACKTRACE_SIZE);
-    nptrs -= 2;  // skip __libc_start_main and _start
-    for (int i = 3; i < nptrs; i++) {
+    for (int i = 2; i < nptrs; i++) {
       fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, nptrs - i);
-      print_fn_name(callstack[i], config.verbose_io);
+      print_fn_name(callstack[i], config.io_verbosity);
     }
   }
 }
 
-static void print_enter_trace(void *addr) {
-  call_stack.emplace_back(addr);
-  if (config.log_fn) {
-    fmt::print(config.log_file, "{:>{}} ", ">", get_nspace());
-    print_fn_name(addr, config.verbose_fn);
-  }
-}
-
-static void print_exit_trace(void *addr) {
-  if (config.log_fn) {
-    fmt::print(config.log_file, "{:>{}} ", "<", get_nspace());
-    print_fn_name(addr, config.verbose_fn);
-  }
-  call_stack.pop_back();
+template <char c>
+static void print_fn(void *addr) {
+  if (config.fn_verbosity == Config::Verbosity::NONE) return;
+  fmt::print(config.log_file, "{:>{}} ", c, get_nspace());
+  print_fn_name(addr, config.fn_verbosity);
 }
 
 template <bool Sep = true, class Head, class... Tail>
@@ -305,12 +306,16 @@ int madvise(void *addr, size_t len, int advice) {
 
 [[maybe_unused]] void __cyg_profile_func_enter(
     void *this_fn, [[maybe_unused]] void *call_site) {
-  print_enter_trace(this_fn);
+  if (!config.trace_fn) return;
+  call_stack.emplace_back(this_fn);
+  print_fn<'>'>(this_fn);
 }
 
 [[maybe_unused]] void __cyg_profile_func_exit(
     void *this_fn, [[maybe_unused]] void *call_site) {
-  print_exit_trace(this_fn);
+  if (!config.trace_fn) return;
+  print_fn<'<'>(this_fn);
+  call_stack.pop_back();
 }
 }
 }  // namespace traceio
