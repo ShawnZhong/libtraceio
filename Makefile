@@ -1,5 +1,5 @@
 lib_target := traceio
-sample_targets := trace_basic trace_test trace_leveldb db_bench
+sample_targets := trace_basic trace_test trace_sqlite trace_leveldb db_bench
 
 $(sample_targets): export CMAKE_ADDITIONAL_FLAGS := -DBUILD_SAMPLES=ON
 

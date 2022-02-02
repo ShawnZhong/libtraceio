@@ -108,7 +108,7 @@ static void print_backtrace() {
   if (!config.log_io) return;
   const auto nspace = get_nspace(2);
   fmt::print(config.log_file, "{:>{}} backtraces:\n", "=", nspace);
-  if (!call_stack.empty()) {
+  if (call_stack.size() > 1) {
     for (int i = call_stack.size() - 1; i >= 0; --i) {
       fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, i);
       print_fn_name(call_stack[i], config.verbose_io);
@@ -117,7 +117,7 @@ static void print_backtrace() {
     void *callstack[config.BACKTRACE_SIZE]{};
     int nptrs = backtrace(callstack, config.BACKTRACE_SIZE);
     nptrs -= 2;  // skip __libc_start_main and _start
-    for (int i = 2; i < nptrs; i++) {
+    for (int i = 3; i < nptrs; i++) {
       fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, nptrs - i);
       print_fn_name(callstack[i], config.verbose_io);
     }
@@ -212,6 +212,17 @@ int open(const char *path, int flags, ...) {
     CALL(open, path, flags, mode);
   }
   CALL(open, path, flags);
+}
+int open64(const char *path, int flags, ...) {
+  mode_t mode = 0;
+  if (__OPEN_NEEDS_MODE(flags)) {
+    va_list arg;
+    va_start(arg, flags);
+    mode = va_arg(arg, mode_t);
+    va_end(arg);
+    CALL(open64, path, flags, mode);
+  }
+  CALL(open64, path, flags);
 }
 int close(int fd) { CALL(close, fd); }
 ssize_t read(int fd, void *buf, size_t n) { CALL(read, fd, buf, n); }

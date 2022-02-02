@@ -14,7 +14,7 @@ target_compile_options(traceio PRIVATE -fno-instrument-functions -Wall -Wextra -
 option(BUILD_SAMPLES "Build samples" OFF)
 if (BUILD_SAMPLES)
     add_subdirectory(sample)
-    foreach (target trace_basic trace_test trace_leveldb db_bench)
+    foreach (target trace_basic trace_test trace_sqlite trace_leveldb db_bench)
         target_link_libraries(${target} traceio)
     endforeach ()
 endif ()
