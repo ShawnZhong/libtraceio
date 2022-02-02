@@ -1,3 +1,5 @@
+// adopted from https://github.com/TomaszAugustyn/call-stack-logger
+
 #include "resolver.h"
 
 #include <bfd.h>  // sudo apt install binutils-dev
