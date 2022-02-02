@@ -26,10 +26,10 @@ namespace traceio {
 
 static struct Config {
   enum class Verbosity : int {
-    NONE = 0,
-    NORMAL = 1,
-    VERBOSE = 2,
-    ALL = 3,
+    NONE = 0,     // No output
+    NORMAL = 1,   // use dladdr to resolve symbols
+    VERBOSE = 2,  // use libbfd to resolve symbols
+    ALL = 3,      // print line number and file name
   };
 
   int indent = 1;
@@ -106,9 +106,10 @@ static void print_fn_name(void *addr, Config::Verbosity verbosity) {
 
   // print the filename and line number
   if (verbosity >= Config::Verbosity::ALL && filename != nullptr) {
-    fmt::print(config.log_file, " in {}", filename);
     if (line != 0) {
-      fmt::print(config.log_file, ":{}", line);
+      fmt::print(config.log_file, " at {}:{}", filename, line);
+    } else {
+      fmt::print(config.log_file, " in {}", filename);
     }
   }
   fmt::print(config.log_file, "\n");
@@ -129,7 +130,8 @@ static void print_backtrace() {
                nspace);
     void *callstack[config.BACKTRACE_SIZE]{};
     int nptrs = backtrace(callstack, config.BACKTRACE_SIZE);
-    for (int i = 2; i < nptrs; i++) {
+    nptrs -= 2;                        // skip __libc_start_main and _start
+    for (int i = 2; i < nptrs; i++) {  // skip the top two frames
       fmt::print(config.log_file, "{:>{}} [{}] ", "=", nspace, nptrs - i);
       print_fn_name(callstack[i], config.io_verbosity);
     }
