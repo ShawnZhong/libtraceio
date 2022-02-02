@@ -4,19 +4,33 @@
 
 #include <bfd.h>  // sudo apt install binutils-dev
 #include <dlfcn.h>
+#include <elfutils/libdwfl.h>
+#include <unistd.h>
 
+#include <cassert>
 #include <map>
 #include <memory>
 
 namespace traceio {
 
+#define DEFINE_FN(handle, fn) \
+  static auto fn = reinterpret_cast<decltype(::fn)*>(dlsym(handle, #fn))
+
+static auto dw_so = dlopen("libdw.so", RTLD_LAZY | RTLD_DEEPBIND);
+DEFINE_FN(dw_so, dwfl_begin);
+DEFINE_FN(dw_so, dwfl_linux_proc_report);
+DEFINE_FN(dw_so, dwfl_module_getsrc);
+DEFINE_FN(dw_so, dwfl_report_end);
+DEFINE_FN(dw_so, dwfl_lineinfo);
+DEFINE_FN(dw_so, dwfl_addrmodule);
+DEFINE_FN(dw_so, dwfl_standard_find_debuginfo);
+DEFINE_FN(dw_so, dwfl_module_addrname);
+DEFINE_FN(dw_so, dwfl_linux_proc_find_elf);
+
 static auto bfd_so = dlopen("libbfd.so", RTLD_LAZY | RTLD_DEEPBIND);
-static auto bfd_openr =
-    reinterpret_cast<decltype(::bfd_openr)*>(dlsym(bfd_so, "bfd_openr"));
-static auto bfd_close =
-    reinterpret_cast<decltype(::bfd_close)*>(dlsym(bfd_so, "bfd_close"));
-static auto bfd_check_format = reinterpret_cast<decltype(::bfd_check_format)*>(
-    dlsym(bfd_so, "bfd_check_format"));
+DEFINE_FN(bfd_so, bfd_openr);
+DEFINE_FN(bfd_so, bfd_close);
+DEFINE_FN(bfd_so, bfd_check_format);
 
 struct BfdWrapper {
   std::unique_ptr<struct bfd, decltype(bfd_close)> bfd;
@@ -41,25 +55,35 @@ static BfdWrapper& get_bfd(Dl_info& info) {
   return it->second;
 }
 
-void resolve(void* address, Dl_info& info, const char*& fn_name,
-             const char*& filename, int& line) {
-  if (bfd_so == nullptr) return;
-  BfdWrapper& bfd_wrapper = get_bfd(info);
-  asection* section = bfd_wrapper.bfd->sections;
-  const bool relative =
-      section->vma < reinterpret_cast<uintptr_t>(info.dli_fbase);
-  while (section != nullptr) {
-    intptr_t offset = reinterpret_cast<intptr_t>(address) -
-                      static_cast<intptr_t>(section->vma);
-    if (relative) offset -= reinterpret_cast<intptr_t>(info.dli_fbase);
-    if (offset < 0 || static_cast<size_t>(offset) > section->size) {
-      section = section->next;
-      continue;
-    }
-    bfd_find_nearest_line(bfd_wrapper.bfd.get(), section,
-                          bfd_wrapper.symbols.get(), offset, &filename,
-                          &fn_name, reinterpret_cast<unsigned int*>(&line));
-    return;
+static Dwfl* get_dwfl() {
+  Dwfl* dwfl;
+  Dwfl_Callbacks callbacks = {};
+  char* debuginfo_path = nullptr;
+  callbacks.find_elf = dwfl_linux_proc_find_elf;
+  callbacks.find_debuginfo = dwfl_standard_find_debuginfo;
+  callbacks.debuginfo_path = &debuginfo_path;
+  dwfl = dwfl_begin(&callbacks);
+  assert(dwfl);
+  int r;
+  r = dwfl_linux_proc_report(dwfl, getpid());
+  assert(!r);
+  r = dwfl_report_end(dwfl, nullptr, nullptr);
+  assert(!r);
+  static_cast<void>(r);
+  return dwfl;
+}
+
+Dwfl* dwfl = nullptr;
+
+extern "C" void resolve(void* address, Dl_info& info, const char*& fn_name,
+                        const char*& filename, int& line) {
+  get_dwfl();
+  auto ip2 = reinterpret_cast<uintptr_t>(address);
+  Dwfl_Module* module = dwfl_addrmodule(dwfl, ip2);
+  fn_name = dwfl_module_addrname(module, ip2);
+  if (Dwfl_Line* dwfl_line = dwfl_module_getsrc(module, ip2)) {
+    filename =
+        dwfl_lineinfo(dwfl_line, nullptr, &line, nullptr, nullptr, nullptr);
   }
 }
 
