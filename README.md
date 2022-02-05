@@ -1,5 +1,7 @@
 # libtraceio
 
+[![CI](https://github.com/ShawnZhong/libtraceio/actions/workflows/default.yml/badge.svg)](https://github.com/ShawnZhong/libtraceio/actions/workflows/default.yml)
+
 A library for tracing I/O system calls and function call graph
 
 ## Usage
