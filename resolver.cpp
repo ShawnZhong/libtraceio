@@ -2,7 +2,9 @@
 
 #include "resolver.h"
 
-#include <bfd.h>  // sudo apt install binutils-dev
+#if __has_include(<bfd.h>)
+
+#include <bfd.h>
 #include <dlfcn.h>
 
 #include <map>
@@ -64,3 +66,13 @@ void resolve(void* address, Dl_info& info, const char*& fn_name,
 }
 
 }  // namespace traceio
+#else
+#warning "BFD not found. Please install BFD via `sudo apt install binutils-dev`"
+
+namespace traceio {
+void resolve([[maybe_unused]] void* address, [[maybe_unused]] Dl_info& info,
+             [[maybe_unused]] const char*& fn_name,
+             [[maybe_unused]] const char*& filename,
+             [[maybe_unused]] int& line) {}
+}  // namespace traceio
+#endif
